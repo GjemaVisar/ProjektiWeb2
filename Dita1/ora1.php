@@ -9,7 +9,8 @@
 <body>
     <p>Rigon MAN</p>
     <h1>sbnf</h1>
-    <h2>Reis stANOVCO</h2>  
+    <h1>Reis Stanovci</h1>  
     <h1>Visar Gjema</h1>
+    <h1>Rigon </h1>
 </body>
 </html>
