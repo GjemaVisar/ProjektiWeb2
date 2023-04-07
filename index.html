@@ -112,7 +112,7 @@
             </li>
 
             <li class="navbar-item">
-              <a href="#" class="navbar-link skewBg" data-nav-link>Contact</a>
+              <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
             <li class="navbar-item">
@@ -128,13 +128,21 @@
 
             <span class="cart-badge">0</span>
           </button>
+          <form action="" class="footer-newsletter">
+            <input type="search" name="search products" aria-label="search" placeholder="search products" required
+              class="email-field">
 
-          <button class="search-btn" aria-label="open search" data-search-toggler>
-            <ion-icon name="search-outline"></ion-icon>
-          </button>
+            <button type="submit" class="footer-btn" aria-label="submit">
+              <ion-icon name="search-outline"></ion-icon>            
+            </button>
+          </form>
 
+          <!-- 
+              Ikona e menus kur te ngushtohet faqja, duhet mu ndreq qe me dal to Home, Blog, Shop...
+           -->
           <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
             <ion-icon name="menu-outline" class="menu"></ion-icon>
+            
             <ion-icon name="close-outline" class="close"></ion-icon>
           </button>
 
@@ -153,7 +161,7 @@
     - #SEARCH BOX
   -->
 
-  <div class="search-container" data-search-box>
+  <!-- <div class="search-container" data-search-box>
 
     <div class="input-wrapper">
       <input type="search" name="search" aria-label="search" placeholder="Search here..." class="search-field">
@@ -165,7 +173,7 @@
       <button class="search-close" aria-label="close search" data-search-toggler></button>
     </div>
 
-  </div>
+  </div> -->
 
 
 
@@ -971,12 +979,12 @@
         <div class="footer-brand">
 
           <a href="#" class="logo">Gamics</a>
-
+          <p class="footer-list-title">Contact</p>
           <p class="footer-text">
             Gamics marketplace the relase etras thats sheets continig passag.
           </p>
-
-          <ul class="contact-list">
+          
+          <ul id="contact" class="contact-list">
 
             <li class="contact-item">
               <div class="contact-icon">
