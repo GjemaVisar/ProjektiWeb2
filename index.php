@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -116,7 +119,7 @@
             </li>
             
             <li class="navbar-item">
-              <a href="login.html" class="navbar-link skewBg" data-nav-link>LogIn</a>
+              <a href="Login/login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
             </li>
           </ul>
         </nav>

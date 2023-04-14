@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +13,7 @@
 <body>
    <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form action="#">
+		<form action="signupInsert.php" method="post">
 			<h1>Create Account</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -19,14 +21,15 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>or use your email for registration</span>
-			<input type="text" placeholder="Name" />
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<button>Sign Up</button>
+			<input type="text" name="name" placeholder="Name" /><!-- -->
+			<input type="email"name="email"  placeholder="Email" /><!-- -->
+			<input type="password" name="password" placeholder="Password" /><!-- -->
+			<input type="password" name="cfpassword" placeholder="Confirm Password" /><!-- -->
+			<input type="submit" name="submit" value="Submit">
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
-		<form action="#">
+		<form action="loginInsert.php" method="post">
 			<h1>Sign in</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -34,10 +37,10 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>or use your account</span>
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
+			<input type="email" name="email" placeholder="Email" />
+			<input type="password" name="password" placeholder="Password" />
 			<a href="#">Forgot your password?</a>
-			<button>Sign In</button>
+			<input type="submit" name="submit" value="Submit">
 		</form>
 	</div>
 	<div class="overlay-container">
