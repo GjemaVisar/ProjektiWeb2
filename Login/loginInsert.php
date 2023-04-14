@@ -12,12 +12,12 @@
 
 
     //KRIJIMI I TABLES users
-    // $sql = 'CREATE TABLE users(
-    //     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    //     emri VARCHAR(20),
-    //     email VARCHAR(20),
+    // $sql = 'CREATE TABLE user(
+    //     id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    //     name VARCHAR(20),
+    //     email VARCHAR(30),
     //     pasword VARCHAR(20),
-    //     data_reg date 
+    //     date VARCHAR(20) 
     // )';
     // $retvalue = mysqli_query($conn,$sql);
     // if(! $retvalue){

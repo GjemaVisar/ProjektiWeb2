@@ -11,10 +11,7 @@
             $data = date('d/m/Y'); 
             
             if($password == $cfpassword){
-                // $sql = "INSERT INTO users(emri,email,passwordi) 
-                // values('$name','$email','$password')";
-                // $insert = mysqli_query($conn,"INSERT INTO users(emri,email,passwordi) 
-                // values('$name','$email','$password')");
+
                 if($insert = mysqli_query($conn,"INSERT INTO user(name,email,password,date) 
                 VALUES ('$name','$email','$password','$data')")){
                     echo "Te dhenat u regj me sukses! ";
