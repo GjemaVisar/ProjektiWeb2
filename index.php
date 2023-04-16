@@ -309,6 +309,81 @@
                 <div class="latest-game-card">
 
                   <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
+                    <img src="assets/images/latest-game-1.jpg" width="400" height="470" loading="lazy"
+                      alt="White Walker Daily" class="img-cover">
+                  </figure>
+
+                  <div class="card-content">
+
+                    <a href="#" class="card-badge skewBg">Zombie</a>
+
+                    <h3 class="h3">
+                      <a href="#" class="card-title">White Walker <span class="span">Daily</span></a>
+                    </h3>
+
+                    <p class="card-price">
+                      Entry Fee : <span class="span">Free</span>
+                    </p>
+
+                  </div>
+
+                </div>
+              </li>
+
+              <li class="scrollbar-item">
+                <div class="latest-game-card">
+
+                  <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
+                    <img src="assets/images/latest-game-1.jpg" width="400" height="470" loading="lazy"
+                      alt="White Walker Daily" class="img-cover">
+                  </figure>
+
+                  <div class="card-content">
+
+                    <a href="#" class="card-badge skewBg">Zombie</a>
+
+                    <h3 class="h3">
+                      <a href="#" class="card-title">White Walker <span class="span">Daily</span></a>
+                    </h3>
+
+                    <p class="card-price">
+                      Entry Fee : <span class="span">Free</span>
+                    </p>
+
+                  </div>
+
+                </div>
+              </li>
+
+              <li class="scrollbar-item">
+                <div class="latest-game-card">
+
+                  <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
+                    <img src="assets/images/latest-game-1.jpg" width="400" height="470" loading="lazy"
+                      alt="White Walker Daily" class="img-cover">
+                  </figure>
+
+                  <div class="card-content">
+
+                    <a href="#" class="card-badge skewBg">Zombie</a>
+
+                    <h3 class="h3">
+                      <a href="#" class="card-title">White Walker <span class="span">Daily</span></a>
+                    </h3>
+
+                    <p class="card-price">
+                      Entry Fee : <span class="span">Free</span>
+                    </p>
+
+                  </div>
+
+                </div>
+              </li>
+
+              <li class="scrollbar-item">
+                <div class="latest-game-card">
+
+                  <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
                     <img src="assets/images/latest-game-2.jpg" width="400" height="470" loading="lazy"
                       alt="Hunter Killer II" class="img-cover">
                   </figure>
@@ -632,7 +707,7 @@
         <div class="container">
 
           <h2 class="h2 section-title">
-            Gaming Product <span class="span">Corner</span>
+            Gaming Product Corner. <span class="span">Order Now</span>
           </h2>
 
           <p class="section-text">
