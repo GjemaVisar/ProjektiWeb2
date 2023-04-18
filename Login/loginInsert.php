@@ -1,7 +1,7 @@
 <?php
-    require('login&signupDB.php');
+    require('storeDB.php');
 
-//KRIJIMI I DATABAZES
+// KRIJIMI I DATABAZES
 //   $sql = 'CREATE Database LogInSignUp';
 //   $retval = mysqli_query($conn, $sql);
 //     if(! $retval){
@@ -10,6 +10,7 @@
 //     echo "Database Login&SignUp created successfully\n ";
 //     mysqli_close($conn);
 
+    
 
     //KRIJIMI I TABLES users
     // $sql = 'CREATE TABLE user(
