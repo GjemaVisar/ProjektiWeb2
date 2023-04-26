@@ -2,7 +2,7 @@
 $dbhost = 'localhost:3307';
 $dbuser = 'root';
 $dbpass = '';
-$dbname = 'LogInSignUp';
+$dbname = 'Store';
 $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
 if(! $conn)
 {

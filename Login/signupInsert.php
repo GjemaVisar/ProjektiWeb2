@@ -1,5 +1,5 @@
 <?php
-    require('login&signupDB.php');
+    require('storeDB.php');
 
 
     
