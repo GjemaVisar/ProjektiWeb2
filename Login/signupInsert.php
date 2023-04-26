@@ -1,14 +1,12 @@
 <?php
     require('storeDB.php');
 
-
-    
         if(isset($_POST['submit'])){
             $name = $_POST['name'];
             $email = $_POST['email'];
             $password = $_POST['password'];
             $cfpassword = $_POST['cfpassword'];
-            $data = 'NOW()'; 
+            $data = date('d/m/Y');
             
             if($password == $cfpassword){
 

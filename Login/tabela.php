@@ -6,9 +6,8 @@ require("storeDB.php");
     //     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     //     name VARCHAR(20),
     //     email VARCHAR(30),
-    //     roli VARCHAR(30),
-    //     pasword VARCHAR(20),
-    //     date DATE 
+    //     password VARCHAR(20),
+    //     date varchar(20)
     // )';
     $retvalue = mysqli_query($conn,$sql);
     if(! $retvalue){
