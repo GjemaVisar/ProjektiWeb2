@@ -8,7 +8,7 @@
             $email = $_POST['email'];
             $password = $_POST['password'];
             $cfpassword = $_POST['cfpassword'];
-            $data = date('d/m/Y'); 
+            $data = 'NOW()'; 
             
             if($password == $cfpassword){
 
@@ -22,6 +22,7 @@
                 echo "Password and confirm password should be same";
             }
         }
+        mysqli_close($conn);
     
 
 ?> 
