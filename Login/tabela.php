@@ -6,9 +6,20 @@ require("storeDB.php");
     //     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     //     name VARCHAR(20),
     //     email VARCHAR(30),
-    //     password VARCHAR(20),
-    //     date varchar(20)
+    //     pasword VARCHAR(20),
+    //     date varchar(20) 
     // )';
+
+    /*
+       // KRIJIMI I TABELES product
+        $sql = 'CREATE TABLE product(
+            pid INT(11) AUTO_INCREMENT PRIMARY KEY,
+            product_name VARCHAR(30) not null,
+            product_price real not null,
+            product_description varchar(100),
+            product_image longblob NOT NULL)';
+    */
+    
     $retvalue = mysqli_query($conn,$sql);
     if(! $retvalue){
         die("Could not create table users : ".mysqli_connect_error());
