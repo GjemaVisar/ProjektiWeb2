@@ -21,10 +21,15 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>or use your email for registration</span>
-			<input type="text" name="name" placeholder="Name" /><!-- -->
-			<input type="email"name="email"  placeholder="Email" /><!-- -->
-			<input type="password" name="password" placeholder="Password" /><!-- -->
-			<input type="password" name="cfpassword" placeholder="Confirm Password" /><!-- -->
+			<div>
+				<input type="text" name="name" placeholder="Name" required/><!-- -->
+				<?php if(isset($errors)): ?>
+					<span><?php echo $errors; ?> </span>
+				<?php endif ?>
+			</div>
+			<input type="email"name="email"  placeholder="Email" required/><!-- -->
+			<input type="password" name="password" placeholder="Password" required/><!-- -->
+			<input type="password" name="cfpassword" placeholder="Confirm Password" required/><!-- -->
 			<input type="submit" name="submit" value="Submit">
 		</form>
 	</div>
