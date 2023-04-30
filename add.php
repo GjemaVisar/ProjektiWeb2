@@ -1,7 +1,7 @@
 <?php
 
 	// // connect with database
-	// $conn = new PDO("mysql:host=localhost:3307;dbname=test", "root", "root");
+	// $conn = new PDO("mysql:host=localhost:3307;dbname=Store", "root", "root");
 
 	// // check if insert form is submitted
 	// if (isset($_POST["submit"]))
