@@ -123,7 +123,7 @@
             </li>
 
             <li class="navbar-item">
-              <a href="" class="navbar-link skewBg" data-nav-link>FAQ</a>
+              <a href="add.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
             </li>
           </ul>
         </nav>
