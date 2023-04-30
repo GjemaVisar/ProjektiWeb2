@@ -4,9 +4,14 @@
         if(isset($_POST['submit'])){
             $email = $_POST['email'];
             $password = $_POST['password'];
+            $salt = 'salt@_hellosalt';
+
+            $hashed = hash('sha256',$password.$salt);
+
+
 
             $check = mysqli_query($conn,"SELECT * FROM user WHERE 
-                    email='".$email."' and password='".$password."' ");
+                    email='".$email."' and password='".$hashed."' ");
 
 
 
