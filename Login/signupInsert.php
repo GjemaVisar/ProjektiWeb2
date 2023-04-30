@@ -32,6 +32,8 @@
 
             }else if(empty($cfpassword)){
                 $errors['cp'] = "Repeat password please";
+            }else if($password != $cfpassword){
+                $errors['pcp'] = "Password and confirm password should be the same";
             }
            
             if($password == $cfpassword && count($errors)==0){
@@ -51,7 +53,7 @@
                     echo "Error : ".$sql.":-".mysqli_error($conn);
                 }
             }else{
-                echo "Password and confirm password should be same";
+                echo end($errors);
             }
         }
         mysqli_close($conn);
