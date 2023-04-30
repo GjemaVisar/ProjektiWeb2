@@ -14,34 +14,19 @@
             $e = "SELECT email from user where email ='$email'";
             $e_query = mysqli_query($conn,$e);
             
-            $errors = array();
-            if(empty($name)){
-                $errors['u'] = "Username required";
-
-            }else if(mysqli_num_rows($u_query)>0 ){
-                $errors['u'] = "Username exists";
-
-            }else if(empty($email)){
-                $errors['e'] = "Email required";
-
+            $errors = "";
+            if(mysqli_num_rows($u_query)>0 ){
+                $errors = "Username exists";
             }else if(mysqli_num_rows($e_query)>0){
-                $errors['e'] = "Email exists";
+                $errors= "Email exists";
             }
-            else if(empty($password)){
-                $errors['p'] = "Password required";
-
-            }else if(empty($cfpassword)){
-                $errors['cp'] = "Repeat password please";
-            }else if($password != $cfpassword){
-                $errors['pcp'] = "Password and confirm password should be the same";
+            else if($password != $cfpassword){
+                $errors = "Password and confirm password should be the same";
             }
            
-            if($password == $cfpassword && count($errors)==0){
+            else if($password == $cfpassword){
                 $salt = 'salt@_hellosalt';
                 $hashed = hash('sha256',$password.$salt);
-
-                //check if username exists
-                
 
                 if($insert = mysqli_query($conn,"INSERT INTO user(name,email,password,date) 
                 VALUES ('$name','$email','$hashed','$data')")){
@@ -52,8 +37,6 @@
                 }else{
                     echo "Error : ".$sql.":-".mysqli_error($conn);
                 }
-            }else{
-                echo end($errors);
             }
         }
         mysqli_close($conn);
