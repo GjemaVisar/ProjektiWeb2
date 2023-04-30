@@ -7,9 +7,9 @@
             $salt = 'salt@_hellosalt';
 
             $hashed = hash('sha256',$password.$salt);
-
-
-
+            $hashed = substr($hashed,0,20);
+            
+            
             $check = mysqli_query($conn,"SELECT * FROM user WHERE 
                     email='".$email."' and password='".$hashed."' ");
 
