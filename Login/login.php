@@ -23,9 +23,9 @@
 			<span>or use your email for registration</span>
 			<div>
 				<input type="text" name="name" placeholder="Name" required/><!-- -->
-				<?php if(isset($errors)): ?>
-					<span><?php echo $errors; ?> </span>
-				<?php endif ?>
+				<?php if(isset($errors)){
+					echo "<span>".$errors."</span>";}
+				?>
 			</div>
 			<input type="email"name="email"  placeholder="Email" required/><!-- -->
 			<input type="password" name="password" placeholder="Password" required/><!-- -->
@@ -42,8 +42,8 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>or use your account</span>
-			<input type="email" name="email" placeholder="Email" />
-			<input type="password" name="password" placeholder="Password" />
+			<input type="email" name="email" placeholder="Email" required/>
+			<input type="password" name="password" placeholder="Password" required/>
 			<a href="#">Forgot your password?</a>
 			<input type="submit" name="submit" value="Submit">
 		</form>
