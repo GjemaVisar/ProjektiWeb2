@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gamics - Create Manage Matches</title>
-
+  
   <!-- 
     - favicon
   -->
@@ -125,24 +125,29 @@
             <li class="navbar-item">
               <a href="add.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
             </li>
-          </ul>
-        </nav>
 
-        <div class="header-actions">
+            <div class="header-actions">
 
-          <button class="cart-btn" aria-label="cart">
+            <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
 
             <span class="cart-badge">0</span>
-          </button>
-          <form action="" class="footer-newsletter">
-            <input type="search" name="search products" aria-label="search" placeholder="search products" required
-              class="email-field">
-
-            <button type="submit" class="footer-btn" aria-label="submit">
-              <ion-icon name="search-outline"></ion-icon>            
             </button>
-          </form>
+            <form action="" class="footer-newsletter">
+            <input type="search" name="search products" aria-label="search" placeholder="search products" required
+            class="email-field">
+
+              <button type="submit" class="footer-btn" aria-label="submit">
+              <ion-icon name="search-outline"></ion-icon>            
+              </button>
+              </form> 
+ 
+              <li class="navbar-item">
+              <a href="#"  data-nav-link><image src = "assets/images/vija.jpg"></a>
+            </li>
+
+          </ul>
+        </nav>
 
           <!-- 
               Ikona e menus kur te ngushtohet faqja, duhet mu ndreq qe me dal to Home, Blog, Shop...
