@@ -1,4 +1,15 @@
+<?php
 
+@include 'storeDB.php';
+
+
+session_start();
+
+if(!isset($_SESSION['admin'])){
+  header("Location:login.php", TRUE, 301);
+}
+
+?>
 
 
 <!DOCTYPE html>
@@ -119,7 +130,7 @@
             </li>
             
             <li class="navbar-item">
-              <a href="Login/login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
+              <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
             </li>
 
             <li class="navbar-item">
