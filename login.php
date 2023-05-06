@@ -25,7 +25,7 @@
                 
                 if($row['role'] == 'admin'){
                     $_SESSION['admin'] = $row['name'];
-                    header("Location:admin-page.php", TRUE, 301);
+                    header("Location:admin.php", TRUE, 301);
 
             	}
                 else if($row['role'] == 'user'){
