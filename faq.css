@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+  
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  .faq {
+    margin-bottom: 20px;
+  }
+  
+  .question {
+    margin-bottom: 10px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .question h3 {
+    margin-top: 0;
+  }
+  
+  .ask label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .ask {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .ask h2 {
+        margin-bottom: 10px;
+        font-size: 1.5em;
+      }
+      
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 1.1em;
+      }
+      
+      input[type="text"],
+      input[type="email"],
+      textarea {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      textarea {
+        resize: vertical;
+      }
+      
+      button[type="submit"] {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+      }
+      
+      button[type="submit"]:hover {
+        background-color: #555;
+      }
+
+      #status-message {
+        font-weight: bold;
+        margin-top: 10px;
+        color: green;
+        display: none;
+      }
+    
