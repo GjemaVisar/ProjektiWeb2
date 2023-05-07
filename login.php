@@ -37,7 +37,7 @@
 					//echo "Its working";
 					$name = $row['name'];
                     $_SESSION['admin'] = $name;
-                    header("Location:admin/admin.php", TRUE, 301);
+                    header("Location:admin/admin-dashboard.php", TRUE, 301);
 
             	}
                 else if($row['role'] == 'user'){
