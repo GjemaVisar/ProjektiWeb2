@@ -29,7 +29,7 @@
                 $salt = 'salt@_hellosalt';
                 $hashed = hash('sha256',$password.$salt);
 
-                if($insert = mysqli_query($conn,"INSERT INTO user(name,role,email,password,date) 
+                if($insert = mysqli_query($conn,"INSERT INTO user(name,role,email,password,datat) 
                 VALUES ('$name','$role','$email','$hashed','$data')")){
                     echo "Te dhenat u regj me sukses! ";
                     header("Location:login.php", TRUE, 301);
