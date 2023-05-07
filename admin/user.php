@@ -75,7 +75,7 @@ $num_users_today = $row_users_today[0];
 	</div>
 	<div class="col-div-3">
 		<div class="box">
-			<p><?php echo $num_users_today; ?><br/><span>Sign up/Today</span></p>
+			<p><?php echo $num_users_today; ?><br/><span>Sign ups for today</span></p>
 			<i class="fa fa-list box-icon"></i>
 		</div>
 	</div>
