@@ -18,7 +18,6 @@ $num_users_today = $row_users_today[0];
  
 
 
-
 ?>
 
 
@@ -91,6 +90,90 @@ $num_users_today = $row_users_today[0];
 			<i class="fa fa-tasks box-icon"></i>
 		</div>
 	</div>
+
+    <div>
+		
+	<form method="get" action="search.php">
+    <input type="text" name="search_term">
+   	<input type="submit" value="Search">
+  	</form>
+</div>
+
+	<div class="container-fluid">
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Users Profile</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+        <?php
+		if(isset($_GET['search_term'])) {
+			$search_term = $_GET['search_term'];
+			if($serch_term =! "")
+		  
+			$query = "SELECT * FROM user WHERE email LIKE '%$search_term%' and role ='user'";
+		  } else {
+			$query = "SELECT * FROM user WHERE role = 'user	";
+		  }
+           
+            $query_run = mysqli_query($conn, $query);
+        ?>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th> ID </th>
+                        <th> Username </th>
+                        <th>Email </th>
+                        <th>Password</th>
+                        <th>Role</th>
+                        <th>EDIT</th>
+                        <th>DELETE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if(mysqli_num_rows($query_run) > 0)
+                    {
+                        while($row = mysqli_fetch_assoc($query_run))
+                        {
+                    ?>
+                        <tr>
+                            <td><?php  echo $row['id']; ?></td>
+                            <td><?php  echo $row['name']; ?></td>
+                            <td><?php  echo $row['email']; ?></td>
+                            <td><?php  echo $row['password']; ?></td>
+                            <td><?php  echo $row['role']; ?></td>
+                            <td>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
+                                    <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
+                                    <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php
+                        }
+                    }
+                    else {
+                        echo "No Record Found";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
     <div class="clearfix"></div>
 	<br/><br/>
 
