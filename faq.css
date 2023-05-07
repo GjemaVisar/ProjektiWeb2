@@ -24,7 +24,7 @@ body {
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   }
-  
+
   .question h3 {
     margin-top: 0;
   }
@@ -33,7 +33,7 @@ body {
     display: block;
     margin-bottom: 5px;
   }
-  
+ 
   .ask {
       background-color: #f0f0f0;
       padding: 20px;
@@ -79,6 +79,7 @@ body {
         padding: 10px;
         cursor: pointer;
         transition: background-color 0.2s ease-in-out;
+        display: inline-block;
       }
       
       button[type="submit"]:hover {

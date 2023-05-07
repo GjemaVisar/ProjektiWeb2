@@ -7,10 +7,20 @@
         if(isset($_POST['submit'])){
             $email = $_POST['email'];
             $password = $_POST['password'];
-            $salt = 'salt@_hellosalt';
+            $salt_query = "SELECT `salt` FROM user WHERE email = '$email' ";
+			
+			$result = mysqli_query($conn,$salt_query);
+			if(mysqli_num_rows($result)==1){
+				$row = mysqli_fetch_assoc($result);
+				$salt = $row['salt'];
+			}else{
+				echo "Invalid query";
+			}
+			//echo $salt;
 
             $hashed = hash('sha256',$password.$salt);
             $hashed = substr($hashed,0,20);
+			//echo $hashed;
             
             $select = "SELECT * FROM user WHERE email= '$email' &&
                         password = '$hashed' ";
@@ -24,7 +34,9 @@
                 $row = mysqli_fetch_array($check);
                 
                 if($row['role'] == 'admin'){
-                    $_SESSION['admin'] = $row['name'];
+					//echo "Its working";
+					$name = $row['name'];
+                    $_SESSION['admin'] = $name;
                     header("Location:admin/admin.php", TRUE, 301);
 
             	}
@@ -38,9 +50,9 @@
 			}	
 			else{
                 $error[] = 'Incorrect';
-            }
+            }  
         }
-	
+
     
 
 ?> 
