@@ -18,6 +18,17 @@
 //         $_POST["answer"]
 //     ]);
 // }
+require("storeDB.php");
+$name = $_SESSION['admin'];
+if(isset($_POST['submit'])){
+    $question = $_POST['question'];
+    $answer = $_POST['answer'];
+    $date_created = date('d/m/Y');
+    $date_updated = NULL;
+    $insert_query = "INSERT INTO faq(question,answer,date_created,date_updated,asker,answerer) VALUES($question,$answer,$date_created,
+    $date_updated,$name,$name)";
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,48 +41,28 @@
         <h1 align="center">FAQ</h1>
     </header>
     <main>
-        <section class="faq">
-            <h2>General Questions</h2>
-            <div class="question">
-                <h3>What is the best-selling game console of all time?</h3>
-                <p>The best-selling game console of all time is the PS2, clocking in at 159 million units sold worldwide. </p>
-            </div>
-            <div class="question">
-                <h3>What is the most-played video game of all time?</h3>
-                <p>The most-played video game on record is Fortnite, 3.8 million game plays.</p>
-            </div>
-            <div class="question">
-                <h3>Roughly how many people play Roblox each month?</h3>
-                <p>Roblox attracts about 150 million monthly players. </p>
-            </div>
-        </section>
-        <section class="faq">
-            <h2>Technical Questions</h2>
-            <div class="question">
-                <h3>What is “Pixel Art”?</h3>
-                <p>A digital art which is created by drawing individual pixels in an image rather than rendering a 3D model is known as “Pixel Art”.</p>
-            </div>
-            <div class="question">
-                <h3>What do you mean by “Lag” ?</h3>
-                    <p>In online gaming, the delay between the action of players and the response time of the server is known as ‘Lag’.</p>
-            </div>
-            <div class="question">
-                <h3>How can you reduce game lag?</h3>
-                <p>To reduce game lag you can either lower the performance setting for the game or by upgrading certain parts on your computer.</p>
-            </div>
-        </section>
         <section class="ask">
             <h2>Ask a Question</h2>
-            <form id="question-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+            <form id="question-form" action="">
+                
                 <label for="question">Question:</label>
                 <textarea id="question" name="question" required></textarea>
+                <label>Answer:</label>
+                <textarea id="answer" name="answer" ></textarea>
                 <input type="submit" name="Submit1" value="Submit">
             </form>
         </section>
+        <section class="faq">
+            <h2>General Questions</h2>
+            <div class="question">
+                <h3 >What is the best-selling game console of all time? </h3>
+                <h4>Question by: </h4>
+                <p>The best-selling game console of all time is the PS2, clocking in at 159 million units sold worldwide. </p>
+                <h4>Answered by: </h4>
+            </div>
+           
+        </section>
+       
     </main>
     <script src="script.js"></script>
 </body>

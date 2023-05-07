@@ -1,6 +1,33 @@
 <?php
     require('storeDB.php');
+		
+		//created salt generating function with length 10
+	$length = 10;
+	function generate_salt($length){
+		$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$salt = '';
 
+		for($i=0;$i<$length;$i++){
+			$index = rand(0,strlen($chars)-1);
+			$salt .= $chars[$index];
+		}
+
+		return $salt;
+	}
+	
+		//created salt generating function with length 10
+		$length = 10;
+		function generate_salt($length){
+			$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			$salt = '';
+	
+			for($i=0;$i<$length;$i++){
+				$index = rand(0,strlen($chars)-1);
+				$salt .= $chars[$index];
+			}
+	
+			return $salt;
+		}
         if(isset($_POST['submit'])){
             $name = $_POST['name'];
             $email = $_POST['email'];
@@ -26,12 +53,12 @@
             }
            
             else if($password == $cfpassword){
-                $salt = 'salt@_hellosalt';
+                $salt = generate_salt($length);
+                $salt = generate_salt($length);
                 $hashed = hash('sha256',$password.$salt);
 
-                if($insert = mysqli_query($conn,"INSERT INTO user(name,role,email,password,datat) 
-                VALUES ('$name','$role','$email','$hashed','$data')")){
-                    echo "Te dhenat u regj me sukses! ";
+                if($insert = mysqli_query($conn,"INSERT INTO user(name,role,email,salt,password,datat) 
+                VALUES ('$name','$role','$email','$salt','$hashed','$data')")){
                     header("Location:login.php", TRUE, 301);
 
                 }else{

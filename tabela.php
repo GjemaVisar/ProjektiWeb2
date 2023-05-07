@@ -19,12 +19,19 @@ require("storeDB.php");
             product_description varchar(100),
             product_image longblob NOT NULL)';
     */
+
+    // ALTER TABLE PER TE SHTUAR KOLONEN ROLI
+    // $sql = "ALTER TABLE user ADD COLUMN `role` varchar(10) AFTER `name`";
+
+    // KRIJIMI I TABELES FAQ
+    $sql = 'CREATE TABLE FAQ (id INT(11) auto_increment primary key, question varchar(100), answer varchar(100),
+            date_created varchar(20), date_updated varchar(20), user_id INT(11), admin_id INT(11))';
     
     $retvalue = mysqli_query($conn,$sql);
     if(! $retvalue){
-        die("Could not create table users : ".mysqli_connect_error());
+        die("Could not create faq table : ".mysqli_connect_error());
     }
-    echo "Table users has been created successfully";
+    echo "Table faq has been created successfully";
 	mysqli_close($conn);
 
 

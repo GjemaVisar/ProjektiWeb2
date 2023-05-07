@@ -7,9 +7,9 @@ $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
 if(! $conn)
 {
     die("Connection failed ". mysqli_connect_error());
+}else{
+    echo "Connected to the database";
 }
-    #echo "Connected to the database";
-    
 
 
 // KRIJIMI I DATABAZES
