@@ -12,7 +12,7 @@
 	<div id="mySidenav" class="sidenav">
 	<p class="logo"><span>M</span>-SoftTech</p>
   <a href="#" class="icon-a"><i class="fa fa-dashboard icons"></i> &nbsp;&nbsp;Dashboard</a>
-  <a href="#"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Customers</a>
+  <a href="user.php"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Users</a>
   <a href="#"class="icon-a"><i class="fa fa-list icons"></i> &nbsp;&nbsp;Projects</a>
   <a href="#"class="icon-a"><i class="fa fa-shopping-bag icons"></i> &nbsp;&nbsp;Orders</a>
   <a href="#"class="icon-a"><i class="fa fa-tasks icons"></i> &nbsp;&nbsp;Inventory</a>
@@ -34,7 +34,7 @@
 		<img src="images/user.png" class="pro-img" />
 		<p>Manoj Adhikari <span>UI / UX DESIGNER</span></p>
 	</div>
-</div>
+  </div>
 	<div class="clearfix"></div>
 </div>
 
@@ -130,32 +130,7 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
 
-  $(".nav").click(function(){
-    $("#mySidenav").css('width','70px');
-    $("#main").css('margin-left','70px');
-    $(".logo").css('visibility', 'hidden');
-    $(".logo span").css('visibility', 'visible');
-     $(".logo span").css('margin-left', '-10px');
-     $(".icon-a").css('visibility', 'hidden');
-     $(".icons").css('visibility', 'visible');
-     $(".icons").css('margin-left', '-8px');
-      $(".nav").css('display','none');
-      $(".nav2").css('display','block');
-  });
-
-$(".nav2").click(function(){
-    $("#mySidenav").css('width','300px');
-    $("#main").css('margin-left','300px');
-    $(".logo").css('visibility', 'visible');
-     $(".icon-a").css('visibility', 'visible');
-     $(".icons").css('visibility', 'visible');
-     $(".nav").css('display','block');
-      $(".nav2").css('display','none');
- });
-
-</script>
 
 </body>
 
