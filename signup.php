@@ -2,18 +2,7 @@
     require('storeDB.php');
 		
 		//created salt generating function with length 10
-	$length = 10;
-	function generate_salt($length){
-		$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$salt = '';
-
-		for($i=0;$i<$length;$i++){
-			$index = rand(0,strlen($chars)-1);
-			$salt .= $chars[$index];
-		}
-
-		return $salt;
-	}
+	
 	
 		//created salt generating function with length 10
 		$length = 10;
@@ -53,7 +42,6 @@
             }
            
             else if($password == $cfpassword){
-                $salt = generate_salt($length);
                 $salt = generate_salt($length);
                 $hashed = hash('sha256',$password.$salt);
 

@@ -2,12 +2,25 @@
 
  require('../storeDB.php');
 
+        $length = 10;
+		function generate_salt($length){
+			$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			$salt = '';
+	
+			for($i=0;$i<$length;$i++){
+				$index = rand(0,strlen($chars)-1);
+				$salt .= $chars[$index];
+			}
+	
+			return $salt;
+		}
+
  if(isset($_POST['registerbtn'])){
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $cfpassword = $_POST['cfpassword'];
-    $role = $_SESSION['admin'];
+    // $role = $_SESSION['admin'];
     $data = date('d/m/Y');
 
     $email_query = "SELECT * FROM user WHERE email='$email'";
@@ -21,10 +34,10 @@
     {
         if($role='admin'){
             if($password == $cfpassword){
-                $salt = 'salt@_hellosalt';
+                $salt = generate_salt($length);
                 $hashed = hash('sha256',$password.$salt);
-                $query = "INSERT INTO user(name,role,email,password,datat) 
-                VALUES ('$name','$role','$email','$hashed','$data')";
+                $query = "INSERT INTO user(name,role,email,salt,password,datat) 
+                VALUES ('$name','$role','$email','$salt','$hashed','$data')";
                 $query_run = mysqli_query($conn, $query);
 
                 if($query_run)
