@@ -212,3 +212,8 @@ td, th {
   font-weight: 700;
   font-size: 2em;
 }
+.col-div-reg{
+	width: 50%;
+  height: 50%;
+	float: left;
+}
