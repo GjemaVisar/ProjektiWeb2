@@ -1,14 +1,15 @@
 <?php
 require("storeDB.php");
 session_start();
-$name = $_SESSION['admin'];
+$asker = $_SESSION['user'];
 if(isset($_POST['submit'])){
     $question = $_POST['question'];
-    $answer = $_POST['answer'];
+    $answer = NULL;
     $date_created = date('d/m/Y');
     $date_updated = NULL;
+    $answerer = NULL;
     $insert_query = "INSERT INTO faq(question,answer,date_created,date_updated,asker,answerer) VALUES('$question','$answer','$date_created',
-    '$date_updated','$name','$name')";
+    '$date_updated','$asker','$answerer')";
     
     if(mysqli_query($conn,$insert_query)){
        #echo "Right";
@@ -36,7 +37,7 @@ if(isset($_POST['submit'])){
                 <label for="question">Question:</label>
                 <textarea id="question" name="question" required></textarea>
                 <label>Answer:</label>
-                <textarea id="answer" name="answer" ></textarea>
+                <textarea id="answer" name="answer" readonly></textarea>
                 <input type="submit" name="submit" value="Submit">
             </form>
         </section>
@@ -51,6 +52,10 @@ if(isset($_POST['submit'])){
                         $answers = $row['answer'];
                         $askers = $row['asker'];
                         $answerers = $row['answerer'];
+                        if($answers == null && $answerers == null){
+                            $answers="This question hasn't gotten a response yet!";
+                            $answerers="No Admin has answered yet";
+                        }
                         echo '<h2>General Questions </h2>
                         <div class="question">
                         <h3>'.$questions.'</h3>
@@ -58,28 +63,10 @@ if(isset($_POST['submit'])){
                         <p>'.$answers.'</p>
                         <h4>Answered by: '.$answerers.'</h4><br>
                         
-                        <form action="?faq='.$id.'" method="Post">
-                        <input type="submit" name="delete_faq" value="Delete FAQ">
-                        </form>
-
-                        <form action="faq-edit.php?faq='.$id.'" method="Post">
-                        <input type="submit" value="Edit FAQ" name="edit_faq">
-                        </form>
                         </div>';
                     }
-                } 
+                }
                 
-               
-               if(isset($_POST['delete_faq'])){
-                $faq_id = $_GET['faq'];
-                #echo $faq_id;
-                $delete_query = "DELETE FROM faq WHERE id=$faq_id";
-                   if(mysqli_query($conn,$delete_query)){
-                    header("Location: faq.php");
-                   }else{
-                    echo "Deletion not OK";
-                   }
-               }
                
             ?>
            
@@ -93,10 +80,11 @@ if(isset($_POST['submit'])){
     </main>
     <script src="script.js"></script>
 </body>
-</html>
 
 <script>
 window.addEventListener("load",function(){
     $("answer").richText();
 });
 </script>
+</html>
+

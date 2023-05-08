@@ -131,7 +131,7 @@ if(!isset($_SESSION['user'])){
             </li>
 
             <li class="navbar-item">
-              <a href="add.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
+              <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
             </li>
           </ul>
         </nav>
