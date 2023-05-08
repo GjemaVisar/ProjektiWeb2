@@ -284,10 +284,10 @@ if(!isset($_SESSION['user'])){
         <section class="section latest-game" aria-label="latest game">
           <div class="container">
 
-            <p class="section-subtitle">Latest Releases</p>
+            <p class="section-subtitle"> </p>
 
             <h2 class="h2 section-title">
-              Create & <span class="span">Manage</span>
+             <span class="span">BUY PS3 / PS4 / PS5</span>
             </h2>
 
             <ul class="has-scrollbar">
@@ -296,20 +296,20 @@ if(!isset($_SESSION['user'])){
                 <div class="latest-game-card">
 
                   <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
-                    <img src="assets/images/latest-game-1.jpg" width="400" height="470" loading="lazy"
+                    <img src="https://www.trustedreviews.com/wp-content/uploads/sites/54/2009/09/11972-ps3controllerangleb-1.jpg" width="400" height="470" loading="lazy"
                       alt="White Walker Daily" class="img-cover">
                   </figure>
 
                   <div class="card-content">
 
-                    <a href="#" class="card-badge skewBg">Zombie</a>
+                    <a href="#" class="card-badge skewBg">PS3</a>
 
                     <h3 class="h3">
-                      <a href="#" class="card-title">White Walker <span class="span">Daily</span></a>
+                      <a href="#" class="card-title">Sony 3 <span class="span">32 GB</span></a>
                     </h3>
 
                     <p class="card-price">
-                      Entry Fee : <span class="span">Free</span>
+                      Price : <span class="span">260 $ </span>
                     </p>
 
                   </div>
@@ -321,20 +321,20 @@ if(!isset($_SESSION['user'])){
                 <div class="latest-game-card">
 
                   <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
-                    <img src="assets/images/latest-game-1.jpg" width="400" height="470" loading="lazy"
+                    <img src="https://m.media-amazon.com/images/I/41sN+-1hRsL._AC_UF894,1000_QL80_.jpg" width="400" height="470" loading="lazy"
                       alt="White Walker Daily" class="img-cover">
                   </figure>
 
                   <div class="card-content">
 
-                    <a href="#" class="card-badge skewBg">Zombie</a>
+                    <a href="#" class="card-badge skewBg">PS4</a>
 
                     <h3 class="h3">
-                      <a href="#" class="card-title">White Walker <span class="span">Daily</span></a>
+                      <a href="#" class="card-title">SONY 4 <span class="span"></span></a>
                     </h3>
 
                     <p class="card-price">
-                      Entry Fee : <span class="span">Free</span>
+                      Price: <span class="span">430 $</span>
                     </p>
 
                   </div>
@@ -346,20 +346,20 @@ if(!isset($_SESSION['user'])){
                 <div class="latest-game-card">
 
                   <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
-                    <img src="assets/images/latest-game-1.jpg" width="400" height="470" loading="lazy"
+                    <img src="https://i.guim.co.uk/img/media/953860ce3e8f24da59a4a0173383eb95f9384c78/43_0_960_576/master/960.jpg?width=465&quality=85&dpr=1&s=none" width="400" height="470" loading="lazy"
                       alt="White Walker Daily" class="img-cover">
                   </figure>
 
                   <div class="card-content">
 
-                    <a href="#" class="card-badge skewBg">Zombie</a>
+                    <a href="#" class="card-badge skewBg">PS5</a>
 
                     <h3 class="h3">
-                      <a href="#" class="card-title">White Walker <span class="span">Daily</span></a>
+                      <a href="#" class="card-title">PS5 <span class="span"></span></a>
                     </h3>
 
                     <p class="card-price">
-                      Entry Fee : <span class="span">Free</span>
+                      Price : <span class="span">660$</span>
                     </p>
 
                   </div>
@@ -367,80 +367,6 @@ if(!isset($_SESSION['user'])){
                 </div>
               </li>
 
-              <li class="scrollbar-item">
-                <div class="latest-game-card">
-
-                  <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
-                    <img src="assets/images/latest-game-1.jpg" width="400" height="470" loading="lazy"
-                      alt="White Walker Daily" class="img-cover">
-                  </figure>
-
-                  <div class="card-content">
-
-                    <a href="#" class="card-badge skewBg">Zombie</a>
-
-                    <h3 class="h3">
-                      <a href="#" class="card-title">White Walker <span class="span">Daily</span></a>
-                    </h3>
-
-                    <p class="card-price">
-                      Entry Fee : <span class="span">Free</span>
-                    </p>
-
-                  </div>
-
-                </div>
-              </li>
-
-              <li class="scrollbar-item">
-                <div class="latest-game-card">
-
-                  <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
-                    <img src="assets/images/latest-game-2.jpg" width="400" height="470" loading="lazy"
-                      alt="Hunter Killer II" class="img-cover">
-                  </figure>
-
-                  <div class="card-content">
-
-                    <a href="#" class="card-badge skewBg">Adventure</a>
-
-                    <h3 class="h3">
-                      <a href="#" class="card-title">Hunter Killer <span class="span">II</span></a>
-                    </h3>
-
-                    <p class="card-price">
-                      Entry Fee : <span class="span">$25.00</span>
-                    </p>
-
-                  </div>
-
-                </div>
-              </li>
-
-              <li class="scrollbar-item">
-                <div class="latest-game-card">
-
-                  <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
-                    <img src="assets/images/latest-game-3.jpg" width="400" height="470" loading="lazy"
-                      alt="Cyberpunk Daily" class="img-cover">
-                  </figure>
-
-                  <div class="card-content">
-
-                    <a href="#" class="card-badge skewBg">Action</a>
-
-                    <h3 class="h3">
-                      <a href="#" class="card-title">Cyberpunk <span class="span">Daily</span></a>
-                    </h3>
-
-                    <p class="card-price">
-                      Entry Fee : <span class="span">$25.00</span>
-                    </p>
-
-                  </div>
-
-                </div>
-              </li>
 
             </ul>
 
