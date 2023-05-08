@@ -2,7 +2,7 @@
 
  require('../storeDB.php');
 
-    $length = 10;
+        $length = 10;
 		function generate_salt($length){
 			$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			$salt = '';
@@ -15,12 +15,11 @@
 			return $salt;
 		}
 
- if(isset($_POST['registerbtn'])){
+ if(isset($_POST['registerbutton'])){
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $cfpassword = $_POST['cfpassword'];
-
     $data = date('d/m/Y');
 
     $email_query = "SELECT * FROM user WHERE email='$email'";
@@ -28,11 +27,11 @@
     if(mysqli_num_rows($email_query_run)>0){
         $_SESSION['status'] = "Email Already Taken. Please Try Another one.";
         $_SESSION['status_code'] = "error";
-        header('Location: registerAdmin.php');  
+        header('Location: registerUser.php');  
     }
     else
     {
-        if($role='admin'){
+        if($role='user'){
             if($password == $cfpassword){
                 $salt = generate_salt($length);
                 $hashed = hash('sha256',$password.$salt);
@@ -43,15 +42,15 @@
                 if($query_run)
                 {
                     // echo "Saved";
-                    $_SESSION['status'] = "Admin Profile Added";
+                    $_SESSION['status'] = "User Profile Added";
                     $_SESSION['status_code'] = "success";
-                    header('Location: registerAdmin.php');
+                    header('Location: registerUser.php');
                 }
                 else 
                 {
-                    $_SESSION['status'] = "Admin Profile Not Added";
+                    $_SESSION['status'] = "User Profile Not Added";
                     $_SESSION['status_code'] = "error";
-                    header('Location: registerAdmin.php');  
+                    header('Location: registerUser.php');  
                 }
             }
 
@@ -59,13 +58,12 @@
             {
                 $_SESSION['status'] = "Password and Confirm Password Does Not Match";
                 $_SESSION['status_code'] = "warning";
-                header('Location: `registerAdmin.php');  
+                header('Location: registerUser.php');  
             }
         }
     }
 
 }
-
 
 ?>
 
@@ -75,7 +73,7 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="admin.css" type="text/css"/>
+	<link rel="stylesheet" href="user.css" type="text/css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
@@ -161,13 +159,14 @@ a:hover{
   <a href="#"class="icon-a"><i class="fa fa-shopping-bag icons"></i> &nbsp;&nbsp;Orders</a>
   <a href="#"class="icon-a"><i class="fa fa-tasks icons"></i> &nbsp;&nbsp;Inventory</a>
   <a href="#"class="icon-a"><i class="fa fa-user icons"></i> &nbsp;&nbsp;Accounts</a>
+  <a href="#"class="icon-a"><i class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Tasks</a>
 
 </div>
   <div id="main">
 
 	<div class="head">
 		<div class="col-div-6">
-        <span style="font-size:30px;cursor:pointer; color: white;" class="nav"  >&#9776; Admins</span>
+        <span style="font-size:30px;cursor:pointer; color: white;" class="nav"  >&#9776; User Add</span>
     </div>
         
     
@@ -186,7 +185,7 @@ a:hover{
   <div class="row justify-content-center">
     <div class="col-md-5">
       <div class="card">
-        <h2 class="card-title text-center" style="color:#ffffff" >Register</h2>
+        <h2 class="card-title text-center" style="color:#ffffff" >Register User</h2>
         <div class="card-body py-md-4">
           <form _lpchecked="1" method="POST" >
             <div class="form-group">
@@ -207,7 +206,7 @@ a:hover{
             </div><br> -->
             <div class="d-flex flex-row align-items-center justify-content-between">
               
-              <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+              <button type="submit" name="registerbutton" class="btn btn-primary">Save</button>
             </div>
           </form>
         </div>
@@ -215,6 +214,56 @@ a:hover{
     </div>
   </div>
 </div>
+<!-- 
+<div class="container-fluid">
+
+<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Admin Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="code.php" method="POST">
+
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label> Username </label>
+                <input type="text" name="username" class="form-control" placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control checking_email" placeholder="Enter Email">
+                <small class="error_email" style="color: red;"></small>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Enter Password">
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password">
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
+       Add Admin Profile 
+</button> -->
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

@@ -79,9 +79,10 @@ $num_users_today = $row_users_today[0];
 		</div>
 	</div>
 	<div class="col-div-3">
+    <a href="registerUser.php" >
 		<div class="box">
-			<p>99<br/><span>Orders</span></p>
-			<i class="fa fa-shopping-bag box-icon"></i>
+			<p>+<br/><span>Add User</span></p>
+			<i class="fa fa-users box-icon"></i>
 		</div>
 	</div>
 	<div class="col-div-3">
