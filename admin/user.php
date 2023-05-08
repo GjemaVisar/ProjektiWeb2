@@ -149,7 +149,7 @@ $num_users_today = $row_users_today[0];
                                 </form>
                             </td>
                             <td>
-                                <form action="delete.php" method="post">
+                                <form action="deleteUsers.php" method="post">
                                     <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                                     <input type='submit' name='delete' value='Delete'></form>
                                 </form>
