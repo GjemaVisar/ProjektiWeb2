@@ -115,7 +115,7 @@ if(!isset($_SESSION['user'])){
             </li>
         -->
             <li class="navbar-item">
-              <a href="#shop" class="navbar-link skewBg" data-nav-link>Shop</a>
+              <a href="shop.php" class="navbar-link skewBg" data-nav-link>Shop</a>
             </li>
 
             <li class="navbar-item">

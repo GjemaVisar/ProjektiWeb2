@@ -114,7 +114,7 @@ $num_users_today = $row_users_today[0];
 		  
 			$query = "SELECT * FROM user WHERE email LIKE '%$search_term%' and role ='user'";
 		  } else {
-			$query = "SELECT * FROM user WHERE role = 'user	";
+			$query = "SELECT * FROM user WHERE role = 'user'	";
 		  }
            
             $query_run = mysqli_query($conn, $query);
