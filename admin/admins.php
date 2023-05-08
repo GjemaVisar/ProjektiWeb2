@@ -1,6 +1,8 @@
 <?php
 
  require('../storeDB.php');
+ session_start();
+ $name = $_SESSION['admin'];
 // Numerimi i llogarive te krijuara te webfaqes
 $sql_total_users = "SELECT COUNT(*) FROM user where role='admin'"; // replace "users" with your table name
 $result_total_users = mysqli_query($conn, $sql_total_users);
@@ -34,15 +36,13 @@ $num_users_today = $row_users_today[0];
 <body>
 	
 <div id="mySidenav" class="sidenav">
-	<p class="logo"><span>M</span>-SoftTech</p>
-  <a href="#" class="icon-a"><i class="fa fa-dashboard icons"></i> &nbsp;&nbsp;Dashboard</a>
+	<p class="logo"><span>Gamics</span></p>
+  
   <a href="user.php"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Users</a>
-  <a href="#"class="icon-a"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;&nbsp;Admins</a>
-  <a href="#"class="icon-a"><i class="fa fa-list icons"></i> &nbsp;&nbsp;Projects</a>
-  <a href="#"class="icon-a"><i class="fa fa-shopping-bag icons"></i> &nbsp;&nbsp;Orders</a>
-  <a href="#"class="icon-a"><i class="fa fa-tasks icons"></i> &nbsp;&nbsp;Inventory</a>
-  <a href="#"class="icon-a"><i class="fa fa-user icons"></i> &nbsp;&nbsp;Accounts</a>
-  <a href="#"class="icon-a"><i class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Tasks</a>
+  <a href="admins.php"class="icon-a"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;&nbsp;Admins</a>
+  
+  <a href="#"class="icon-a"><i class="fa fa-user icons"></i> &nbsp;&nbsp;Products</a>
+  <a href="../faq.php"class="icon-a"><i class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Faq</a>
 
 </div>
   <div id="main">
@@ -57,10 +57,11 @@ $num_users_today = $row_users_today[0];
 	<div class="col-div-6">
 	<div class="profile">
 
-		<img src="images/user.png" class="pro-img" />
-		<p>Manoj Adhikari <span>UI / UX DESIGNER</span></p>
+		<img src="..\assets\images\admin.png" class="pro-img" />
+		<p><?php echo strtoupper($name) ?>
+		<span>ADMIN</span></p>
 	</div>
-</div>
+  </div>
 	<div class="clearfix"></div>
 </div>
 
