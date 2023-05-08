@@ -3,7 +3,7 @@
     require('storeDB.php');
 
     session_start();
-    
+   
         if(isset($_POST['submit'])){
             $email = $_POST['email'];
             $password = $_POST['password'];
@@ -37,7 +37,7 @@
 					//echo "Its working";
 					$name = $row['name'];
                     $_SESSION['admin'] = $name;
-                    header("Location:admin/admin-dashboard.php", TRUE, 301);
+                    header("Location:admin/user.php", TRUE, 301);
 
             	}
                 else if($row['role'] == 'user'){
