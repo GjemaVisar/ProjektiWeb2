@@ -77,7 +77,7 @@ $num_users_today = $row_users_today[0];
 	<div class="col-div-3">
         <a href="registerAdmin.php" >
 		<div class="box">
-			<p><br/><span>Register an Admin</span></p>
+			<p>+<br/><span>Register an Admin</span></p>
 			<i class="fa fa-users box-icon"></i>
 		</div></a>
 	</div>

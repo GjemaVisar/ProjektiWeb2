@@ -14,6 +14,7 @@
 
 		return $salt;
 	}
+
 	
 		
         if(isset($_POST['submit'])){
@@ -41,7 +42,6 @@
             }
            
             else if($password == $cfpassword){
-                $salt = generate_salt($length);
                 $salt = generate_salt($length);
                 $hashed = hash('sha256',$password.$salt);
 

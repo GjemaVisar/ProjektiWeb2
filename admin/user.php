@@ -83,7 +83,19 @@ $num_users_today = $row_users_today[0];
 			<p><?php echo $num_users_today; ?><br/><span>Sign ups for today</span></p>
 			
 		</div>
-    
+	</div>
+	<div class="col-div-3">
+    <a href="registerUser.php" >
+		<div class="box">
+			<p>+<br/><span>Add User</span></p>
+			<i class="fa fa-users box-icon"></i>
+		</div>
+	</div>
+	<div class="col-div-3">
+		<div class="box">
+			<p>78<br/><span>Tasks</span></p>
+			<i class="fa fa-tasks box-icon"></i>
+		</div>
 	</div>
 	
     
