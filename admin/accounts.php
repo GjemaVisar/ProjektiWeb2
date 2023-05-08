@@ -2,9 +2,19 @@
 
  require('../storeDB.php');
 
+    session_start();
+    #Session te cilat i perdorim- nuk e di pse spom funksionojne
+    if(isset($_SESSION['success']) && $_SESSION['success'] !=''){
+        echo '<h2 class="bg-primary" > '.$_SESSION['success'].' <h2>';
+        unset($_SESSION['success']);
+    }
+    if(isset($_SESSION['status']) && $_SESSION['status'] !=''){
+        echo '<h2 class="bg-info> " '.$_SESSION['status'].' <h2>';
+        unset($_SESSION['status']);
+    }
+
+
 ?>
-
-
 
 <!Doctype HTML>
 <html>
@@ -85,13 +95,13 @@
                             <td><?php  echo $row['password']; ?></td>
                             <td><?php  echo $row['role']; ?></td>
                             <td>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
+                                <form action="edit.php" method="post">
+                                    <input type="hidden" name="edit_id" value="<?php echo $row['id'] ?>">
                                     <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
                                 </form>
                             </td>
                             <td>
-                                <form action="#" method="post">
+                                <form action="delete.php" method="post">
                                     <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
                                     <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
                                 </form>
