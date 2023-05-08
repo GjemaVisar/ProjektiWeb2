@@ -71,52 +71,39 @@ $num_users_today = $row_users_today[0];
 			<p><?php echo $num_users; ?><br/><span>Accounts</span></p>
 			<i class="fa fa-users box-icon"></i>
 		</div>
+        
+        <form class = "search-form" method="get" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+        <label for="search-bar" style="color: white;">Search users:</label>
+    <input type="text" name="search_term" id = "search_bar" >
+   	<input type="submit" value="Search">
+  	</form> 
 	</div>
 	<div class="col-div-3">
 		<div class="box">
 			<p><?php echo $num_users_today; ?><br/><span>Sign ups for today</span></p>
-			<i class="fa fa-list box-icon"></i>
+			
 		</div>
+    
 	</div>
-	<div class="col-div-3">
-		<div class="box">
-			<p>99<br/><span>Orders</span></p>
-			<i class="fa fa-shopping-bag box-icon"></i>
-		</div>
-	</div>
-	<div class="col-div-3">
-		<div class="box">
-			<p>78<br/><span>Tasks</span></p>
-			<i class="fa fa-tasks box-icon"></i>
-		</div>
-	</div>
+	
+    
 
-    <div>
-		
-	<form method="get" action="search.php">
-    <input type="text" name="search_term">
-   	<input type="submit" value="Search">
-  	</form>
-</div>
 
 	<div class="container-fluid">
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Users Profile</h6>
-    </div>
+
     <div class="card-body">
         <div class="table-responsive">
         <?php
-		if(isset($_GET['search_term'])) {
-			$search_term = $_GET['search_term'];
-			if($serch_term =! "")
-		  
-			$query = "SELECT * FROM user WHERE email LIKE '%$search_term%' and role ='user'";
-		  } else {
-			$query = "SELECT * FROM user WHERE role = 'user	";
+            $search_query = isset($_GET['search_term']) ? $_GET['search_term'] : '';
+            if($search_query){
+                $query1 = "SELECT * FROM user WHERE email LIKE '%$search_query%'and role ='user'";
+            }
+            else {
+			$query1 = "SELECT * FROM user WHERE role = 'user'";
 		  }
            
-            $query_run = mysqli_query($conn, $query);
+            $query_run = mysqli_query($conn, $query1);
         ?>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -150,9 +137,9 @@ $num_users_today = $row_users_today[0];
                                 </form>
                             </td>
                             <td>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
-                                    <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
+                                <form action="delete.php" method="post">
+                                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                    <input type='submit' name='delete' value='Delete'></form>
                                 </form>
                             </td>
                         </tr>
