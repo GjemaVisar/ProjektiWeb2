@@ -1,34 +1,10 @@
-<?php
-
- require('../storeDB.php');
+<?php 
+    require('../storeDB.php');
  session_start();
-
- if(!isset($_SESSION['admin'])){
-	header("Location:../login.php", TRUE, 301);
-  }
-
  $name = $_SESSION['admin'];
-// Numerimi i llogarive te krijuara te webfaqes
-$sql_total_users = "SELECT COUNT(*) FROM user where role='admin'"; // replace "users" with your table name
-$result_total_users = mysqli_query($conn, $sql_total_users);
-
-$row_total_users = mysqli_fetch_array($result_total_users);
-$num_users = $row_total_users[0];
-
-// Llogarit e krijuara sot
-$today = date('d/m/Y');
-$sql_users_today = "SELECT COUNT(*) FROM user WHERE role='admin' and datat = '$today'"; // replace "users" with your table name and "signup_date" with the name of your column that stores the date of sign up
-$result_users_today = mysqli_query($conn, $sql_users_today);
-
-$row_users_today = mysqli_fetch_array($result_users_today);
-$num_users_today = $row_users_today[0];
- 
-
 
 
 ?>
-
-
 
 <!Doctype HTML>
 <html>
@@ -49,6 +25,7 @@ $num_users_today = $row_users_today[0];
   <a href="products.php"class="icon-a"><i class="fa fa-gamepad icons"></i> &nbsp;&nbsp;Products</a>
   <a href="../faq.php"class="icon-a"><i class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Faq</a>
   <a href="logout.php"class="icon-a"><i class="fa fa-level-down icons"></i> &nbsp;&nbsp;Log Out</a>
+
   
 
 </div>
@@ -76,23 +53,23 @@ $num_users_today = $row_users_today[0];
 	<br/>
 	
     <div class="col-div-3">
-        <a href="accounts.php" >
-		<div class="box">
-			<p><?php echo $num_users; ?><br/><span>Accounts</span></p>
-			<i class="fa fa-users box-icon"></i>
+        <a href="games.php" >
+		<div class="box">\
+            <i class="fa fa-gamepad fa-3x"></i>
+			<p><?php //echo $num_users; ?><br/><span>Games</span></p>
 		</div></a>
 	</div>
 	<div class="col-div-3">
-        <a href="registerAdmin.php" >
+        <a href="add_game.php" >
 		<div class="box">
-			<p>+<br/><span>Register an Admin</span></p>
-			<i class="fa fa-users box-icon"></i>
+			<p>+<br/><span>Add a Game</span></p>
+			<i class="fa fa-gamepad box-icon"></i>
 		</div></a>
 	</div>
 	<div class="col-div-3">
 		<div class="box">
-			<p><?php echo $num_users_today; ?><br/><span>Sign up/Today</span></p>
-			<i class="fa fa-list box-icon"></i>
+			<p><?php // echo $num_users_today; ?><br/><span>Games purchased</span></p>
+			<i class="fa fa-money box-icon"></i>
 		</div>
 	</div>
 	

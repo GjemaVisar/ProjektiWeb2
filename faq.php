@@ -91,6 +91,7 @@ if(isset($_POST['submit'])){
 </style>
 </head>
 <body>
+
     <header>
         <h1 align="center">FAQ</h1>
     </header>
