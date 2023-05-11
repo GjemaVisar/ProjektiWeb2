@@ -8,7 +8,8 @@ if(isset($_POST['submit'])){
     $date_created = date('d/m/Y');
     $date_updated = NULL;
     $answerer = NULL;
-    $insert_query = "INSERT INTO faq(question,answer,date_created,date_updated,asker,answerer) VALUES('$question','$answer','$date_created',
+    $insert_query = "INSERT INTO faq(question,answer,date_created,date_updated,asker,answerer) 
+    VALUES('$question','$answer','$date_created',
     '$date_updated','$asker','$answerer')";
     
     if(mysqli_query($conn,$insert_query)){
@@ -24,11 +25,144 @@ if(isset($_POST['submit'])){
 <head>
     <title>FAQ Page</title>
     <link rel="stylesheet" type="text/css" href="faq.css">
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
 </head>
-<body>
-    <header>
-        <h1 align="center">FAQ</h1>
-    </header>
+<body style="background-color:aliceblue;">
+    <header class="header">
+
+    <div class="header-top">
+      <div class="container">
+
+        <!-- <div class="countdown-text">
+          Exclusive Black Friday ! Offer <span class="span skewBg">10</span> Days
+        </div> -->
+
+        <div class="social-wrapper">
+
+          <p class="social-title">Follow us on :</p>
+
+          <ul class="social-list">
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="header-bottom skewBg" data-header>
+      <div class="container">
+
+        <a href="#" class="logo">Gamics</a>
+
+        <nav class="navbar" data-navbar>
+          <ul class="navbar-list">
+
+            <li class="navbar-item">
+              <a href="user-page.php" class="navbar-link skewBg" data-nav-link>Home</a>
+            </li>
+<!--
+            <li class="navbar-item">
+              <a href="#live" class="navbar-link skewBg" data-nav-link>Live</a>
+            </li>
+        
+            <li class="navbar-item">
+              <a href="#features" class="navbar-link skewBg" data-nav-link>Features</a>
+            </li>
+        -->
+            <li class="navbar-item">
+              <a href="shop.php" class="navbar-link skewBg" data-nav-link>Shop</a>
+            </li>
+
+            <li class="navbar-item">
+              <a href="#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
+            </li>
+
+            <li class="navbar-item">
+              <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
+            </li>
+            
+            <li class="navbar-item">
+              <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
+            </li>
+
+            <li class="navbar-item">
+              <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+
+          <button class="cart-btn" aria-label="cart">
+            <ion-icon name="cart"></ion-icon>
+
+            <span class="cart-badge">0</span>
+          </button>
+          <form action="" class="footer-newsletter">
+            <input type="search" name="search products" aria-label="search" placeholder="search products" required
+              class="email-field">
+
+            <button type="submit" class="footer-btn" aria-label="submit">
+              <ion-icon name="search-outline"></ion-icon>            
+            </button>
+          </form>
+
+          <!-- 
+              Ikona e menus kur te ngushtohet faqja, duhet mu ndreq qe me dal to Home, Blog, Shop...
+           -->
+          <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+            <ion-icon name="menu-outline" class="menu"></ion-icon>
+            
+            <ion-icon name="close-outline" class="close"></ion-icon>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+  </header>
+  <br><br><br><br>
     <main>
         <section class="ask">
             <h2>Ask a Question</h2>
@@ -87,4 +221,12 @@ window.addEventListener("load",function(){
 });
 </script>
 </html>
+<script src="./assets/js/script.js" defer></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 

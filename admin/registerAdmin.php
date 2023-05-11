@@ -21,48 +21,63 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
     $cfpassword = $_POST['cfpassword'];
-
     $data = date('d/m/Y');
 
-    $email_query = "SELECT * FROM user WHERE email='$email'";
-    $email_query_run = mysqli_query($conn, $email_query);
-    if(mysqli_num_rows($email_query_run)>0){
-        $_SESSION['status'] = "Email Already Taken. Please Try Another one.";
-        $_SESSION['status_code'] = "error";
-        header('Location: registerAdmin.php');  
-    }
-    else
-    {
-        if($role='admin'){
-            if($password == $cfpassword){
-                $salt = generate_salt($length);
-                $hashed = hash('sha256',$password.$salt);
-                $query = "INSERT INTO user(name,role,email,salt,password,datat) 
-                VALUES ('$name','$role','$email','$salt','$hashed','$data')";
-                $query_run = mysqli_query($conn, $query);
+    // RegEx
+    $usernameRegex = "/^[a-zA-Z0-9_]{3,20}$/";
+		$emailRegex = "/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/";
+		$passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
+	
+		$errors = "";
+		$u = "SELECT name from user where name = '$name'";
+    $u_query = mysqli_query($conn,$u);
+            
+    $e = "SELECT email from user where email ='$email'";
+    $e_query = mysqli_query($conn,$e);
 
-                if($query_run)
-                {
-                    // echo "Saved";
-                    $_SESSION['status'] = "Admin Profile Added";
-                    $_SESSION['status_code'] = "success";
-                    header('Location: registerAdmin.php');
-                }
-                else 
-                {
-                    $_SESSION['status'] = "Admin Profile Not Added";
-                    $_SESSION['status_code'] = "error";
-                    header('Location: registerAdmin.php');  
-                }
-            }
+    if($role='admin'){
 
-            else 
-            {
-                $_SESSION['status'] = "Password and Confirm Password Does Not Match";
-                $_SESSION['status_code'] = "warning";
-                header('Location: `registerAdmin.php');  
-            }
-        }
+      if (!preg_match($usernameRegex, $name)) {
+        $errors = "Invalid username format";
+      }
+      elseif (!preg_match($emailRegex, $email)) {
+        $errors = "Invalid email format";
+      }
+      elseif (!preg_match($passwordRegex, $password)) {
+        $errors = "Invalid password format";
+      }
+      elseif(mysqli_num_rows($u_query)>0){
+          $errors = "Username is already used ";
+          header('Location: registerAdmin.php');
+      }
+      elseif(mysqli_num_rows($e_query)>0){
+          $errors = "Email is already used";
+          header('Location: registerAdmin.php');  
+      }
+      else{
+          if($password == $cfpassword){
+                  $salt = generate_salt($length);
+                  $hashed = hash('sha256',$password.$salt);
+                  $query = "INSERT INTO user(name,role,email,salt,password,datat) 
+                  VALUES ('$name','$role','$email','$salt','$hashed','$data')";
+                  $query_run = mysqli_query($conn, $query);
+
+                  if($query_run)
+                  {
+                      // echo "Saved";
+                      $errors="Admin Profile added";
+                      header('Location: registerAdmin.php');
+                  }
+                  else 
+                  {
+                      $errors="Admin Profile not added";
+                      header('Location: registerAdmin.php');  
+                  }
+              }else {
+                  $errors = "Password and confirm password should be the same";
+                  header('Location: `registerAdmin.php');  
+                }
+          }
     }
 
 }
@@ -158,7 +173,6 @@ a:hover{
   
   <a href="user.php"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Users</a>
   <a href="admins.php"class="icon-a"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;&nbsp;Admins</a>
-  
   <a href="#"class="icon-a"><i class="fa fa-user icons"></i> &nbsp;&nbsp;Products</a>
   <a href="../faq.php"class="icon-a"><i class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Faq</a>
 
@@ -204,6 +218,9 @@ a:hover{
             <div class="form-group">
               <input type="password" class="form-control" name="cfpassword" id="confirm-password" placeholder="confirm-password">
             </div>
+            <?php if(isset($errors)): ?>
+              <span><?php echo $errors; ?> </span>
+            <?php endif ?>
             <!-- <div class="form-group">
                 <select name="role"><option value="admin" >admin</option></select>
             </div><br> -->

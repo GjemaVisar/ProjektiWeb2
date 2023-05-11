@@ -14,47 +14,60 @@
 
 		return $salt;
 	}
-
 	
+	if(isset($_POST['submit'])){
+		$name = $_POST['name'];
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$cfpassword = $_POST['cfpassword'];
+		$role = $_POST['role'];
+		$data = date('d/m/Y');
+	
+		// RegEx
+		$usernameRegex = "/^[a-zA-Z0-9_]{3,20}$/";
+		$emailRegex = "/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/";
+		$passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
+	
+		$errors = "";
+		$u = "SELECT name from user where name = '$name'";
+        $u_query = mysqli_query($conn,$u);
+            
+        $e = "SELECT email from user where email ='$email'";
+        $e_query = mysqli_query($conn,$e);
+	
+		if (!preg_match($usernameRegex, $name)) {
+			$errors = "Invalid username format";
+		}
+		elseif (!preg_match($emailRegex, $email)) {
+			$errors = "Invalid email format";
+		}
+		elseif (!preg_match($passwordRegex, $password)) {
+			$errors = "Invalid password format";
+		}
+		elseif(mysqli_num_rows($u_query) > 0){
+			$errors = "Username exists";
+		}
+		elseif(mysqli_num_rows($e_query) > 0){
+			$errors = "Email exists";
+		}
+		elseif($password != $cfpassword){
+			$errors = "Password and confirm password should be the same";
+		}
+		else {
+			$salt = generate_salt($length);
+			$hashed = hash('sha256',$password.$salt);
+	
+			if($insert = mysqli_query($conn,"INSERT INTO user(name, role, email, salt, password, datat) 
+			VALUES ('$name','$role','$email','$salt','$hashed','$data')")){
+				header("Location: login.php", TRUE, 301);
+			}else{
+				$errors = "Useri nuk mund te regjistrohej";
+				echo "Error : ".$sql.":-".mysqli_error($conn);
+			}
+		}
 		
-        if(isset($_POST['submit'])){
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $cfpassword = $_POST['cfpassword'];
-            $role = $_POST['role'];
-            $data = date('d/m/Y');
-            
-            $u = "SELECT name from user where name = '$name'";
-            $u_query = mysqli_query($conn,$u);
-            
-            $e = "SELECT email from user where email ='$email'";
-            $e_query = mysqli_query($conn,$e);
-            
-            $errors = "";
-            if(mysqli_num_rows($u_query)>0){
-                $errors = "Username exists";
-            }else if(mysqli_num_rows($e_query)>0){
-                $errors= "Email exists";
-            }
-            else if($password != $cfpassword){
-                $errors = "Password and confirm password should be the same";
-            }
-           
-            else if($password == $cfpassword){
-                $salt = generate_salt($length);
-                $hashed = hash('sha256',$password.$salt);
-
-                if($insert = mysqli_query($conn,"INSERT INTO user(name,role,email,salt,password,datat) 
-                VALUES ('$name','$role','$email','$salt','$hashed','$data')")){
-                    header("Location:login.php", TRUE, 301);
-
-                }else{
-                    echo "Error : ".$sql.":-".mysqli_error($conn);
-                }
-            }
-        }
-        mysqli_close($conn);
+		mysqli_close($conn);
+	}
     
 #<p class='text-danger'><?php  if(isset($errors['e'])){echo $errors['e'];} / </p>
 ?>
@@ -81,14 +94,14 @@
 			<span>or use your email for registration</span>
 			<div>
 				<input type="text" name="name" placeholder="Name" required/><!-- -->
-				<?php if(isset($errors)): ?>
-					<span><?php echo $errors; ?> </span>
-				<?php endif ?>
 				<input type="email"name="email"  placeholder="Email" required/><!-- -->
 				<input type="password" name="password" placeholder="Password" required/><!-- -->
 				<input type="password" name="cfpassword" placeholder="Confirm Password" required/><!-- -->
-				<select name="role" >
-					<option value="user" >user</option>
+				<?php if(isset($errors)): ?>
+					<span><?php echo $errors; ?> </span>
+				<?php endif ?>
+				<select hidden name="role" >
+					<option value="user" selected >user</option>
 					<option value="admin" >admin</option>
 				</select>
 				<p>If you have an accout please Sign In</p>
