@@ -24,8 +24,12 @@ require("storeDB.php");
     // $sql = "ALTER TABLE user ADD COLUMN `role` varchar(10) AFTER `name`";
 
     // KRIJIMI I TABELES FAQ
-    $sql = 'CREATE TABLE FAQ (id INT(11) auto_increment primary key, question varchar(100), answer varchar(100),
-            date_created varchar(20), date_updated varchar(20), user_id INT(11), admin_id INT(11))';
+    // $sql = 'CREATE TABLE FAQ (id INT(11) auto_increment primary key, question varchar(100), answer varchar(100),
+    //         date_created varchar(20), date_updated varchar(20), user_id INT(11), admin_id INT(11))';
+
+    //KRIJIMI I TABELES NEWSLETTER
+    $sql = 'CREATE TABLE newsletter(id INT(11) auto_increment primary key, username varchar(30), user_email varchar(100))';
+
     
     $retvalue = mysqli_query($conn,$sql);
     if(! $retvalue){

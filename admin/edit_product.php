@@ -7,7 +7,7 @@ if(isset($_POST['edit_btn']))
 {
     $id = $_POST['edit_id'];
     
-    $query = "SELECT * FROM user where id='$id' ";
+    $query = "SELECT * FROM product where pid='$id' ";
     $query_run = mysqli_query($conn, $query);
 
     foreach($query_run as $row){
@@ -37,23 +37,44 @@ if(isset($_POST['edit_btn']))
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card">
-                <h2 class="card-title text-center" style="color:#ffffff" >Edit Admin Profile</h2>
+                <h2 class="card-title text-center" style="color:#ffffff" >Edit Game Information</h2>
                 <div class="card-body py-md-4">
                     <form _lpchecked="1" method="POST" >
 
-                        <input type="hidden" name="edit_id" value="<?php echo $row['id'] ?>" >
+                        <input type="hidden" name="edit_id" value="<?php echo $row['pid'] ?>" >
                         <div class="form-group">
-                            <input type="text" class="form-control" name="edit_name" value="<?php echo $row['name'] ?>"  id="name" placeholder="Name">
+                            <input type="text" class="form-control" name="edit_name" value="<?php echo $row['product_name'] ?>"  id="name" placeholder="Product Name">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" name="edit_email" value="<?php echo $row['email'] ?>" id="email" placeholder="Email">
+                            <input type="text" class="form-control" name="edit_price" value="<?php echo $row['product_price'] ?>" id="price" placeholder="Product Price">
                         </div>
 
                         <div class="form-group">
-                            <input type="password" class="form-control" name="edit_password" value="<?php echo $row['password'] ?>" id="password" placeholder="Password">
+                            <input type="text" class="form-control" name="edit_description" 
+                                    value="<?php echo $row['product_description'] ?>" id="description" placeholder="Product Description">
                         </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="edit_image" 
+                                    value="<?php echo $row['product_image'] ?>" id="image" placeholder="Product Image">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="edit_quantity" 
+                                    value="<?php echo $row['quantity'] ?>" id="quantity" placeholder="Product Quantity">
+                        </div>
+
+
+                        <div class="form-group">    
+                        <select class="form-control" name="edit_category">
+                            <option value="videogame">Video Game</option>
+                            <option value="console">Consoles</option>
+                            <option value="merch">Merch</option>
+                        </select>
+                        </div>
+
                         <div>
-                            <a href="accounts.php" class="btn btn-primary" >Cancel</a>
+                            <a href="games.php" class="btn btn-primary" >Cancel</a>
                             <button type="submit" name="updatebtn" class="btn btn-primary" >Update</button>
                         </div>
 
@@ -74,38 +95,41 @@ if(isset($_POST['edit_btn']))
 
 <?php 
 
-    $length = 10;
-    function generate_salt($length){
-        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $salt = '';
-
-        for($i=0;$i<$length;$i++){
-            $index = rand(0,strlen($chars)-1);
-            $salt .= $chars[$index];
-        }
-
-        return $salt;
-    }
     if(isset($_POST['updatebtn']))
     {
-        $id = $_POST['edit_id'];
-        $name = $_POST['edit_name'];
-        $email = $_POST['edit_email'];
-        $password = $_POST['edit_password'];
+        $pid = $_POST['edit_id'];
+        $product_name = $_POST['edit_name'];
+        echo $product_name;
 
-        $salt = generate_salt($length);
-        $hashed = hash('sha256',$password.$salt);
+        $product_price = $_POST['edit_price'];
+        $float_val = floatval($product_price);
+        echo $float_val;
 
-        $query = "UPDATE user SET name='$name', email='$email', password='$hashed' WHERE id='$id' ";
+        $product_description = $_POST['edit_description'];
+        echo $product_description;
+
+        $product_image = $_POST['edit_image'];
+        echo $product_image;
+
+        $product_category = $_POST['edit_category'];
+        echo $product_category;
+
+        $product_quantity = $_POST['edit_quantity'];
+        $quantity = intval($product_quantity);
+
+        $query = "UPDATE product SET product_name='$product_name', product_price=$float_val,
+         product_description='$product_description', product_image = '$product_image',
+         category = '$product_category',quantity = $quantity WHERE pid='$pid' ";
+
         $query_run = mysqli_query($conn,$query);
 
         if($query_run){
             $_SESSION['success'] = "Your data is Updated";
-            header('Location: accounts.php');
+            header('Location: games.php');
         }
         else{
             $_SESSION['status'] = "Your data is NOT Updated";
-            header('Location: accounts.php');
+            header('Location: games.php');
         }
 
     }
@@ -200,8 +224,9 @@ a:hover{
   <a href="user.php"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Users</a>
   <a href="admins.php"class="icon-a"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;&nbsp;Admins</a>
   
-  <a href="#"class="icon-a"><i class="fa fa-gamepad icons"></i> &nbsp;&nbsp;Products</a>
+  <a href="products.php"class="icon-a"><i class="fa fa-gamepad icons"></i> &nbsp;&nbsp;Products</a>
   <a href="../faq.php"class="icon-a"><i class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Faq</a>
+  <a href="logout.php"class="icon-a"><i class="fa fa-level-down icons"></i> &nbsp;&nbsp;Log Out</a>
 
 </div>
 

@@ -126,12 +126,18 @@ if(!isset($_SESSION['user'])){
               <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
+            <!--
             <li class="navbar-item">
               <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
             </li>
-
+            -->
+            
             <li class="navbar-item">
               <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
+            </li>
+
+            <li class="navbar-item">
+              <a href="admin/logout.php" class="navbar-link skewBg" data-nav-link>Log Out</a>
             </li>
           </ul>
         </nav>
@@ -1203,7 +1209,7 @@ if(!isset($_SESSION['user'])){
                     Compete With 100 Players On A Remote Island Thats Winner Takes Showdown Known Issue.
                   </p>
 
-                  <a href="#" class="card-link">
+                  <a href="https://answers.ea.com/t5/Battlefield/ct-p/battlefield" class="card-link">
                     <span class="span">Read More</span>
 
                     <ion-icon name="caret-forward"></ion-icon>
@@ -1245,12 +1251,11 @@ if(!isset($_SESSION['user'])){
                 <ion-icon name="mail-outline"></ion-icon>
               </div>
 
-              <button type="submit" class="btn newsletter-btn skewBg">
+              <button type="submit" class="btn newsletter-btn skewBg" name="subscribe">
                 <span class="span">Subscribe</span>
 
                 <ion-icon name="paper-plane" aria-hidden="true"></ion-icon>
               </button>
-
             </form>
 
           </div>
@@ -1278,7 +1283,7 @@ if(!isset($_SESSION['user'])){
 
           <p class="footer-list-title">Contact</p>
           <p class="footer-text">
-            Gamics marketplace the relase etras thats sheets continig passag.
+            Gamics is the most professional game selling website in Kosovo
           </p>
           
           <ul id="contact" class="contact-list">
@@ -1289,7 +1294,7 @@ if(!isset($_SESSION['user'])){
               </div>
 
               <address class="item-text">
-                Address : PO Box W75 Street lan West new queens
+                Address : Prishtina Mall,Kati II, Lipjan, 10000
               </address>
             </li>
 
@@ -1298,7 +1303,8 @@ if(!isset($_SESSION['user'])){
                 <ion-icon name="headset"></ion-icon>
               </div>
 
-              <a href="tel:+241245654235" class="item-text">Phone : +24 1245 654 235</a>
+              <p class="item-text">Phone : +383 44 149 235<br>+383 45 274 218</p>
+            
             </li>
 
             <li class="contact-item">
@@ -1306,7 +1312,7 @@ if(!isset($_SESSION['user'])){
                 <ion-icon name="mail-open"></ion-icon>
               </div>
 
-              <a href="mailto:info@exemple.com" class="item-text">Email : info@exemple.com</a>
+              <a href="mailto:info@exemple.com" class="item-text">Email : gamics-ks@gmail.com</a>
             </li>
 
           </ul>
@@ -1320,24 +1326,18 @@ if(!isset($_SESSION['user'])){
           </li>
 
           <li>
-            <a href="#" class="footer-link">Graphics (26)</a>
+            <a href="#" class="footer-link">Video Games</a>
           </li>
 
           <li>
-            <a href="#" class="footer-link">Backgrounds (11)</a>
+            <a href="#" class="footer-link">Consoles</a>
           </li>
 
           <li>
-            <a href="#" class="footer-link">Fonts (9)</a>
+            <a href="#" class="footer-link">Merch</a>
           </li>
 
-          <li>
-            <a href="#" class="footer-link">Music (3)</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Photography (3)</a>
-          </li>
+          
 
         </ul>
 
@@ -1359,13 +1359,6 @@ if(!isset($_SESSION['user'])){
             <a href="#" class="footer-link">Refund Policy</a>
           </li>
 
-          <li>
-            <a href="#" class="footer-link">Affiliate</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Use Cases</a>
-          </li>
 
         </ul>
 
@@ -1405,20 +1398,7 @@ if(!isset($_SESSION['user'])){
 
           </div>
 
-          <div class="footer-newsletter">
-
-            <p class="footer-list-title">Newsletter Sign Up</p>
-
-            <form action="" class="footer-newsletter">
-              <input type="email" name="email_address" aria-label="email" placeholder="Enter your email" required
-                class="email-field">
-
-              <button type="submit" class="footer-btn" aria-label="submit">
-                <ion-icon name="rocket"></ion-icon>
-              </button>
-            </form>
-
-          </div>
+          
 
         </div>
 

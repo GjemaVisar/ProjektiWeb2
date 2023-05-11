@@ -1,70 +1,33 @@
 <?php
 
  require('../storeDB.php');
+ 
  session_start();
  $name = $_SESSION['admin'];
-    $length = 10;
-		function generate_salt($length){
-			$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-			$salt = '';
-	
-			for($i=0;$i<$length;$i++){
-				$index = rand(0,strlen($chars)-1);
-				$salt .= $chars[$index];
-			}
-	
-			return $salt;
-		}
 
  if(isset($_POST['registerbtn'])){
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $cfpassword = $_POST['cfpassword'];
+        $product_name = $_POST['name'];
+        $product_price = $_POST['price'];
+        
+        $float_val = floatval($product_price);
+        $product_description = $_POST['description'];
+        
+        $product_image = $_POST['image'];
+        $product_category = $_POST['category'];
 
-    $data = date('d/m/Y');
+        $product_quantity = $_POST['quantity'];
+        $quantity = intval($product_quantity);
 
-    $email_query = "SELECT * FROM user WHERE email='$email'";
-    $email_query_run = mysqli_query($conn, $email_query);
-    if(mysqli_num_rows($email_query_run)>0){
-        $_SESSION['status'] = "Email Already Taken. Please Try Another one.";
-        $_SESSION['status_code'] = "error";
-        header('Location: registerAdmin.php');  
-    }
-    else
-    {
-        if($role='admin'){
-            if($password == $cfpassword){
-                $salt = generate_salt($length);
-                $hashed = hash('sha256',$password.$salt);
-                $query = "INSERT INTO user(name,role,email,salt,password,datat) 
-                VALUES ('$name','$role','$email','$salt','$hashed','$data')";
-                $query_run = mysqli_query($conn, $query);
 
-                if($query_run)
-                {
-                    // echo "Saved";
-                    $_SESSION['status'] = "Admin Profile Added";
-                    $_SESSION['status_code'] = "success";
-                    header('Location: registerAdmin.php');
-                }
-                else 
-                {
-                    $_SESSION['status'] = "Admin Profile Not Added";
-                    $_SESSION['status_code'] = "error";
-                    header('Location: registerAdmin.php');  
-                }
-            }
+        
+        $insert_query = "INSERT INTO product(product_name, product_price, product_description, product_image, category, quantity)
+         VALUES('$product_name',$float_val,'$product_description','$product_image','$product_category',$quantity)";
 
-            else 
-            {
-                $_SESSION['status'] = "Password and Confirm Password Does Not Match";
-                $_SESSION['status_code'] = "warning";
-                header('Location: `registerAdmin.php');  
-            }
+        if(mysqli_query($conn,$insert_query)){
+            //
+        }else{
+          echo "Error: ".mysqli_error($conn);
         }
-    }
-
 }
 
 
@@ -168,7 +131,7 @@ a:hover{
 
 	<div class="head">
 		<div class="col-div-6">
-        <span style="font-size:30px;cursor:pointer; color: white;" class="nav"  >&#9776; Admins</span>
+        <span style="font-size:30px;cursor:pointer; color: white;" class="nav"  >&#9776; Products</span>
     </div>
         
     
@@ -189,21 +152,34 @@ a:hover{
   <div class="row justify-content-center">
     <div class="col-md-5">
       <div class="card">
-        <h2 class="card-title text-center" style="color:#ffffff" >Register</h2>
+        <h2 class="card-title text-center" style="color:#ffffff" >Add Game</h2>
         <div class="card-body py-md-4">
-          <form _lpchecked="1" method="POST" >
+
+          <form _lpchecked="1" method="POST" action="">
             <div class="form-group">
-              <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+              <input type="text" class="form-control" name="name" id="name" placeholder="Product name" required>
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+              <input type="text" class="form-control" name="price" id="price" placeholder="Product Price" required>
             </div>
 
             <div class="form-group">
-              <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+              <input type="text" class="form-control" name="description" id="description" placeholder="Product Description" >
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" name="cfpassword" id="confirm-password" placeholder="confirm-password">
+              <input type="text" class="form-control" name="image" id="image" placeholder="Product Image" required>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Product Quantity" required>
+            </div>
+
+            <div class="form-group">    
+                <select class="form-control" name="category">
+                    <option value="videogame">Video Game</option>
+                    <option value="console">Consoles</option>
+                    <option value="merch">Merch</option>
+                </select>
             </div>
             <!-- <div class="form-group">
                 <select name="role"><option value="admin" >admin</option></select>
@@ -213,6 +189,7 @@ a:hover{
               <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
             </div>
           </form>
+
         </div>
       </div>
     </div>

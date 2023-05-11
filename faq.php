@@ -25,6 +25,7 @@ if(isset($_POST['submit'])){
     <link rel="stylesheet" type="text/css" href="faq.css">
 </head>
 <body>
+
     <header>
         <h1 align="center">FAQ</h1>
     </header>
