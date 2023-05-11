@@ -102,8 +102,10 @@ if(isset($_POST['submit'])){
     
             <a href="admin/user.php"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Users</a>
             <a href="admin/admins.php"class="icon-a"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;&nbsp;Admins</a>
-            <a href="admin/"class="icon-a"><i class="fa fa-user icons"></i> &nbsp;&nbsp;Products</a>
+            <a href="admin/products.php"class="icon-a"><i class="fa fa-user icons"></i> &nbsp;&nbsp;Products</a>
             <a href="faq.php"class="icon-a"><i class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Faq</a>
+            <a href="admin/logout.php"class="icon-a"><i class="fa fa-level-down icons"></i> &nbsp;&nbsp;Log Out</a>
+
         </div>
     </nav>
     <main>
