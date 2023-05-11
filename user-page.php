@@ -143,12 +143,12 @@ if(!isset($_SESSION['user'])){
         </nav>
 
         <div class="header-actions">
-
+        <a href='shop_cart.php'>
           <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
-
             <span class="cart-badge">0</span>
           </button>
+          </a>
           <form action="" class="footer-newsletter">
             <input type="search" name="search products" aria-label="search" placeholder="search products" required
               class="email-field">

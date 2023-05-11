@@ -284,7 +284,9 @@
   .card-banner { background-color: var(--light-gray-1); }
   
   .img-holder { aspect-ratio: var(--width) / var(--height); }
-  
+  .img-holder2 {aspect-ratio: 400 / 400;}
+
+
   .img-cover {
     width: 100%;
     height: 100%;
@@ -794,6 +796,23 @@
     box-shadow: var(--shadow-4);
     height: 100%;
   }
+  .shop-card2 {
+    box-shadow: var(--shadow-4);
+    width: 300px;
+    height:400px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    }
+  
+  .shop_item{
+    margin-bottom: 130px;
+  }
+
+  .shop-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
   
   .shop-card .card-content {
     position: relative;
@@ -839,6 +858,55 @@
   }
   
   .shop-card .card-btn:is(:hover, :focus) {
+    background-color: var(--marigold);
+    color: var(--xiketic);
+    border-color: var(--marigold);
+  }
+
+  .shop-card2 .card-content {
+    position: relative;
+    padding: 25px;
+    padding-block-start: 40px;
+  }
+  
+  .shop-card2 .card-badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .shop-card2 .h3 { font-size: var(--fs-7); }
+  
+  .shop-card2 .card-title {
+    transition: var(--transition);
+    margin-block-end: 10px;
+  }
+  
+  .shop-card2 .card-title:is(:hover, :focus) { color: var(--marigold); }
+  
+  .shop-card2 .card-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--marigold);
+  }
+  
+  .shop-card2 .card-price {
+    font-family: var(--ff-oxanium);
+    font-weight: var(--fw-800);
+  }
+  
+  .shop-card2 .card-btn {
+    color: inherit;
+    font-size: 18px;
+    padding: 7px;
+    border: 1px solid var(--english-violet);
+    border-radius: 4px;
+    transition: var(--transition);
+  }
+  
+  .shop-card2 .card-btn:is(:hover, :focus) {
     background-color: var(--marigold);
     color: var(--xiketic);
     border-color: var(--marigold);
