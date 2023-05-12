@@ -120,14 +120,15 @@ if(isset($_POST['submit'])){
             <li class="navbar-item">
               <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
-            
-            <li class="navbar-item">
-              <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
-            </li>
-
             <li class="navbar-item">
               <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
             </li>
+            
+            <li class="navbar-item">
+              <a href="admin/logout.php" class="navbar-link skewBg" data-nav-link>Log Out</a>
+            </li>
+
+            
           </ul>
         </nav>
 

@@ -1,4 +1,65 @@
 <?php
+  require("storeDB.php");
+  session_start();
+
+  
+  if(isset($_SESSION['user_id'])){
+    $user_id =$_SESSION['user_id'];
+  }
+  
+
+  if(isset($_POST['submit'])){
+    $pid = $_POST['product_id'];
+    $quantity = $_POST['product_quantity'];
+
+    
+    $cookie_name = "shopping_cart".$user_id;
+    $cart = isset($_COOKIE[$cookie_name]) ? $_COOKIE[$cookie_name] : "[]";
+    $cart = json_decode($cart,true);
+
+    $result = mysqli_query($conn,"SELECT * FROM product WHERE pid='".$pid."'");
+    $product = mysqli_fetch_assoc($result);
+    echo $product;
+
+    $get_quantity = "SELECT quantity from product WHERE pid = '".$pid."'";
+    $quantity_res = mysqli_query($conn,$get_quantity);
+    $quantity_limit = mysqli_fetch_assoc($quantity_res);
+    $limit = $quantity_limit['quantity'];
+    echo $limit;
+
+
+    foreach($cart as &$item) {
+      if($item["productId"] == $pid) {
+          if($item["quantity"]==$limit){
+            $found = true;
+            break; 
+          }
+          else{
+            $item["quantity"] += $quantity;
+            $found = true;
+            break;
+          }
+      }
+  }
+
+  // if product not found, add it to cart
+  if(!$found) {
+      array_push($cart, array(
+          "productId" => $pid,
+          "quantity" => $quantity,
+          "price" => $product['product_price'],
+          "name" => $product['product_name'],
+          "description" => $product['product_description'],
+          "image" => $product['product_image']
+      ));
+  }
+
+
+    setcookie($cookie_name,json_encode($cart),time()+1296000);
+    //setcookie($cookie_name,"",time()-1296000);
+
+    header("Location: shop.php");
+  }
 ?>
 <html>
 <head>
@@ -110,7 +171,7 @@
             </li>
 
             <li class="navbar-item">
-              <a href="logout.php" class="navbar-link skewBg" data-nav-link>Log Out</a>
+              <a href="admin/logout.php" class="navbar-link skewBg" data-nav-link>Log Out</a>
             </li>
 
             
@@ -156,36 +217,77 @@
     <div class="row no-gutters">
         <div class="col-md-8">
             <div class="product-details mr-2">
-                <div class="d-flex flex-row align-items-center"><i class="fa fa-long-arrow-left"></i><span class="ml-2">Continue Shopping</span></div>
-                <hr>
+                <div class="d-flex flex-row align-items-center">
+                    <i class="fa fa-long-arrow-left"></i>
+                    <span class="ml-2"><a href="shop.php">Continue Shopping</a></span>
+
+                </div>
+                  <hr>
                 <h6 class="mb-0">Shopping cart</h6>
-                <div class="d-flex justify-content-between"><span>You have 4 items in your cart</span>
+                <div class="d-flex justify-content-between">
+                  <?php
+                    if(isset($_SESSION['user_id'])){
+                      $user_id =$_SESSION['user_id'];
+                    }
+                    $totalQuantity = 0;
+                    $cookie_name = "shopping_cart".$user_id;
+                    if(isset($_COOKIE[$cookie_name])){
+                        $cookie_data = json_decode($_COOKIE[$cookie_name],true);
+                        foreach ($cookie_data as $item) {
+                          $totalQuantity += $item['quantity'];
+                  }
+                }
+                  ?>
+                  <span>You have <?php echo $totalQuantity;?> items in your cart</span>
+                </div>
+
+                <?php  
+                     if(isset($_COOKIE[$cookie_name])){
+                    foreach($cookie_data as $key=>$value){
+                     
+                      ?>
+                <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
+                    <div class="d-flex flex-row"><img class="rounded" src=<?php echo $value['image']?> width="40">
+                        <div class="ml-2">
+                          <span class="font-weight-bold d-block"><?php echo $value['name'];?></span>
+                          <span class="spec"><?php echo $value['description'];?></span></div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center">
+                      <span class="d-block"><?php echo $value['quantity'];?></span>
+                      <span class="d-block ml-5 font-weight-bold">$<?php echo $value['price']*$value['quantity'];?></span>
+
+                      <form method="Post" action="delete_from_cart.php">
+                        <input type="hidden" name="id_to_delete" value="<?php echo $value['productId']?>">
+                        <button type="submit" name="delete_item"><i class="fa fa-trash-o ml-3 text-black-50"></i></button>
+                      </form>
+                    </div>
+    
+                </div>
+                    <?php } 
+                  }?>
+                <?php
+                    if(isset($_SESSION['user_id'])){
+                      $user_id =$_SESSION['user_id'];
+                    }
+                    $cookie_name = "shopping_cart".$user_id;
+                    //echo $cookie_name;
+                    if(isset($_COOKIE[$cookie_name])){
+                      // echo $cookie_name;
+                      // $cart = $_COOKIE[$cookie_name];
+                      // echo $_COOKIE[$cookie_name];
+                      $totalPrice = 0;
+                      $cookie_data = json_decode($_COOKIE[$cookie_name],true);
+                      foreach ($cookie_data as $item) {
+                        $totalPrice += $item['quantity']*$item['price'];
+                      }
+                      $shipping = 0.03 * $totalPrice;
+                    }else{
+                      echo "";
+                    }
                     
-                </div>
-                <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
-                    <div class="d-flex flex-row"><img class="rounded" src="https://i.imgur.com/QRwjbm5.jpg" width="40">
-                        <div class="ml-2"><span class="font-weight-bold d-block">Iphone 11 pro</span><span class="spec">256GB, Navy Blue</span></div>
-                    </div>
-                    <div class="d-flex flex-row align-items-center"><span class="d-block">2</span><span class="d-block ml-5 font-weight-bold">$900</span><i class="fa fa-trash-o ml-3 text-black-50"></i></div>
-                </div>
-                <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
-                    <div class="d-flex flex-row"><img class="rounded" src="https://i.imgur.com/GQnIUfs.jpg" width="40">
-                        <div class="ml-2"><span class="font-weight-bold d-block">One pro 7T</span><span class="spec">256GB, Navy Blue</span></div>
-                    </div>
-                    <div class="d-flex flex-row align-items-center"><span class="d-block">2</span><span class="d-block ml-5 font-weight-bold">$900</span><i class="fa fa-trash-o ml-3 text-black-50"></i></div>
-                </div>
-                <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
-                    <div class="d-flex flex-row"><img class="rounded" src="https://i.imgur.com/o2fKskJ.jpg" width="40">
-                        <div class="ml-2"><span class="font-weight-bold d-block">Google pixel 4 XL</span><span class="spec">256GB, Axe black</span></div>
-                    </div>
-                    <div class="d-flex flex-row align-items-center"><span class="d-block">1</span><span class="d-block ml-5 font-weight-bold">$800</span><i class="fa fa-trash-o ml-3 text-black-50"></i></div>
-                </div>
-                <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
-                    <div class="d-flex flex-row"><img class="rounded" src="https://i.imgur.com/Tja5H1c.jpg" width="40">
-                        <div class="ml-2"><span class="font-weight-bold d-block">Samsung galaxy Note 10&nbsp;</span><span class="spec">256GB, Navy Blue</span></div>
-                    </div>
-                    <div class="d-flex flex-row align-items-center"><span class="d-block">1</span><span class="d-block ml-5 font-weight-bold">$999</span><i class="fa fa-trash-o ml-3 text-black-50"></i></div>
-                </div>
+                   
+                    
+                    ?>
             </div>
         </div>
         <div class="col-md-4">
@@ -198,20 +300,40 @@
 
 
 <label class="radio"> <input type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png"/></span> </label>
-                <div><label class="credit-card-label">Name on card</label><input type="text" class="form-control credit-inputs" placeholder="Name"></div>
-                <div><label class="credit-card-label">Card number</label><input type="text" class="form-control credit-inputs" placeholder="0000 0000 0000 0000"></div>
+            <form method="Post" action="admin/buy_product.php">
+                <div><label class="credit-card-label">Name on card</label><input type="text" class="form-control credit-inputs" placeholder="Name" name="name_card"></div>
+                <div><label class="credit-card-label">Card number</label><input type="text" class="form-control credit-inputs" placeholder="0000 0000 0000 0000" name="card_number"></div>
                 <div class="row">
-                    <div class="col-md-6"><label class="credit-card-label">Date</label><input type="text" class="form-control credit-inputs" placeholder="12/24"></div>
-                    <div class="col-md-6"><label class="credit-card-label">CVV</label><input type="text" class="form-control credit-inputs" placeholder="342"></div>
+                    <div class="col-md-6"><label class="credit-card-label">Date</label><input type="text" class="form-control credit-inputs" placeholder="12/24" name="expiry"></div>
+                    <div class="col-md-6"><label class="credit-card-label">CVV</label><input type="text" class="form-control credit-inputs" placeholder="342" name="cvv"></div>
                 </div>
                 <hr class="line">
-                <div class="d-flex justify-content-between information"><span>Subtotal</span><span>$3000.00</span></div>
-                <div class="d-flex justify-content-between information"><span>Shipping</span><span>$20.00</span></div>
-                <div class="d-flex justify-content-between information"><span>Total(Incl. taxes)</span><span>$3020.00</span></div><button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button"><span>$3020.00</span><span>Checkout<i class="fa fa-long-arrow-right ml-1"></i></span></button></div>
+                <div class="d-flex justify-content-between information">
+                  <span>Subtotal</span>
+                  <span>$<?php if(isset($_COOKIE[$cookie_name])){
+                    echo '<input type="hidden" name="price" value='.$totalPrice.'>'.$totalPrice;}?>
+                    </span>
+                </div>
+                <div class="d-flex justify-content-between information">
+
+                  <span>Shipping</span><span>$<?php if(isset($_COOKIE[$cookie_name])){
+                    echo "<input type='hidden' name='shipping' value=".$shipping.">".$shipping;}?></span>
+                </div>
+                <div class="d-flex justify-content-between information">
+                  <span>Total(Incl. taxes)</span>
+                  <span>$<?php if(isset($_COOKIE[$cookie_name])){
+                    echo "<input type='hidden' name='total' value=".$totalPrice+$shipping.">".$totalPrice+$shipping;}?></span>
+                </div>
+                
+                  <button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="submit" name="buy">
+                  <span>$<?php if(isset($_COOKIE[$cookie_name])){echo $totalPrice+$shipping;}?></span>
+                  <span>Buy<i class="fa fa-long-arrow-right ml-1"></i></span></button></div>
+            </form>
         </div>
     </div>
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  
 </body>
 </html>

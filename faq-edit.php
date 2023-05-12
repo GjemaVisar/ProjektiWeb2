@@ -73,10 +73,12 @@
                 <input type="text" name="new_answer" size="100" required>
             <br>
                 <input type="submit" name="edit" value="Submit Edit">
+                <<input type="submit" name="exit" value="Exit">
                 </div>
             </form>';
         }
-        if(isset($_POST['edit'])){
+        else if(isset($_POST['edit'])){
+            
             $result = mysqli_query($conn,$query);
             $row = mysqli_fetch_assoc($result);
             $questions = $row['question'];

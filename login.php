@@ -41,7 +41,10 @@
 
             	}
                 else if($row['role'] == 'user'){
-                    $_SESSION['user'] = $row['name'];
+					$name = $row['name'];
+                    $_SESSION['user'] = $name;
+					$id = $row['id'];
+					$_SESSION['user_id'] = $id;
                     header("Location:user-page.php", TRUE, 301);
            	 	}	
 
@@ -49,7 +52,7 @@
                 // exit();
 			}	
 			else{
-                $error[] = 'Incorrect';
+                $error['e'] = 'Incorrect';
             }  
         }
 
@@ -68,31 +71,7 @@
 </head>
 <body>
    <div class="container" id="container">
-	<!-- <div class="form-container sign-up-container">
-		<form action="signupInsert.php" method="post">
-			<h1>Create Account</h1>
-			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your email for registration</span>
-			<div>
-				<input type="text" name="name" placeholder="Name" required/>
-				<?php if(isset($errors)): ?>
-					<span><?php echo $errors; ?> </span>
-				<?php endif ?>
-			</div>
-			<input type="email"name="email"  placeholder="Email" required/>
-			<input type="password" name="password" placeholder="Password" required/>
-			<input type="password" name="cfpassword" placeholder="Confirm Password" required/>
-			<select name="role" >
-				<option value="user" >user</option>
-				<option value="admin" >admin</option>
-			</select>
-			<input type="submit" name="submit" value="Submit">
-		</form>
-	</div> -->
+	
 	<div class="form-container sign-in-container">
 		<form action="" method="post">
 			<h1>Sign in</h1>
@@ -102,12 +81,12 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>or use your account</span>
+			<input type="email" name="email" placeholder="Email" />
+			<input type="password" name="password" placeholder="Password" />
 			<?php if(isset($errors)): ?>
 					<span><?php echo $errors; ?> </span>
 				<?php endif ?>
-			<input type="email" name="email" placeholder="Email" />
-			<input type="password" name="password" placeholder="Password" />
-			<a href="#">Forgot your password?</a>
+			<!--<a href="#">Forgot your password?</a>-->
 			<input type="submit" name="submit" value="Submit">
 		</form>
 	</div>
