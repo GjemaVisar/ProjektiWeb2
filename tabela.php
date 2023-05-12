@@ -27,9 +27,9 @@ require("storeDB.php");
     // $sql = 'CREATE TABLE FAQ (id INT(11) auto_increment primary key, question varchar(100), answer varchar(100),
     //         date_created varchar(20), date_updated varchar(20), user_id INT(11), admin_id INT(11))';
 
-    //KRIJIMI I TABELES NEWSLETTER
-    $sql = 'CREATE TABLE newsletter(id INT(11) auto_increment primary key, username varchar(30), user_email varchar(100))';
-
+    //KRIJIMI I TABELES purchased
+    $sql = 'CREATE TABLE purchased(id INT(11) auto_increment primary key, user_id INT not null,
+    product_id INT not null, purchase_date DATETIME CURRENT_TIMESTAMP, quantity tinyint(4) ';
     
     $retvalue = mysqli_query($conn,$sql);
     if(! $retvalue){
