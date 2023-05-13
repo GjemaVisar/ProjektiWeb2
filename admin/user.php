@@ -30,6 +30,8 @@ $num_users_today = $row_users_today[0];
 	<title></title>
 	<link rel="stylesheet" href="admin.css" type="text/css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -74,11 +76,9 @@ $num_users_today = $row_users_today[0];
 			<i class="fa fa-users box-icon"></i>
 		</div>
         
-        <form class = "search-form" method="get" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-        <label for="search-bar" style="color: white;">Search users:</label>
-    <input type="text" name="search_term" id = "search_bar" >
-   	<input type="submit" value="Search">
-  	</form> 
+        <input type="text" id="search_bar" name="search_term" />
+<button id="searchButton" type="button">Search</button>
+
 	</div>
 	<div class="col-div-3">
 		<div class="box">
@@ -98,73 +98,31 @@ $num_users_today = $row_users_today[0];
     
 
 
-	<div class="container-fluid">
-<div class="card shadow mb-4">
+    <div class="container-fluid">
+			<div class="card shadow mb-4">
 
-    <div class="card-body">
-        <div class="table-responsive">
-        <?php
-            $search_query = isset($_GET['search_term']) ? $_GET['search_term'] : '';
-            if($search_query){
-                $query1 = "SELECT * FROM user WHERE email LIKE '%$search_query%'and role ='user'";
-            }
-            else {
-			$query1 = "SELECT * FROM user WHERE role = 'user'";
-		  }
-           
-            $query_run = mysqli_query($conn, $query1);
-        ?>
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th> ID </th>
-                        <th> Username </th>
-                        <th>Email </th>
-                        <th>Password</th>
-                        <th>Role</th>
-                        <th>EDIT</th>
-                        <th>DELETE</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if(mysqli_num_rows($query_run) > 0)
-                    {
-                        while($row = mysqli_fetch_assoc($query_run))
-                        {
-                    ?>
-                        <tr>
-                            <td><?php  echo $row['id']; ?></td>
-                            <td><?php  echo $row['name']; ?></td>
-                            <td><?php  echo $row['email']; ?></td>
-                            <td><?php  echo $row['password']; ?></td>
-                            <td><?php  echo $row['role']; ?></td>
-                            <td>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
-                                    <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form action="deleteUsers.php" method="post">
-                                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                    <input type='submit' name='delete' value='Delete'></form>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php
-                        }
-                    }
-                    else {
-                        echo "No Record Found";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+							<thead>
+								<tr>
+									<th> ID </th>
+									<th> Username </th>
+									<th>Email </th>
+									<th>Password</th>
+									<th>Role</th>
+									<th>EDIT</th>
+									<th>DELETE</th>
+								</tr>
+							</thead>
+							<tbody id="usersTableBody">
+								<!-- User data will be loaded dynamically using AJAX -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 
@@ -175,8 +133,50 @@ $num_users_today = $row_users_today[0];
 
 </div>
 
+<script>
+    
+    $(document).ready(function () {
+    // Funksioni load
+    loadUsers();
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    // pe me handle search buttonin
+    $('#searchButton').click(function (event) {
+        event.preventDefault();
+        loadUsers();
+    });
+
+    // Me bo search buttoni edhe kur ti ranojsh enter
+    $('#search_bar').keypress(function (event) {
+        if (event.which === 13) { // 13 osht enteri 
+            event.preventDefault(); // prevent default mos me lan me bo reload
+            $('#searchButton').click();
+        }
+    });
+
+    function loadUsers() {
+        var searchQuery = $('#search_bar').val();
+
+        $.ajax({
+            url: 'load_users.php',
+            type: 'GET',
+            dataType: 'html',
+            data: { search_term: searchQuery },
+            success: function (response) {
+                $('#usersTableBody').html(response);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+});
+
+
+
+
+
+</script>
+
 
 </body>
 
