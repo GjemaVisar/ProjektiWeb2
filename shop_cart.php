@@ -85,6 +85,53 @@
 <link
   href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
   rel="stylesheet">
+
+  <style>
+    /* Style The Dropdown Button */
+    .dropbtn {
+      color: white;
+
+      border: none;
+      cursor: pointer;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+      display: block;
+    }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    </style>
+
 </head>
 
 <body>
@@ -142,38 +189,43 @@
         <nav class="navbar" data-navbar>
           <ul class="navbar-list">
 
-            <li class="navbar-item">
+          <li class="navbar-item">
               <a href="user-page.php" class="navbar-link skewBg" data-nav-link>Home</a>
             </li>
-<!--
-            <li class="navbar-item">
-              <a href="#live" class="navbar-link skewBg" data-nav-link>Live</a>
-            </li>
-        
-            <li class="navbar-item">
-              <a href="#features" class="navbar-link skewBg" data-nav-link>Features</a>
-            </li>
-        -->
+
             <li class="navbar-item">
               <a href="shop.php" class="navbar-link skewBg" data-nav-link>Shop</a>
             </li>
 
             <li class="navbar-item">
-              <a href="user-page.php#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
+              <a href="#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
             </li>
 
             <li class="navbar-item">
-              <a href="user-page.php#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
+              <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
+            
+            <!--
+            <li class="navbar-item">
+              <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
+            </li>
+            -->
             
             <li class="navbar-item">
               <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
             </li>
 
+            <li class="navbar-item dropdown" >
+              <a href="#" class="navbar-link skewBg dropbtn" data-nav-link>Profile</a>
+              <div class="dropdown-content" >
+                <a href="update-profile.php">Update Profile</a>
+                <form action="delete-profile.php" method="post" ><button type="submit" name="delete_btn"  > Delete Acc</button></form>
+              </div>
+            </li>
+
             <li class="navbar-item">
               <a href="admin/logout.php" class="navbar-link skewBg" data-nav-link>Log Out</a>
             </li>
-
             
           </ul>
         </nav>

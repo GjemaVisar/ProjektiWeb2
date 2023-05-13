@@ -34,7 +34,7 @@
             
         $e = "SELECT email from user where email ='$email'";
         $e_query = mysqli_query($conn,$e);
-	/*
+	
 		if (!preg_match($usernameRegex, $name)) {
 			$errors = "Invalid username format";
 		}
@@ -44,8 +44,7 @@
 		elseif (!preg_match($passwordRegex, $password)) {
 			$errors = "Invalid password format";
 		}
-		*/
-		if(mysqli_num_rows($u_query) > 0){
+		elseif(mysqli_num_rows($u_query) > 0){
 			$errors = "Username exists";
 		}
 		elseif(mysqli_num_rows($e_query) > 0){
@@ -101,7 +100,7 @@
 				<?php if(isset($errors)): ?>
 					<span><?php echo $errors; ?> </span>
 				<?php endif ?>
-				<select  name="role" >
+				<select hidden name="role" >
 					<option value="user" selected >user</option>
 					<option value="admin" >admin</option>
 				</select>
