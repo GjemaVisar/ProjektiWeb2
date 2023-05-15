@@ -1,4 +1,6 @@
 <?php
+    //id e userit prej session
+
     if(isset($_POST['buy'])){
         $cardNamePattern = "/^[a-zA-Z ]+$/";
         $cardNumberPattern = "/^\d{16}$/";
@@ -18,11 +20,13 @@
 
         if(preg_match($cardNamePattern,$name) && preg_match($cardNumberPattern,$card_number) && 
         preg_match($expiryPattern,$expiry_date) &&preg_match($cvvPattern,$cvv)){
-            
+            // me e fshi contentin e cookie
+            // me ndreq tabelen per blerje
         }
 
 
    
     }
+    
 
 ?>
