@@ -1081,145 +1081,86 @@ $id = $_SESSION['user_id'];
             Compete With 100 Players On A Remote Island For Winner Takes Showdown Known Issue Where Certain Skin
             Strategic
           </p>
+          <!DOCTYPE html>
+          <html>
+<head>
+    <title>News API</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        .container {
+            margin-top: 20px;
+            width: 75%;
+        }
 
-          <ul class="blog-list">
+        .title {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
 
-            <li>
-              <div class="blog-card">
+        .single-news {
+            background-color: #ddd;
+            padding: 30px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <hr>
+        <div class="list-wrapper">
+            <?php
+            if (file_exists('news.json')) {
+                $api_url = 'news.json';
+                $newslist = json_decode(file_get_contents($api_url));
+            } else {
+                $api_url = 'https://newsapi.org/v2/everything?q=videogames&from=2023-05-14&to=2023-05-10&sortBy=popularity&pageSize=15&apiKey=371aaaac69d64e46bef2448595bcfe8f';
 
-                <figure class="card-banner img-holder" style="--width: 400; --height: 290;">
-                  <img src="assets/images/blog-1.jpg" width="400" height="290" loading="lazy"
-                    alt="Shooter Action Video" class="img-cover">
-                </figure>
+                $newslist = @file_get_contents($api_url);
 
-                <div class="card-content">
+                if ($newslist === false) {
+                    echo "Failed to fetch news articles.";
+                } else {
+                    file_put_contents('news.json', $newslist);
+                    $newslist = json_decode($newslist);
 
-                  <ul class="card-meta-list">
+                    if (empty($newslist->articles)) {
+                        echo "No news articles found.";
+                    }
+                }
+            }
 
-                    <li class="card-meta-item">
-                      <ion-icon name="person-outline"></ion-icon>
-
-                      <a href="#" class="item-text">Admin</a>
-                    </li>
-
-                    <li class="card-meta-item">
-                      <ion-icon name="calendar-outline"></ion-icon>
-
-                      <time datetime="2022-09-19" class="item-text">September 19, 2022</time>
-                    </li>
-
-                  </ul>
-
-                  <h3>
-                    <a href="#" class="card-title">Shooter Action Video</a>
-                  </h3>
-
-                  <p class="card-text">
-                    Compete With 100 Players On A Remote Island Thats Winner Takes Showdown Known Issue.
-                  </p>
-
-                  <a href="#" class="card-link">
-                    <span class="span">Read More</span>
-
-                    <ion-icon name="caret-forward"></ion-icon>
-                  </a>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="blog-card">
-
-                <figure class="card-banner img-holder" style="--width: 400; --height: 290;">
-                  <img src="assets/images/blog-2.jpg" width="400" height="290" loading="lazy" alt="The Walking Dead"
-                    class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <ul class="card-meta-list">
-
-                    <li class="card-meta-item">
-                      <ion-icon name="person-outline"></ion-icon>
-
-                      <a href="#" class="item-text">Admin</a>
-                    </li>
-
-                    <li class="card-meta-item">
-                      <ion-icon name="calendar-outline"></ion-icon>
-
-                      <time datetime="2022-09-19" class="item-text">September 19, 2022</time>
-                    </li>
-
-                  </ul>
-
-                  <h3>
-                    <a href="#" class="card-title">The Walking Dead</a>
-                  </h3>
-
-                  <p class="card-text">
-                    Compete With 100 Players On A Remote Island Thats Winner Takes Showdown Known Issue.
-                  </p>
-
-                  <a href="#" class="card-link">
-                    <span class="span">Read More</span>
-
-                    <ion-icon name="caret-forward"></ion-icon>
-                  </a>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="blog-card">
-
-                <figure class="card-banner img-holder" style="--width: 400; --height: 290;">
-                  <img src="assets/images/blog-3.jpg" width="400" height="290" loading="lazy"
-                    alt="Defense Of The Ancients" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <ul class="card-meta-list">
-
-                    <li class="card-meta-item">
-                      <ion-icon name="person-outline"></ion-icon>
-
-                      <a href="#" class="item-text">Admin</a>
-                    </li>
-
-                    <li class="card-meta-item">
-                      <ion-icon name="calendar-outline"></ion-icon>
-
-                      <time datetime="2022-09-19" class="item-text">September 19, 2022</time>
-                    </li>
-
-                  </ul>
-
-                  <h3>
-                    <a href="#" class="card-title">Defense Of The Ancients</a>
-                  </h3>
-
-                  <p class="card-text">
-                    Compete With 100 Players On A Remote Island Thats Winner Takes Showdown Known Issue.
-                  </p>
-
-                  <a href="https://answers.ea.com/t5/Battlefield/ct-p/battlefield" class="card-link">
-                    <span class="span">Read More</span>
-
-                    <ion-icon name="caret-forward"></ion-icon>
-                  </a>
-
-                </div>
-
-              </div>
-            </li>
-
-          </ul>
+            if (!empty($newslist->articles)) {
+                $count = 0; // Counter variable
+                foreach ($newslist->articles as $news) {
+                    if ($count >= 10) {
+                        break; // Break the loop once 30 articles have been displayed
+                    }
+                    ?>
+                    <div class="row single-news">
+                        <div class="col-4">
+                            <img style="width:100%;" src="<?php echo $news->urlToImage; ?>">
+                        </div>
+                        <div class="col-8">
+                            <h2><?php echo $news->title; ?></h2>
+                            <small><?php echo $news->source->name; ?></small>
+                            <?php if ($news->author && $news->author != '') { ?>
+                                <small>| <?php echo $news->author; ?></small>
+                            <?php } ?>
+                            <p><?php echo $news->description; ?></p>
+                            <a href="<?php echo $news->url; ?>" class="btn btn-sm btn-primary" style="float:right;" target="_blank">Read More >></a>
+                        </div>
+                    </div>
+                    <?php
+                    $count++; // Increment the counter variable
+                }
+            }
+            
+            ?>
+        </div>
+    </div>
+</body>
+</html>
 
         </div>
       </section>
