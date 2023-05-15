@@ -61,7 +61,6 @@ if(isset($_POST['submit'])){
         background-color:#1b203d;
       }
       .sidenav{
-        position: absolute;
         top: 0;
         right: 25px;
         font-size: 36px;
