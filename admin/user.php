@@ -4,7 +4,7 @@
   session_start();
  $name = $_SESSION['admin'];
 // Numerimi i llogarive te krijuara te webfaqes
-$sql_total_users = "SELECT COUNT(*) FROM user"; // replace "users" with your table name
+$sql_total_users = "SELECT COUNT(*) FROM user WHERE role = 'user' "; // replace "users" with your table name
 $result_total_users = mysqli_query($conn, $sql_total_users);
 
 $row_total_users = mysqli_fetch_array($result_total_users);

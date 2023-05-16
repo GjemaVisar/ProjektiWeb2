@@ -66,6 +66,7 @@
 		</div></a>
 	</div>
 	<div class="col-div-3">
+		<a href="games_purchased.php">
 		<div class="box">
 			<p><?php // echo $num_users_today; ?><br/><span>Games purchased</span></p>
 			<i class="fa fa-money box-icon"></i>

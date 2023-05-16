@@ -311,9 +311,21 @@
                   <form method="Post" action="shop_cart.php" >
                     <input type="hidden" name="product_id" value="<?php echo $product_id;?>" >
                     <input type="hidden" name="product_quantity" value="1">
-                    <button type="submit" class="card-btn" name="submit">
+                    <?php 
+                      $check_quantity = "SELECT quantity from  product where pid = '$product_id'";
+                      $res = mysqli_query($conn,$check_quantity);
+                      $row = mysqli_fetch_row($res);
+                      $value = $row[0];
+
+                      if($value == 0){
+                    ?>
+                    <p class="card-btn">No more of this item in stock!</p>
+                    
+                    <?php }else{ ?>
+                      <button type="submit" class="card-btn" name="submit">
                       <ion-icon name="basket"></ion-icon>
                     </button>
+                    <?php }?>
                   </form>
                   </div>
                   <i style="color:white;"><?php echo $product_description; ?></i>
