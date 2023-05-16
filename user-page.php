@@ -230,30 +230,6 @@ $id = $_SESSION['user_id'];
 
 
 
-
-
-  <!-- 
-    - #SEARCH BOX
-  -->
-
-  <!-- <div class="search-container" data-search-box>
-
-    <div class="input-wrapper">
-      <input type="search" name="search" aria-label="search" placeholder="Search here..." class="search-field">
-
-      <button class="search-submit" aria-label="submit search" data-search-toggler>
-        <ion-icon name="search-outline"></ion-icon>
-      </button>
-
-      <button class="search-close" aria-label="close search" data-search-toggler></button>
-    </div>
-
-  </div> -->
-
-
-
-
-
   <main>
     <article>
 
@@ -281,10 +257,6 @@ $id = $_SESSION['user_id'];
             <button class="btn skewBg">Read More</button>
 
           </div>
-
-          <!-- <figure class="hero-banner img-holder" style="--width: 700; --height: 700;">
-            <img src="assets/images/hero-banner.png" width="700" height="700" alt="hero banner" class="w-100">
-          </figure> -->
 
         </div>
       </section>
@@ -659,403 +631,46 @@ $id = $_SESSION['user_id'];
           </p>
 
           <ul class="has-scrollbar">
+            <?php 
+              $favorite_games = "SELECT product_image, category,product_price,product_name from product
+              INNER JOIN purchased on product.pid = purchased.product_id group by product.pid order by sum(payment) desc limit 10";
+              
+              $res = mysqli_query($conn,$favorite_games);
+              if(mysqli_num_rows($res)>0){
+                while($row = mysqli_fetch_assoc($res)){
+              ?>
 
             <li class="scrollbar-item">
               <div class="shop-card">
-
                 <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="https://game4u.co.za/wp-content/uploads/2022/07/FIFA-23-PS5.jpg" width="300" height="260" loading="lazy"
-                    alt="FIFA 23 " class="img-cover">
+                  <img src=<?php echo $row['product_image']?> width="300" height="260" loading="lazy"
+                    alt=<?php echo $row['product_name']?> class="img-cover">
                 </figure>
 
                 <div class="card-content">
 
-                  <a href="#" class="card-badge skewBg">PS5</a>
+                  <a href="#" class="card-badge skewBg"><?php echo $row['category']?></a>
 
                   <h3 class="h3">
-                    <a href="#" class="card-title">FIFA 23</a>
+                    <a href="#" class="card-title"><?php echo $row['product_name']?></a>
                   </h3>
 
                   <div class="card-wrapper">
-                    <p class="card-price">$59.00</p>
+                    <p class="card-price">$<?php echo $row['product_price'] ?></p>
 
-                    <button class="card-btn">
+                    <a href="shop.php">
+                    <button class="card-btn" >
+                      
                       <ion-icon name="basket"></ion-icon>
                     </button>
+                  </a>
                   </div>
 
                 </div>
-
               </div>
             </li>
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="https://m.media-amazon.com/images/I/51IbzXOUhcL._AC_UL420_SR420,420_.jpg" width="300" height="260" loading="lazy"
-                    alt="NBA 2K23" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">PS5</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">NBA 2k23</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$45.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="https://media.4rgos.it/i/Argos/4744850_R_Z001A?w=750&h=440&qlt=70" width="300" height="260" loading="lazy"
-                    alt="CALL OF DUTY CW" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">PS5</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">CALL of DUTY CW</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$53.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="https://blog.playstation.com/tachyon/2020/07/msm-mm-1.png?resize=789,1024&crop_strategy=smart" width="300" height="260" loading="lazy"
-                    alt="SpiderMan" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">PS5</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">SpiderMan</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$29.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/91ug7DBCdaL._SX425_.jpg" width="300" height="260" loading="lazy"
-                    alt="Uncharted" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">PS5</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">UNCHARTED</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$43.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="https://media.4rgos.it/i/Argos/1238606_R_Z001A?w=750&h=440&qlt=70" width="300" height="260" loading="lazy"
-                    alt="Assassin's Creed Mirage" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">PS5</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Assassin's Creed Mirage</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$60.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
+            <?php }}?>
             
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="assets/images/shop-img-2.jpg" width="300" height="260" loading="lazy"
-                    alt="Gears 5 Xbox Controller" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">x-box</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Gears 5 Xbox Controller</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$29.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="https://image.smythstoys.com/original/desktop/192729.jpg" width="300" height="260" loading="lazy"
-                    alt="Assassins's Creed Valhalla" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">PS5</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Assassin's Creed Valhalla</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$45.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="https://cdn.awsli.com.br/600x450/1318/1318697/produto/107918540/fd0ca5b44b.jpg" width="300" height="260" loading="lazy"
-                    alt="Cyberpunk 2077" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">PS5</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Cyberpunk 2077</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$29.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="https://m.media-amazon.com/images/I/817y77i7EFL.jpg" width="300" height="260" loading="lazy"
-                    alt="God of War - Ragnarok" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">PS5</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">God of War - Ragnarok</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$49.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="https://media.gamestop.com/i/gamestop/11106262-e90860d9" width="300" height="260" loading="lazy"
-                    alt="PS5 Camo Controller" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">PS5</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">PS5 Camo Controller</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$65.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="https://images.g2a.com/1024x768/1x1x0/tom-clancys-the-division-2-ps5-psn-account-global-i10000146655060/9fcb976b729c4d869404f621"
-                   width="300" height="260" loading="lazy"
-                    alt="The Division 2" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">PS5</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">The Division 2</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$29.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="assets/images/shop-img-3.jpg" width="300" height="260" loading="lazy"
-                    alt="GeForce RTX 2070" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">Graphics</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">GeForce RTX 2070</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$29.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="assets/images/shop-img-4.jpg" width="300" height="260" loading="lazy"
-                    alt="Virtual Reality Smiled" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">VR-Box</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Virtual Reality Smiled</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">$29.00</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
 
           </ul>
 

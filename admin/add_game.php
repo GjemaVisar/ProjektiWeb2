@@ -23,11 +23,7 @@
         $insert_query = "INSERT INTO product(product_name, product_price, product_description, product_image, category, quantity)
          VALUES('$product_name',$float_val,'$product_description','$product_image','$product_category',$quantity)";
 
-        if(mysqli_query($conn,$insert_query)){
-            //
-        }else{
-          echo "Error: ".mysqli_error($conn);
-        }
+        mysqli_query($conn,$insert_query) or die(mysqli_error($conn));
 }
 
 

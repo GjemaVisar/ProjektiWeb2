@@ -1,33 +1,30 @@
 <?php
   require("storeDB.php");
   session_start();
-
-  
-  if(isset($_SESSION['user_id'])){
-    $user_id =$_SESSION['user_id'];
-  }
-  
+ 
 
   if(isset($_POST['submit'])){
     $pid = $_POST['product_id'];
     $quantity = $_POST['product_quantity'];
 
+    $cookie_name = get_cookie();
+    echo $cookie_name;
     
-    $cookie_name = "shopping_cart".$user_id;
+   
     $cart = isset($_COOKIE[$cookie_name]) ? $_COOKIE[$cookie_name] : "[]";
     $cart = json_decode($cart,true);
 
     $result = mysqli_query($conn,"SELECT * FROM product WHERE pid='".$pid."'");
     $product = mysqli_fetch_assoc($result);
-    echo $product;
+    
 
     $get_quantity = "SELECT quantity from product WHERE pid = '".$pid."'";
     $quantity_res = mysqli_query($conn,$get_quantity);
     $quantity_limit = mysqli_fetch_assoc($quantity_res);
     $limit = $quantity_limit['quantity'];
-    echo $limit;
 
 
+    $found = "";
     foreach($cart as &$item) {
       if($item["productId"] == $pid) {
           if($item["quantity"]==$limit){
@@ -94,6 +91,28 @@
       border: none;
       cursor: pointer;
     }
+    /*style the alert box */
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        position: relative;
+        }
+    .alert .closebtn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        }
+    .alert .closebtn:hover {
+        color: black;
+    }
 
     /* The container <div> - needed to position the dropdown content */
     .dropdown {
@@ -129,6 +148,22 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
+
+  .btn_quantity{
+      border: 2px solid #333;
+      padding: 5px 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      background-color: #fff;
+      transition: all 0.3s ease;
+      margin-right: 5px;
+}
+.btn_quantity::hover{
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
 
     </style>
 
@@ -205,12 +240,6 @@
               <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
-            <!--
-            <li class="navbar-item">
-              <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
-            </li>
-            -->
-            
             <li class="navbar-item">
               <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
             </li>
@@ -265,6 +294,12 @@
   <br></br>
   <br></br>
   <br></br>
+  <?php if (isset($_SESSION['error_message'])) { ?>
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <?php echo $_SESSION['error_message']; ?>
+        </div>
+        <?php unset($_SESSION['error_message']);} ?>
 <div class="container mt-5 p-3 rounded cart">
     <div class="row no-gutters">
         <div class="col-md-8">
@@ -272,17 +307,19 @@
                 <div class="d-flex flex-row align-items-center">
                     <i class="fa fa-long-arrow-left"></i>
                     <span class="ml-2"><a href="shop.php">Continue Shopping</a></span>
-
+                    <?php
+                      $cookie_name = get_cookie();
+                      if(isset($_COOKIE[$cookie_name])){
+                        echo $_COOKIE[$cookie_name];
+                      }
+                    ?>
                 </div>
                   <hr>
                 <h6 class="mb-0">Shopping cart</h6>
                 <div class="d-flex justify-content-between">
                   <?php
-                    if(isset($_SESSION['user_id'])){
-                      $user_id =$_SESSION['user_id'];
-                    }
                     $totalQuantity = 0;
-                    $cookie_name = "shopping_cart".$user_id;
+                    $cookie_name = get_cookie();
                     if(isset($_COOKIE[$cookie_name])){
                         $cookie_data = json_decode($_COOKIE[$cookie_name],true);
                         foreach ($cookie_data as $item) {
@@ -295,8 +332,8 @@
 
                 <?php  
                      if(isset($_COOKIE[$cookie_name])){
-                    foreach($cookie_data as $key=>$value){
-                     
+                        foreach($cookie_data as $key=>$value){
+                            
                       ?>
                 <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
                     <div class="d-flex flex-row"><img class="rounded" src=<?php echo $value['image']?> width="40">
@@ -304,6 +341,15 @@
                           <span class="font-weight-bold d-block"><?php echo $value['name'];?></span>
                           <span class="spec"><?php echo $value['description'];?></span></div>
                     </div>
+                    
+                    <div class="d-flex align-items-center">
+                      <form method="Post">
+                          <input type="hidden" value=<?php echo $value['productId'];?> name="id">
+                          <input class="btn_quantity" type="submit" value ="+" name="add_quantity" >
+                          <input class="btn_quantity" type="submit" value= "-" name="remove_quantity">
+                      </form>
+                    </div>
+
                     <div class="d-flex flex-row align-items-center">
                       <span class="d-block"><?php echo $value['quantity'];?></span>
                       <span class="d-block ml-5 font-weight-bold">$<?php echo $value['price']*$value['quantity'];?></span>
@@ -318,15 +364,9 @@
                     <?php } 
                   }?>
                 <?php
-                    if(isset($_SESSION['user_id'])){
-                      $user_id =$_SESSION['user_id'];
-                    }
-                    $cookie_name = "shopping_cart".$user_id;
+                    $cookie_name = get_cookie();
                     //echo $cookie_name;
                     if(isset($_COOKIE[$cookie_name])){
-                      // echo $cookie_name;
-                      // $cart = $_COOKIE[$cookie_name];
-                      // echo $_COOKIE[$cookie_name];
                       $totalPrice = 0;
                       $cookie_data = json_decode($_COOKIE[$cookie_name],true);
                       foreach ($cookie_data as $item) {
@@ -353,11 +393,11 @@
 
 <label class="radio"> <input type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png"/></span> </label>
             <form method="Post" action="admin/buy_product.php">
-                <div><label class="credit-card-label">Name on card</label><input type="text" class="form-control credit-inputs" placeholder="Name" name="name_card"></div>
-                <div><label class="credit-card-label">Card number</label><input type="text" class="form-control credit-inputs" placeholder="0000 0000 0000 0000" name="card_number"></div>
+                <div><label class="credit-card-label">Name on card</label><input type="text" class="form-control credit-inputs" placeholder="Name" name="name_card" required></div>
+                <div><label class="credit-card-label">Card number</label><input type="text" class="form-control credit-inputs" placeholder="0000 0000 0000 0000" name="card_number" required></div>
                 <div class="row">
-                    <div class="col-md-6"><label class="credit-card-label">Date</label><input type="text" class="form-control credit-inputs" placeholder="12/24" name="expiry"></div>
-                    <div class="col-md-6"><label class="credit-card-label">CVV</label><input type="text" class="form-control credit-inputs" placeholder="342" name="cvv"></div>
+                    <div class="col-md-6"><label class="credit-card-label">Date</label><input type="text" class="form-control credit-inputs" placeholder="12/24" name="expiry" required></div>
+                    <div class="col-md-6"><label class="credit-card-label">CVV</label><input type="text" class="form-control credit-inputs" placeholder="342" name="cvv" required></div>
                 </div>
                 <hr class="line">
                 <div class="d-flex justify-content-between information">
@@ -378,6 +418,7 @@
                 </div>
                 
                   <button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="submit" name="buy">
+                    <input type="hidden" name="mycookie" value=<?php echo $cookie_name;?>>
                   <span>$<?php if(isset($_COOKIE[$cookie_name])){echo $totalPrice+$shipping;}?></span>
                   <span>Buy<i class="fa fa-long-arrow-right ml-1"></i></span></button></div>
             </form>
@@ -386,6 +427,24 @@
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-  
+  <?php 
+    mysqli_close($conn);
+  ?>
+
+    <script>
+        var close = document.getElementsByClassName("closebtn");
+        var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function(){
+                var div = this.parentElement;
+                div.style.opacity = "0";
+                setTimeout(function(){ div.style.display = "none"; }, 600);
+            }
+        }
+        setTimeout(function() {
+            var alertBox = document.querySelector('.alert');
+            alertBox.style.display = 'none';
+        }, 3000); // Set the duration in milliseconds
+    </script>
 </body>
 </html>
