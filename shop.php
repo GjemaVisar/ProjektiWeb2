@@ -72,6 +72,12 @@
       display: block;
     }
 
+    .dark-dropdown {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
     </style>
 </head>
 
@@ -177,13 +183,15 @@
             <span class="cart-badge">0</span>
           </button>
           </a>
-          <form action="" class="footer-newsletter">
-            <input type="search" name="search products" aria-label="search" placeholder="search products" required
+          <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="footer-newsletter" methos="GET">
+            <input type="search" name="search" aria-label="search" placeholder="search products" required
               class="email-field">
 
             <button type="submit" class="footer-btn" aria-label="submit">
               <ion-icon name="search-outline"></ion-icon>            
             </button>
+            
+
           </form>
 
           <!-- 
@@ -203,6 +211,26 @@
   </header>
   <br></br>
   <br></br>
+  <br> 
+  
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET" id="filterForm">
+  <select id="dropdown" class="dark-dropdown" name="category" >
+  <option value="deffault" disabled selected>Category</option>
+  <option value="merch">Merch</option>
+  <option value="videogame">Videogame</option>
+  <option value="console">Console</option>
+  <option value="all">All</option>
+</select>
+</form>
+
+<script>
+  const dropdown = document.getElementById('dropdown');
+  const form = document.getElementById('filterForm');
+
+  dropdown.addEventListener('change', function() {
+    form.submit();
+  });
+</script>
   <br></br>
   
   <div class="shop-container">
@@ -211,7 +239,27 @@
   
         
             require("storeDB.php");
-            $get_product = "SELECT * FROM product";
+            $search = isset($_GET['search']) ? $_GET['search'] : '';
+$category = isset($_GET['category']) ? $_GET['category'] : '';
+
+if (!empty($search) && !empty($category)) {
+  // Construct the SQL query with search and category filters
+  $get_product = "SELECT * FROM product WHERE product_name LIKE '%$search%' AND category = '$category'";
+} elseif (!empty($search)) {
+  // Construct the SQL query with only search filter
+  $get_product = "SELECT * FROM product WHERE product_name LIKE '%$search%'";
+} elseif (!empty($category)) {
+  // Construct the SQL query with only category filter
+  $get_product = "SELECT * FROM product WHERE category = '$category'";
+} else {
+  // No search or category provided, retrieve all products
+  $get_product = "SELECT * FROM product";
+}
+            
+            // Further processing with the SQL query and displaying the products
+            // ...
+            
+           
             $result = mysqli_query($conn,$get_product);
             if(mysqli_num_rows($result)>0){
                 while($row = mysqli_fetch_assoc($result)){
