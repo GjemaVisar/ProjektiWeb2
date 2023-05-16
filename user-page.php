@@ -9,12 +9,11 @@ $id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 if ($user_name !== null && $id !== null) {
   // User is logged in, display their name
-  echo '<span style="color: white;">Welcome, ' . $user_name . '</span>';
+  // echo '<span style="color: white;">Welcome, ' . $user_name . '</span>';
 } else {
   // User is not logged in
-  echo '<span style="color: white;">Please log in to access this page</span>';
-  // You can redirect to the login page here if desired
-}
+  echo '<a href="login.php" class="navbar-link skewBg" data-nav-link><button style="background-color: white; color: black; border: none; padding: 5px 10px; cursor: pointer;">Log In</button></a>';
+}  // You can redirect to the login page here if desired
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +38,7 @@ if ($user_name !== null && $id !== null) {
   <!-- 
     - google font link
   -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"

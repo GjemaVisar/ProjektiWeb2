@@ -1,5 +1,4 @@
-<?php
-?>
+
 <html>
 <head>
     <title>Buy Games</title>
@@ -183,7 +182,7 @@
             <ion-icon name="cart"></ion-icon>
           </button>
           </a>
-          <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="footer-newsletter" methos="GET">
+          <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="footer-newsletter" methos="GET" id="searchForm">
             <input type="search" name="search" aria-label="search" placeholder="search products" required
               class="email-field">
 
@@ -214,7 +213,7 @@
   <br> 
   
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET" id="filterForm">
-  <select id="dropdown" class="dark-dropdown" name="category" >
+<select id="categoryDropdown" class="dark-dropdown" name="category">
   <option value="deffault" disabled selected>Category</option>
   <option value="merch">Merch</option>
   <option value="videogame">Videogame</option>
@@ -222,44 +221,68 @@
   <option value="all">All</option>
 </select>
 </form>
-
 <script>
-  const dropdown = document.getElementById('dropdown');
-  const form = document.getElementById('filterForm');
+  $(document).ready(function() {
+    // Function to update the product listing based on search or category filter
+    function updateProductListing(data) {
+      $('.shop-container').html(data);
+    }
 
-  dropdown.addEventListener('change', function() {
-    form.submit();
+    // Search form submission
+    $('#searchForm').submit(function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Get the search query
+      var searchQuery = $(this).find('input[name="search"]').val();
+
+      // Perform AJAX request
+      $.ajax({
+        url: 'search.php',
+        type: 'GET',
+        data: { search: searchQuery },
+        success: function(response) {
+          // Handle the response and update the product listing
+          updateProductListing(response);
+        },
+        error: function(xhr, status, error) {
+          // Handle any errors
+          console.error(error);
+        }
+      });
+    });
+
+    // Category dropdown change event
+    $('#categoryDropdown').change(function() {
+      var category = $(this).val();
+
+      // Perform AJAX request
+      $.ajax({
+        url: 'search.php',
+        type: 'GET',
+        data: { category: category },
+        success: function(response) {
+          // Handle the response and update the product listing
+          updateProductListing(response);
+        },
+        error: function(xhr, status, error) {
+          // Handle any errors
+          console.error(error);
+        }
+      });
+    });
   });
 </script>
+
   <br></br>
   
   <div class="shop-container">
- 
-  <?php 
-  
-        
+  <?php
             require("storeDB.php");
-            $search = isset($_GET['search']) ? $_GET['search'] : '';
-$category = isset($_GET['category']) ? $_GET['category'] : '';
-
-if (!empty($search) && !empty($category)) {
-  // Construct the SQL query with search and category filters
-  $get_product = "SELECT * FROM product WHERE product_name LIKE '%$search%' AND category = '$category'";
-} elseif (!empty($search)) {
-  // Construct the SQL query with only search filter
-  $get_product = "SELECT * FROM product WHERE product_name LIKE '%$search%'";
-} elseif (!empty($category)) {
-  // Construct the SQL query with only category filter
-  $get_product = "SELECT * FROM product WHERE category = '$category'";
-} else {
-  // No search or category provided, retrieve all products
+    
   $get_product = "SELECT * FROM product";
-}
-            
+
             // Further processing with the SQL query and displaying the products
             // ...
-            
-           
             $result = mysqli_query($conn,$get_product);
             if(mysqli_num_rows($result)>0){
                 while($row = mysqli_fetch_assoc($result)){
@@ -270,29 +293,18 @@ if (!empty($search) && !empty($category)) {
                     $product_image = $row['product_image'];
                     $product_description = $row['product_description'];
                     $quantity = $row['quantity'];
-
                     //$cart = isset($_COOKIE["cart"]) ? $_COOKIE["cart"] : "[]";
                     //$cart = json_decode($cart);
-
-                   
-
         ?>
-  
-      
         <div class="shop-card2">
                 <figure class="card-banner" style="width:300; height: 260;">
                   <img src=<?php echo $product_image;?> width="300" height="260" loading="lazy"
                     alt=<?php echo $product_name; ?> class="img-cover">
-                
-
                 <div class="card-content">
-
                   <a href="#" class="card-badge skewBg"><?php echo $category;?></a>
-
                   <h3 class="h3">
                     <a href="#" class="card-title"><?php echo $product_name;?></a>
                   </h3>
-
                   <div class="card-wrapper">
                     <p class="card-price">$<?php echo $product_price;?></p>
                   <form method="Post" action="shop_cart.php" >
@@ -316,16 +328,17 @@ if (!empty($search) && !empty($category)) {
                   </form>
                   </div>
                   <i style="color:white;"><?php echo $product_description; ?></i>
-
                 </div>
                 </figure>
               </div>
-    <?php 
-        
-    
+    <?php
     }
-            }       
+            }
                 ?>
+  
+
+
+
                 </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
