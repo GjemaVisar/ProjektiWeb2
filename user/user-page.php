@@ -1,6 +1,6 @@
 <?php 
 
-@include 'storeDB.php';
+@include '../storeDB.php';
 
 session_start();
 
@@ -44,7 +44,7 @@ if ($user_name !== null && $id !== null) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
     /* Style The Dropdown Button */
     .dropbtn {
@@ -191,7 +191,7 @@ if ($user_name !== null && $id !== null) {
                 <a href="update-profile.php">Update Profile</a>
                 <a href="change-password.php" >Change Pass</a>
                 <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
-                <a href="admin/logout.php" data-nav-link>Log Out</a>
+                <a href="../admin/logout.php" data-nav-link>Log Out</a>
               </div>
             </li>
 
@@ -274,27 +274,27 @@ if ($user_name !== null && $id !== null) {
           <ul class="has-scrollbar">
 
             <li class="brand-item">
-              <img src="assets/images/brand-1.png" width="90" height="90" loading="lazy" alt="brand logo">
+              <img src="../assets/images/brand-1.png" width="90" height="90" loading="lazy" alt="brand logo">
             </li>
 
             <li class="brand-item">
-              <img src="assets/images/brand-2.png" width="90" height="90" loading="lazy" alt="brand logo">
+              <img src="../assets/images/brand-2.png" width="90" height="90" loading="lazy" alt="brand logo">
             </li>
 
             <li class="brand-item">
-              <img src="assets/images/brand-3.png" width="90" height="90" loading="lazy" alt="brand logo">
+              <img src="../assets/images/brand-3.png" width="90" height="90" loading="lazy" alt="brand logo">
             </li>
 
             <li class="brand-item">
-              <img src="assets/images/brand-4.png" width="90" height="90" loading="lazy" alt="brand logo">
+              <img src="../assets/images/brand-4.png" width="90" height="90" loading="lazy" alt="brand logo">
             </li>
 
             <li class="brand-item">
-              <img src="assets/images/brand-5.png" width="90" height="90" loading="lazy" alt="brand logo">
+              <img src="../assets/images/brand-5.png" width="90" height="90" loading="lazy" alt="brand logo">
             </li>
 
             <li class="brand-item">
-              <img src="assets/images/brand-6.png" width="90" height="90" loading="lazy" alt="brand logo">
+              <img src="../assets/images/brand-6.png" width="90" height="90" loading="lazy" alt="brand logo">
             </li>
 
           </ul>
@@ -424,7 +424,7 @@ if ($user_name !== null && $id !== null) {
               <div class="featured-game-card">
 
                 <figure class="card-banner img-holder" style="--width: 450; --height: 600;">
-                  <img src="assets/images/featured-game-1.jpg" width="450" height="600" loading="lazy"
+                  <img src="../assets/images/featured-game-1.jpg" width="450" height="600" loading="lazy"
                     alt="Just for Gamers" class="img-cover">
                 </figure>
 
@@ -446,7 +446,7 @@ if ($user_name !== null && $id !== null) {
 
                 <div class="card-content-overlay">
 
-                  <img src="assets/images/featured-game-icon.png" width="36" height="61" loading="lazy" alt=""
+                  <img src="../assets/images/featured-game-icon.png" width="36" height="61" loading="lazy" alt=""
                     class="card-icon">
 
                   <h3 class="h3">
@@ -470,7 +470,7 @@ if ($user_name !== null && $id !== null) {
               <div class="featured-game-card">
 
                 <figure class="card-banner img-holder" style="--width: 450; --height: 600;">
-                  <img src="assets/images/featured-game-2.jpg" width="450" height="600" loading="lazy"
+                  <img src="../assets/images/featured-game-2.jpg" width="450" height="600" loading="lazy"
                     alt="Need for Speed" class="img-cover">
                 </figure>
 
@@ -492,7 +492,7 @@ if ($user_name !== null && $id !== null) {
 
                 <div class="card-content-overlay">
 
-                  <img src="assets/images/featured-game-icon.png" width="36" height="61" loading="lazy" alt=""
+                  <img src="../assets/images/featured-game-icon.png" width="36" height="61" loading="lazy" alt=""
                     class="card-icon">
 
                   <h3 class="h3">
@@ -516,7 +516,7 @@ if ($user_name !== null && $id !== null) {
               <div class="featured-game-card">
 
                 <figure class="card-banner img-holder" style="--width: 450; --height: 600;">
-                  <img src="assets/images/featured-game-3.jpg" width="450" height="600" loading="lazy"
+                  <img src="../assets/images/featured-game-3.jpg" width="450" height="600" loading="lazy"
                     alt="Egypt Hunting Gamers" class="img-cover">
                 </figure>
 
@@ -538,7 +538,7 @@ if ($user_name !== null && $id !== null) {
 
                 <div class="card-content-overlay">
 
-                  <img src="assets/images/featured-game-icon.png" width="36" height="61" loading="lazy" alt=""
+                  <img src="../assets/images/featured-game-icon.png" width="36" height="61" loading="lazy" alt=""
                     class="card-icon">
 
                   <h3 class="h3">
@@ -562,7 +562,7 @@ if ($user_name !== null && $id !== null) {
               <div class="featured-game-card">
 
                 <figure class="card-banner img-holder" style="--width: 450; --height: 600;">
-                  <img src="assets/images/featured-game-4.jpg" width="450" height="600" loading="lazy"
+                  <img src="../assets/images/featured-game-4.jpg" width="450" height="600" loading="lazy"
                     alt="Just for Gamers" class="img-cover">
                 </figure>
 
@@ -584,7 +584,7 @@ if ($user_name !== null && $id !== null) {
 
                 <div class="card-content-overlay">
 
-                  <img src="assets/images/featured-game-icon.png" width="36" height="61" loading="lazy" alt=""
+                  <img src="../assets/images/featured-game-icon.png" width="36" height="61" loading="lazy" alt=""
                     class="card-icon">
 
                   <h3 class="h3">
@@ -618,7 +618,7 @@ if ($user_name !== null && $id !== null) {
       -->
 
       <section class="section shop" id="shop" aria-label="shop"
-        style="background-image: url('./assets/images/shop-bg.jpg')">
+        style="background-image: url('../assets/images/shop-bg.jpg')">
         <div class="container">
 
           <h2 class="h2 section-title">
@@ -939,7 +939,7 @@ if ($user_name !== null && $id !== null) {
           &copy; 2022 Gamics. All Right Reserved
         </p>
 
-        <img src="assets/images/footer-bottom-img.png" width="340" height="21" loading="lazy" alt=""
+        <img src="../assets/images/footer-bottom-img.png" width="340" height="21" loading="lazy" alt=""
           class="footer-bottom-img">
 
       </div>
@@ -966,7 +966,7 @@ if ($user_name !== null && $id !== null) {
   <!-- 
     - custom js link
   -->
-  <script src="./assets/js/script.js" defer></script>
+  <script src="../assets/js/script.js" defer></script>
 
   <!-- 
     - ionicon link

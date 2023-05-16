@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Buy Games</title>
-    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="css/shop.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -14,7 +14,7 @@
   - custom css link
 -->
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 
 <!-- 
   - google font link
@@ -275,7 +275,7 @@
   
   <div class="shop-container">
   <?php
-            require("storeDB.php");
+            require("../storeDB.php");
     
   $get_product = "SELECT * FROM product";
 

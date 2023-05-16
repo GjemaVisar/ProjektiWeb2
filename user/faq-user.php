@@ -1,5 +1,5 @@
 <?php
-require("storeDB.php");
+require("../storeDB.php");
 session_start();
 $asker = $_SESSION['user'];
 if(isset($_POST['submit'])){
@@ -24,13 +24,13 @@ if(isset($_POST['submit'])){
 <html>
 <head>
     <title>FAQ Page</title>
-    <link rel="stylesheet" type="text/css" href="faq.css">
+    <link rel="stylesheet" type="text/css" href="../faq.css">
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
 
   <!-- 
     - custom css link
   -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 
   <!-- 
     - google font link
@@ -186,11 +186,11 @@ if(isset($_POST['submit'])){
 
         <div class="header-actions">
 
+        <a href='shop_cart.php'>
           <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
-
-            <span class="cart-badge">0</span>
           </button>
+          </a>
           <form action="" class="footer-newsletter">
             <input type="search" name="search products" aria-label="search" placeholder="search products" required
               class="email-field">
@@ -265,7 +265,7 @@ if(isset($_POST['submit'])){
         }
        </script>
     </main>
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 
 <script>
@@ -274,7 +274,7 @@ window.addEventListener("load",function(){
 });
 </script>
 </html>
-<script src="./assets/js/script.js" defer></script>
+<script src="../assets/js/script.js" defer></script>
 
   <!-- 
     - ionicon link

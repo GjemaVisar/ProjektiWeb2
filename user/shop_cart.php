@@ -1,5 +1,5 @@
 <?php
-  require("storeDB.php");
+  require("../storeDB.php");
   session_start();
  
 
@@ -62,7 +62,7 @@
 <html>
 <head>
     <title>Buy Games</title>
-    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="css/shop.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -73,7 +73,7 @@
 <!-- 
   - custom css link
 -->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 
 <!-- 
   - google font link
@@ -384,7 +384,7 @@
 
 
 <label class="radio"> <input type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png"/></span> </label>
-            <form method="Post" action="admin/buy_product.php">
+            <form method="Post" action="../admin/buy_product.php">
                 <div><label class="credit-card-label">Name on card</label><input type="text" class="form-control credit-inputs" placeholder="Name" name="name_card" required></div>
                 <div><label class="credit-card-label">Card number</label><input type="text" class="form-control credit-inputs" placeholder="0000 0000 0000 0000" name="card_number" required></div>
                 <div class="row">

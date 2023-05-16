@@ -1,6 +1,6 @@
 <?php 
 
-require('../storeDB.php');
+require('../../storeDB.php');
 session_start();
 if(isset($_POST['delete_btn'])){
     

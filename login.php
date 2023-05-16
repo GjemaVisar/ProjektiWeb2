@@ -37,7 +37,7 @@
 					//echo "Its working";
 					$name = $row['name'];
                     $_SESSION['admin'] = $name;
-                    header("Location:admin/user.php", TRUE, 301);
+                    header("Location:admin/users-tab/user.php", TRUE, 301);
 
             	}
                 else if($row['role'] == 'user'){
@@ -45,7 +45,7 @@
                     $_SESSION['user'] = $name;
 					$id = $row['id'];
 					$_SESSION['user_id'] = $id;
-                    header("Location:user-page.php", TRUE, 301);
+                    header("Location:user/user-page.php", TRUE, 301);
            	 	}	
 
                 // header("Location: http://localhost/ProjektiWeb2/", TRUE, 301);

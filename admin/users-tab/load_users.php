@@ -1,5 +1,5 @@
 <?php
-require('../storeDB.php');
+require('../../storeDB.php');
 
 $searchQuery = isset($_GET['search_term']) ? $_GET['search_term'] : '';
 
