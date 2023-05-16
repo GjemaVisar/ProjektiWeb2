@@ -4,15 +4,17 @@
 
 session_start();
 
+$user_name = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+$id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-if(!isset($_SESSION['user']) && !isset($_SESSION['user_id'])){
-  header("Location:login.php", TRUE, 301);
-  exit();
+if ($user_name !== null && $id !== null) {
+  // User is logged in, display their name
+  echo '<span style="color: white;">Welcome, ' . $user_name . '</span>';
+} else {
+  // User is not logged in
+  echo '<span style="color: white;">Please log in to access this page</span>';
+  // You can redirect to the login page here if desired
 }
-
-$user_name = $_SESSION['user']; 
-$id = $_SESSION['user_id'];
-
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +25,8 @@ $id = $_SESSION['user_id'];
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gamics - Create Manage Matches(User Page)</title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
   <!-- 
     - favicon
@@ -32,16 +36,16 @@ $id = $_SESSION['user_id'];
   <!-- 
     - custom css link
   -->
-  <link rel="stylesheet" href="style.css">
+
 
   <!-- 
     - google font link
   -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
     /* Style The Dropdown Button */
     .dropbtn {
@@ -98,9 +102,9 @@ $id = $_SESSION['user_id'];
     - #HEADER
   -->
 
-  <header class="header">
+  <header class="header"style="color:black;">
 
-    <div class="header-top">
+    <div class="header-top" >
       <div class="container">
 
         <!-- <div class="countdown-text">
@@ -1083,7 +1087,7 @@ $id = $_SESSION['user_id'];
           <html>
 <head>
     <title>News API</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
     <style>
         .container {
             margin-top: 20px;
