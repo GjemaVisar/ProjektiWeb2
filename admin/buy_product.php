@@ -26,9 +26,12 @@
             array_push($product_ids,$value['productId']);
             array_push($product_quantity,$value['quantity']);
             array_push($product_price,$value['price']*$value['quantity']);
+           
+      }
+     
         }
 
-    }
+    
     
     
     if(isset($_POST['buy'])){

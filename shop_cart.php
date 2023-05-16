@@ -24,6 +24,7 @@
     $limit = $quantity_limit['quantity'];
 
 
+
     $found = "";
     foreach($cart as &$item) {
       if($item["productId"] == $pid) {
@@ -264,7 +265,6 @@
         <a href='shop_cart.php'>
           <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
-            <span class="cart-badge">0</span>
           </button>
           </a>
           <form action="" class="footer-newsletter">
@@ -307,12 +307,6 @@
                 <div class="d-flex flex-row align-items-center">
                     <i class="fa fa-long-arrow-left"></i>
                     <span class="ml-2"><a href="shop.php">Continue Shopping</a></span>
-                    <?php
-                      $cookie_name = get_cookie();
-                      if(isset($_COOKIE[$cookie_name])){
-                        echo $_COOKIE[$cookie_name];
-                      }
-                    ?>
                 </div>
                   <hr>
                 <h6 class="mb-0">Shopping cart</h6>
@@ -340,14 +334,6 @@
                         <div class="ml-2">
                           <span class="font-weight-bold d-block"><?php echo $value['name'];?></span>
                           <span class="spec"><?php echo $value['description'];?></span></div>
-                    </div>
-                    
-                    <div class="d-flex align-items-center">
-                      <form method="Post">
-                          <input type="hidden" value=<?php echo $value['productId'];?> name="id">
-                          <input class="btn_quantity" type="submit" value ="+" name="add_quantity" >
-                          <input class="btn_quantity" type="submit" value= "-" name="remove_quantity">
-                      </form>
                     </div>
 
                     <div class="d-flex flex-row align-items-center">

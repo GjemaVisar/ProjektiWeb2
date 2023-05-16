@@ -181,7 +181,6 @@
         <a href='shop_cart.php'>
           <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
-            <span class="cart-badge">0</span>
           </button>
           </a>
           <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="footer-newsletter" methos="GET">

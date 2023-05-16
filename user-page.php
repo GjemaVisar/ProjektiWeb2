@@ -201,7 +201,6 @@ if ($user_name !== null && $id !== null) {
         <a href='shop_cart.php'>
           <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
-            <span class="cart-badge">0</span>
           </button>
           </a>
           <form action="" class="footer-newsletter">
