@@ -1,82 +1,66 @@
-<?php
-include 'storeDB.php';
-session_start();
+<?php 
 
-$length = 10;
+    include 'storeDB.php';
+    session_start();
 
-// Check if the user is logged in
-if (isset($_SESSION['user'])) {
-    $userId = $_SESSION['user_id'];
-
-    // Retrieve the current user's information from the database
-    $sql = "SELECT name, email, salt,  password FROM user WHERE id = $userId";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
     $length = 10;
+    $errors= '';
 
-    function generate_salt($length){
-        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $salt = '';
+    if(isset($_SESSION['user'])){
+        $userId = $_SESSION['user_id'];
 
-        for($i=0;$i<$length;$i++){
-            $index = rand(0,strlen($chars)-1);
-            $salt .= $chars[$index];
+        $sql = "SELECT salt,  password FROM user WHERE id = $userId";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+        function generate_salt($length){
+            $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $salt = '';
+    
+            for($i=0;$i<$length;$i++){
+                $index = rand(0,strlen($chars)-1);
+                $salt .= $chars[$index];
+            }
+    
+            return $salt;
         }
+        if(isset($_POST['submit'])){
+            $old_password = $_POST['old_password'];
+            $new_password = $_POST['new_password'];
+            $cfnew_password = $_POST['confirm_new_password'];
 
-        return $salt;
-    }
+            $salt_in_database = $row['salt'];
+            $password_in_database = $row['password'];
 
-    if(isset($_POST['submit']))
-    {
-        $u_name = $_POST['username'];
-        $u_email = $_POST['email'];
-        $u_password = $_POST['password'];
-
-        $usernameRegex = "/^[a-zA-Z0-9_]{3,20}$/";
-        $emailRegex = "/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/";
-        $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
-        
-        $salt_in_database = $row['salt'];
-        $password_in_database = $row['password'];
-        $errors = "";
-        // $u = "SELECT name from user where name = '$u_name'";
-        // $u_query = mysqli_query($conn,$u);
-                
-        // $e = "SELECT email from user where email ='$u_email'";
-        // $e_query = mysqli_query($conn,$e);
+            $hashed= hash('sha256',$old_password.$salt_in_database);
 
 
-        // if (!preg_match($usernameRegex, $u_name)) {
-        //     $errors = "Invalid username format";
-        //   }
-        //   elseif (!preg_match($emailRegex, $u_email)) {
-        //     $errors = "Invalid email format";
-        //   }
-        //   elseif (!preg_match($passwordRegex, $u_password)) {
-        //     $errors = "Invalid password format";
-        //   }
-        //   else{
-
-            $hashed = hash('sha256',$u_password.$salt_in_database);
             if($hashed = $password_in_database){
-              $sql2= "UPDATE user SET name = '$u_name', email = '$u_email' WHERE id = $userId ";
-
-              $result2 = mysqli_query($conn,$sql2);
-  
-              if($result2){
-                  header("Location: user-page.php");
-              }else{
-                $error = "Error!!!";
-                header("Location: update-profile.php");
-              }
+                if($cfnew_password == ''){
+                    $errors = "Please confirm the password";
+                }
+                if($new_password != $cfnew_password){
+                    $errors = "Passwords doesnt match";
+                }else{
+                    $salt = generate_salt($length);
+                    $hashed_new_password = hash('sha256',$new_password.$salt);
+                    $sql2 = "UPDATE user SET password = '$hashed_new_password' WHERE id = $userId";
+                    $result2 = mysqli_query($conn,$sql2);
+                    if($result2){
+                        header("Location: user-page.php");
+                    }else{
+                        header("Location: change-password.php");
+                    }
+                }
             }else{
-              $error = "Incorrect Password";
-            // }
+                echo "Error";
+            }
         }
     }
 
-   
-    ?>
+
+?>
+
 <!DOCTYPE html>
  <html lang="en">
  <head>
@@ -86,7 +70,7 @@ if (isset($_SESSION['user'])) {
     <title>Document</title>
    
     <link rel="stylesheet" href="admin/admin.css" type="text/css"/>
-	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- 
     - favicon
   -->
@@ -106,6 +90,7 @@ if (isset($_SESSION['user'])) {
   href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
   rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         body{
 
@@ -358,22 +343,21 @@ transition: .3s;
                             <form method="POST">
 
                               <div class="form-group">
-                                  <input type="text" class="form-control" name="username" value="<?php echo "{$row['name']}"; ?>" id="name" placeholder="Name">
+                                  <input type="password" class="form-control" name="old_password" id="name" placeholder="Old Password">
                               </div>
                               <div class="form-group">
-                                  <input type="email" class="form-control" name="email" value="<?php echo "{$row['email']}"; ?>" id="email" placeholder="Email">
+                                  <input type="password" class="form-control" name="new_password" id="email" placeholder="New Password">
                               </div>
                               <div class="form-group">
-                                  <label style="color:#f1f1f1">Verify your password</label>
-                                  <input type="password" class="form-control" name="password" placeholder="Password">
+                                  <input type="password" class="form-control" name="confirm_new_password" placeholder="Confirm Password">
                               </div>
                               <?php if (isset($errors)): ?>
                                   <span><?php echo $errors; ?></span>
                               <?php endif ?>
                               <div>
-                                  <a href="accounts.php" class="btn btn-primary" style="text-align: center;">Cancel</a>
+                                  <a href="user-page.php" class="btn btn-primary" style="text-align: center;">Cancel</a>
                                   <br>
-                                  <input type='submit' name='submit' class="btn btn-primary" value='Update Profile'>
+                                  <input type='submit' name='submit' class="btn btn-primary" value='Update Password'>
                                   </div>
 
                             </form>
@@ -397,14 +381,4 @@ transition: .3s;
             
  </body>
  </html>
-<?php
-} else {
-    // Redirect the user to the login page if they are not logged in
-    header("Location: login.php");
-    exit;
-}
-
-
-
- ?>
  <script src="delete-profile.js" ></script>

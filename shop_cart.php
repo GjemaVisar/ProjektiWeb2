@@ -70,6 +70,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script rel="shop.js"></script>
 
 <!-- 
@@ -219,12 +220,10 @@
               <a href="#" class="navbar-link skewBg dropbtn" data-nav-link>Profile</a>
               <div class="dropdown-content" >
                 <a href="update-profile.php">Update Profile</a>
-                <form action="delete-profile.php" method="post" ><button type="submit" name="delete_btn"  > Delete Acc</button></form>
+                <a href="change-password.php" >Change Pass</a>
+                <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
+                <a href="admin/logout.php" data-nav-link>Log Out</a>
               </div>
-            </li>
-
-            <li class="navbar-item">
-              <a href="admin/logout.php" class="navbar-link skewBg" data-nav-link>Log Out</a>
             </li>
             
           </ul>
@@ -389,3 +388,4 @@
   
 </body>
 </html>
+<script src="delete-profile.js" ></script>
