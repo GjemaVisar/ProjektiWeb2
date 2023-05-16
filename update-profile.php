@@ -5,11 +5,11 @@ session_start();
 $length = 10;
 
 // Check if the user is logged in
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user'])) {
     $userId = $_SESSION['user_id'];
 
     // Retrieve the current user's information from the database
-    $sql = "SELECT name, email, password FROM user WHERE id = $userId";
+    $sql = "SELECT name, email, salt, password FROM user WHERE id = $userId";
     $result = mysqli_query($conn, $sql);
     $info = mysqli_fetch_assoc($result);
     $length = 10;
@@ -32,10 +32,16 @@ if (isset($_SESSION['user_id'])) {
         $u_email = $_POST['email'];
         $u_password = $_POST['password'];
 
+        $salt_in_database = $info['salt'];
+        $password_in_database = $info['password'];
+        $errors = '';
+
         $usernameRegex = "/^[a-zA-Z0-9_]{3,20}$/";
         $emailRegex = "/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/";
         $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
       
+        $hashed= hash('sha256',$u_password.$salt_in_database);
+
         // $errors = "";
         // $u = "SELECT name from user where name = '$u_name'";
         // $u_query = mysqli_query($conn,$u);
@@ -43,31 +49,26 @@ if (isset($_SESSION['user_id'])) {
         // $e = "SELECT email from user where email ='$u_email'";
         // $e_query = mysqli_query($conn,$e);
 
+        if($hashed = $password_in_database){
+          $sql2= "UPDATE user SET name = '$u_name', email = '$u_email' WHERE id = $userId ";
 
-        if (!preg_match($usernameRegex, $u_name)) {
-            $errors = "Invalid username format";
-          }
-          elseif (!preg_match($emailRegex, $u_email)) {
-            $errors = "Invalid email format";
-          }
-          elseif (!preg_match($passwordRegex, $u_password)) {
-            $errors = "Invalid password format";
-          }
-          else{
-            $salt = generate_salt($length);
-            $hashed = hash('sha256',$u_password.$salt);
-
-            $sql2= "UPDATE user SET name = '$u_name', email = '$u_email', password = '$hashed' WHERE id = $userId ";
-
-            $result2 = mysqli_query($conn,$sql2);
-
-            if($result2){
-                echo "Update success";
-            }
+        if($result2){
+            echo "Update success";
         }
-    }
+          $result2 = mysqli_query($conn,$sql2);
 
-   
+          if($result2){
+              header("Location: user-page.php");
+          }else{
+            $error = "Error!!!";
+            header("Location: update-profile.php");
+          }
+        }else{
+          $error = "Incorrect Password";
+        // }
+    }
+}
+
     ?>
      <!DOCTYPE html>
  <html lang="en">
@@ -97,6 +98,8 @@ if (isset($_SESSION['user_id'])) {
 <link
   href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
   rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         body{
 
@@ -299,12 +302,10 @@ transition: .3s;
               <a href="#" class="navbar-link skewBg dropbtn" data-nav-link>Profile</a>
               <div class="dropdown-content" >
                 <a href="update-profile.php">Update Profile</a>
-                <form action="delete-profile.php" method="post" ><button type="submit" name="delete_btn"  > Delete Acc</button></form>
+                <a href="change-password.php" >Change Pass</a>
+                <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
+                <a href="admin/logout.php" data-nav-link>Log Out</a>
               </div>
-            </li>
-
-            <li class="navbar-item">
-              <a href="admin/logout.php" class="navbar-link skewBg" data-nav-link>Log Out</a>
             </li>
             
       </ul>
@@ -358,13 +359,14 @@ transition: .3s;
                                 </div>
 
                                 <div class="form-group">
+                                    <label style="color:#f1f1f1">Verify your password</label>
                                     <input type="password" class="form-control" name="password" placeholder="Password">
                                 </div>
                                 <?php if(isset($errors)): ?>
                                     <span><?php echo $errors; ?> </span>
                                 <?php endif ?>
                                 <div>
-                                    <a href="accounts.php" class="btn btn-primary" style="text-align: center;" >Cancel</a>
+                                    <a href="user-page.php" class="btn btn-primary" style="text-align: center;" >Cancel</a>
                                     <br>
                                     <input type='submit' name='submit'class="btn btn-primary" value='Update Profile'>
                                 </div>

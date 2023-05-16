@@ -40,6 +40,7 @@ if(isset($_POST['submit'])){
   <link
     href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
     /* Style The Dropdown Button */
@@ -173,12 +174,10 @@ if(isset($_POST['submit'])){
               <a href="#" class="navbar-link skewBg dropbtn" data-nav-link>Profile</a>
               <div class="dropdown-content" >
                 <a href="update-profile.php">Update Profile</a>
-                <form action="delete-profile.php" method="post" ><button type="submit" name="delete_btn"  > Delete Acc</button></form>
+                <a href="change-password.php" >Change Pass</a>
+                <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
+                <a href="admin/logout.php" data-nav-link>Log Out</a>
               </div>
-            </li>
-
-            <li class="navbar-item">
-              <a href="admin/logout.php" class="navbar-link skewBg" data-nav-link>Log Out</a>
             </li>
 
             
@@ -282,5 +281,7 @@ window.addEventListener("load",function(){
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="delete-profile.js" ></script>
+
 
 

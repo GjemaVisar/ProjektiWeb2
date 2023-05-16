@@ -50,8 +50,12 @@ if(isset($_POST['edit_btn']))
                         </div>
 
                         <div class="form-group">
-                            <input type="password" class="form-control" name="edit_password" value="<?php echo $row['password'] ?>" id="password" placeholder="Password">
+                            <label style="color:#f1f1f1">Verify your password</label>
+                            <input type="password" class="form-control" name="edit_password" id="password" placeholder="Password">
                         </div>
+                        <?php if(isset($errors)): ?>
+                            <span><?php echo $errors; ?> </span>
+                        <?php endif ?>
                         <div>
                             <a href="accounts.php" class="btn btn-primary" >Cancel</a>
                             <button type="submit" name="updatebtn" class="btn btn-primary" >Update</button>
@@ -75,6 +79,7 @@ if(isset($_POST['edit_btn']))
 <?php 
 
     $length = 10;
+
     function generate_salt($length){
         $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $salt = '';
@@ -93,21 +98,29 @@ if(isset($_POST['edit_btn']))
         $email = $_POST['edit_email'];
         $password = $_POST['edit_password'];
 
-        $salt = generate_salt($length);
-        $hashed = hash('sha256',$password.$salt);
+        $sql = "SELECT name, email, salt, password FROM user WHERE id = $id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
 
-        $query = "UPDATE user SET name='$name', email='$email', password='$hashed' WHERE id='$id' ";
-        $query_run = mysqli_query($conn,$query);
+        $salt_in_database = $row['salt'];
+        $password_in_database = $row['password'];
+        $errors = '';
 
-        if($query_run){
-            $_SESSION['success'] = "Your data is Updated";
-            header('Location: accounts.php');
+        $hashed= hash('sha256',$password.$salt_in_database);
+
+        if($hashed = $password_in_database){
+          $query = "UPDATE user SET name='$name', email='$email' WHERE id='$id' ";
+          $query_run = mysqli_query($conn,$query);
+  
+          if($query_run){
+              $_SESSION['success'] = "Your data is Updated";
+              header('Location: accounts.php');
+          }
+          else{
+              $_SESSION['status'] = "Your data is NOT Updated";
+              header('Location: accounts.php');
+          }
         }
-        else{
-            $_SESSION['status'] = "Your data is NOT Updated";
-            header('Location: accounts.php');
-        }
-
     }
 
 ?>

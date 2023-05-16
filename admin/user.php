@@ -111,7 +111,6 @@ $num_users_today = $row_users_today[0];
 									<th>Email </th>
 									<th>Password</th>
 									<th>Role</th>
-									<th>EDIT</th>
 									<th>DELETE</th>
 								</tr>
 							</thead>
