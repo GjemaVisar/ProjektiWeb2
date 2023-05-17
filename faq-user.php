@@ -189,8 +189,6 @@ if(isset($_POST['submit'])){
 
           <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
-
-            <span class="cart-badge">0</span>
           </button>
           <form action="" class="footer-newsletter">
             <input type="search" name="search products" aria-label="search" placeholder="search products" required
