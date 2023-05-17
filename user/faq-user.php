@@ -1,5 +1,5 @@
 <?php
-require("storeDB.php");
+require("../storeDB.php");
 session_start();
 $asker = $_SESSION['user'];
 if(isset($_POST['submit'])){
@@ -24,13 +24,13 @@ if(isset($_POST['submit'])){
 <html>
 <head>
     <title>FAQ Page</title>
-    <link rel="stylesheet" type="text/css" href="faq.css">
+    <link rel="stylesheet" type="text/css" href="../faq.css">
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
 
   <!-- 
     - custom css link
   -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 
   <!-- 
     - google font link
@@ -40,6 +40,7 @@ if(isset($_POST['submit'])){
   <link
     href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
     /* Style The Dropdown Button */
@@ -173,12 +174,10 @@ if(isset($_POST['submit'])){
               <a href="#" class="navbar-link skewBg dropbtn" data-nav-link>Profile</a>
               <div class="dropdown-content" >
                 <a href="update-profile.php">Update Profile</a>
-                <form action="delete-profile.php" method="post" ><button type="submit" name="delete_btn"  > Delete Acc</button></form>
+                <a href="change-password.php" >Change Pass</a>
+                <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
+                <a href="admin/logout.php" data-nav-link>Log Out</a>
               </div>
-            </li>
-
-            <li class="navbar-item">
-              <a href="admin/logout.php" class="navbar-link skewBg" data-nav-link>Log Out</a>
             </li>
 
             
@@ -187,9 +186,11 @@ if(isset($_POST['submit'])){
 
         <div class="header-actions">
 
+        <a href='shop_cart.php'>
           <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
           </button>
+          </a>
           <form action="" class="footer-newsletter">
             <input type="search" name="search products" aria-label="search" placeholder="search products" required
               class="email-field">
@@ -264,7 +265,7 @@ if(isset($_POST['submit'])){
         }
        </script>
     </main>
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 
 <script>
@@ -273,12 +274,14 @@ window.addEventListener("load",function(){
 });
 </script>
 </html>
-<script src="./assets/js/script.js" defer></script>
+<script src="../assets/js/script.js" defer></script>
 
   <!-- 
     - ionicon link
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="delete-profile.js" ></script>
+
 
 

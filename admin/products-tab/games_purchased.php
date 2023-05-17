@@ -1,6 +1,6 @@
 <?php
 
- require('../storeDB.php');
+ require('../../storeDB.php');
  session_start();
  $name = $_SESSION['admin'];
 
@@ -10,7 +10,7 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="admin.css" type="text/css"/>
+	<link rel="stylesheet" href="../css/admin.css" type="text/css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -38,7 +38,7 @@
 	<div class="col-div-6">
 	<div class="profile">
 
-		<img src="..\assets\images\admin.png" class="pro-img" />
+		<img src="..\..\assets\images\admin.png" class="pro-img" />
 		<p><?php echo strtoupper($name) ?>
 		<span>ADMIN</span></p>
 	</div>

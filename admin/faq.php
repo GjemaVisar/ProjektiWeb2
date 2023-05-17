@@ -1,5 +1,5 @@
 <?php
-require("storeDB.php");
+require("../storeDB.php");
 session_start();
 $name = $_SESSION['admin'];
 if(isset($_POST['submit'])){
@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
 <html>
 <head>
     <title>FAQ Page</title>
-    <link rel="stylesheet" type="text/css" href="faq.css">
+    <link rel="stylesheet" type="text/css" href="../faq.css">
     <!-- <link rel="stylesheet" href="admin/admin.css" type="text/css"/> -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -98,12 +98,12 @@ if(isset($_POST['submit'])){
     <nav>
         <div id="mySidenav" class="sidenav">
             <p class="logo"><span>Gamics</span></p>
-    
-            <a href="admin/user.php"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Users</a>
-            <a href="admin/admins.php"class="icon-a"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;&nbsp;Admins</a>
-            <a href="admin/products.php"class="icon-a"><i class="fa fa-user icons"></i> &nbsp;&nbsp;Products</a>
-            <a href="faq.php"class="icon-a"><i class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Faq</a>
-            <a href="admin/logout.php"class="icon-a"><i class="fa fa-level-down icons"></i> &nbsp;&nbsp;Log Out</a>
+
+            <a href="users-tab/user.php"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Users</a>
+  <a href="admins-tab/admins.php"class="icon-a"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;&nbsp;Admins</a>
+  <a href="products-tab/products.php"class="icon-a"><i class="fa fa-gamepad icons"></i> &nbsp;&nbsp;Products</a>
+  <a href="faq.php"class="icon-a"><i class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Faq</a>
+  <a href="logout.php"class="icon-a"><i class="fa fa-level-down icons"></i> &nbsp;&nbsp;Log Out</a>
 
         </div>
     </nav>
@@ -141,7 +141,7 @@ if(isset($_POST['submit'])){
                         <input type="submit" name="delete_faq" value="Delete FAQ">
                         </form>
 
-                        <form action="faq-edit.php?faq='.$id.'" method="Post">
+                        <form action="../faq-edit.php?faq='.$id.'" method="Post">
                         <input type="submit" value="Edit FAQ" name="edit_faq">
                         </form>
                         </div>';

@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-require("storeDB.php");
+require("../storeDB.php");
 
 // Check if the search query or category is provided
 $search = isset($_GET['search']) ? $_GET['search'] : '';

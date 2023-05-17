@@ -1,5 +1,5 @@
 <?php
-  require("storeDB.php");
+  require("../storeDB.php");
   session_start();
  
 
@@ -62,7 +62,7 @@
 <html>
 <head>
     <title>Buy Games</title>
-    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="css/shop.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -73,7 +73,7 @@
 <!-- 
   - custom css link
 -->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 
 <!-- 
   - google font link
@@ -83,6 +83,7 @@
 <link
   href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
   rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <style>
     /* Style The Dropdown Button */
@@ -264,6 +265,12 @@
               <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
+            <!--
+            <li class="navbar-item">
+              <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
+            </li>
+            -->
+            
             <li class="navbar-item">
               <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
             </li>
@@ -272,13 +279,12 @@
               <a href="#" class="navbar-link skewBg dropbtn" data-nav-link>Profile</a>
               <div class="dropdown-content" >
                 <a href="update-profile.php">Update Profile</a>
-                <form action="delete-profile.php" method="post" ><button type="submit" name="delete_btn"  > Delete Acc</button></form>
+                <a href="change-password.php" >Change Pass</a>
+                <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
+                <a href="admin/logout.php" data-nav-link>Log Out</a>
               </div>
             </li>
 
-            <li class="navbar-item">
-              <a href="admin/logout.php" class="navbar-link skewBg" data-nav-link>Log Out</a>
-            </li>
             
           </ul>
         </nav>
@@ -408,7 +414,7 @@
 
 
 <label class="radio"> <input type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png"/></span> </label>
-            <form method="Post" action="admin/buy_product.php">
+            <form method="Post" action="../admin/buy_product.php">
                 <div><label class="credit-card-label">Name on card</label><input type="text" class="form-control credit-inputs" placeholder="Name" name="name_card" required></div>
                 <div><label class="credit-card-label">Card number</label><input type="text" class="form-control credit-inputs" placeholder="0000 0000 0000 0000" name="card_number" required></div>
                 <div class="row">
@@ -466,3 +472,4 @@
     </script>
 </body>
 </html>
+<script src="delete-profile.js" ></script>

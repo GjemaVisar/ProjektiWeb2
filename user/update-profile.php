@@ -1,67 +1,76 @@
-<?php 
+<?php
+include '../storeDB.php';
+session_start();
 
-    include 'storeDB.php';
-    session_start();
+$length = 10;
 
+// Check if the user is logged in
+if (isset($_SESSION['user'])) {
+    $userId = $_SESSION['user_id'];
+
+    // Retrieve the current user's information from the database
+    $sql = "SELECT name, email, salt, password FROM user WHERE id = $userId";
+    $result = mysqli_query($conn, $sql);
+    $info = mysqli_fetch_assoc($result);
     $length = 10;
-    $errors= '';
 
-    if(isset($_SESSION['user'])){
-        $userId = $_SESSION['user_id'];
+    function generate_salt($length){
+        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $salt = '';
 
-        $sql = "SELECT salt,  password FROM user WHERE id = $userId";
-        $result = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_assoc($result);
-
-        function generate_salt($length){
-            $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $salt = '';
-    
-            for($i=0;$i<$length;$i++){
-                $index = rand(0,strlen($chars)-1);
-                $salt .= $chars[$index];
-            }
-    
-            return $salt;
+        for($i=0;$i<$length;$i++){
+            $index = rand(0,strlen($chars)-1);
+            $salt .= $chars[$index];
         }
-        if(isset($_POST['submit'])){
-            $old_password = $_POST['old_password'];
-            $new_password = $_POST['new_password'];
-            $cfnew_password = $_POST['confirm_new_password'];
 
-            $salt_in_database = $row['salt'];
-            $password_in_database = $row['password'];
-
-            $hashed= hash('sha256',$old_password.$salt_in_database);
-
-
-            if($hashed = $password_in_database){
-                if($cfnew_password == ''){
-                    $errors = "Please confirm the password";
-                }
-                if($new_password != $cfnew_password){
-                    $errors = "Passwords doesnt match";
-                }else{
-                    $salt = generate_salt($length);
-                    $hashed_new_password = hash('sha256',$new_password.$salt);
-                    $sql2 = "UPDATE user SET password = '$hashed_new_password' WHERE id = $userId";
-                    $result2 = mysqli_query($conn,$sql2);
-                    if($result2){
-                        header("Location: user-page.php");
-                    }else{
-                        header("Location: change-password.php");
-                    }
-                }
-            }else{
-                echo "Error";
-            }
-        }
+        return $salt;
     }
 
+    if(isset($_POST['submit']))
+    {
+        $u_name = $_POST['username'];
+        $u_email = $_POST['email'];
+        $u_password = $_POST['password'];
 
-?>
+        $salt_in_database = $info['salt'];
+        $password_in_database = $info['password'];
+        $errors = '';
 
-<!DOCTYPE html>
+        $usernameRegex = "/^[a-zA-Z0-9_]{3,20}$/";
+        $emailRegex = "/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/";
+        $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
+      
+        $hashed= hash('sha256',$u_password.$salt_in_database);
+
+        // $errors = "";
+        // $u = "SELECT name from user where name = '$u_name'";
+        // $u_query = mysqli_query($conn,$u);
+                
+        // $e = "SELECT email from user where email ='$u_email'";
+        // $e_query = mysqli_query($conn,$e);
+
+        if($hashed = $password_in_database){
+          $sql2= "UPDATE user SET name = '$u_name', email = '$u_email' WHERE id = $userId ";
+
+        if($result2){
+            echo "Update success";
+        }
+          $result2 = mysqli_query($conn,$sql2);
+
+          if($result2){
+              header("Location: user-page.php");
+          }else{
+            $error = "Error!!!";
+            header("Location: update-profile.php");
+          }
+        }else{
+          $error = "Incorrect Password";
+        // }
+    }
+}
+
+    ?>
+     <!DOCTYPE html>
  <html lang="en">
  <head>
     <meta charset="UTF-8">
@@ -69,7 +78,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
    
-    <link rel="stylesheet" href="admin/admin.css" type="text/css"/>
+    <link rel="stylesheet" href="../admin/admin.css" type="text/css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- 
     - favicon
@@ -79,7 +88,7 @@
 <!-- 
   - custom css link
 -->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 
 <!-- 
   - google font link
@@ -342,26 +351,28 @@ transition: .3s;
                         <div class="card-body py-md-4">
                             <form method="POST">
 
-                              <div class="form-group">
-                                  <input type="password" class="form-control" name="old_password" id="name" placeholder="Old Password">
-                              </div>
-                              <div class="form-group">
-                                  <input type="password" class="form-control" name="new_password" id="email" placeholder="New Password">
-                              </div>
-                              <div class="form-group">
-                                  <input type="password" class="form-control" name="confirm_new_password" placeholder="Confirm Password">
-                              </div>
-                              <?php if (isset($errors)): ?>
-                                  <span><?php echo $errors; ?></span>
-                              <?php endif ?>
-                              <div>
-                                  <a href="user-page.php" class="btn btn-primary" style="text-align: center;">Cancel</a>
-                                  <br>
-                                  <input type='submit' name='submit' class="btn btn-primary" value='Update Password'>
-                                  </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="username" value="<?php echo "{$info['name']}" ?>" id="name" placeholder="Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" value="<?php echo "{$info['email']}" ?>" id="email" placeholder="Email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="color:#f1f1f1">Verify your password</label>
+                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                </div>
+                                <?php if(isset($errors)): ?>
+                                    <span><?php echo $errors; ?> </span>
+                                <?php endif ?>
+                                <div>
+                                    <a href="user-page.php" class="btn btn-primary" style="text-align: center;" >Cancel</a>
+                                    <br>
+                                    <input type='submit' name='submit'class="btn btn-primary" value='Update Profile'>
+                                </div>
 
                             </form>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -371,7 +382,7 @@ transition: .3s;
           <!-- 
     - custom js link
   -->
-  <script src="./assets/js/script.js" defer></script>
+  <script src="../assets/js/script.js" defer></script>
 
 <!-- 
   - ionicon link
@@ -381,4 +392,13 @@ transition: .3s;
             
  </body>
  </html>
- <script src="delete-profile.js" ></script>
+<?php
+} else {
+    // Redirect the user to the login page if they are not logged in
+    header("Location: login.php");
+    exit;
+}
+
+
+
+ ?>
