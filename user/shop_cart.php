@@ -115,6 +115,29 @@
     .alert .closebtn:hover {
         color: black;
     }
+    
+
+    .buy_green {
+        padding: 20px;
+        background-color: #03AC13;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        position: relative;
+        }
+    .buy_green .closebtn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        }
+    .buy_green .closebtn:hover {
+        color: black;
+    }
 
     /* The container <div> - needed to position the dropdown content */
     .dropdown {
@@ -306,6 +329,13 @@
             <?php echo $_SESSION['error_message']; ?>
         </div>
         <?php unset($_SESSION['error_message']);} ?>
+
+        <?php if (isset($_SESSION['success_buy'])) { ?>
+        <div class="buy_green">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <?php echo $_SESSION['success_buy']; ?>
+        </div>
+        <?php unset($_SESSION['error_message']);} ?>
 <div class="container mt-5 p-3 rounded cart">
     <div class="row no-gutters">
         <div class="col-md-8">
@@ -437,6 +467,8 @@
             var alertBox = document.querySelector('.alert');
             alertBox.style.display = 'none';
         }, 3000); // Set the duration in milliseconds
+
+        
     </script>
 </body>
 </html>
