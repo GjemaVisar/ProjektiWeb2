@@ -68,7 +68,7 @@
             $_SESSION['success_buy'] = "Your purchase was complete! If you dont want to purchase the same items again, 
             please click the garbage cans!";
             
-            header("Location: ../shop_cart.php");
+            header("Location: ../user/shop_cart.php");
             exit();
           
         }else{

@@ -153,11 +153,11 @@ if(isset($_POST['submit'])){
             </li>
 
             <li class="navbar-item">
-              <a href="#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
+              <a href="user-page.php#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
             </li>
 
             <li class="navbar-item">
-              <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
+              <a href="user-page.php#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
             <!--
@@ -191,14 +191,7 @@ if(isset($_POST['submit'])){
             <ion-icon name="cart"></ion-icon>
           </button>
           </a>
-          <form action="" class="footer-newsletter">
-            <input type="search" name="search products" aria-label="search" placeholder="search products" required
-              class="email-field">
-
-            <button type="submit" class="footer-btn" aria-label="submit">
-              <ion-icon name="search-outline"></ion-icon>            
-            </button>
-          </form>
+          
 
           <!-- 
               Ikona e menus kur te ngushtohet faqja, duhet mu ndreq qe me dal to Home, Blog, Shop...

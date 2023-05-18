@@ -32,7 +32,7 @@
 
 	<div class="head">
 		<div class="col-div-6">
-        <span style="font-size:30px;cursor:pointer; color: white;" class="nav"  >&#9776; Admins</span>
+        <span style="font-size:30px;cursor:pointer; color: white;" class="nav"  >&#9776; Products</span>
     </div>
         
     
