@@ -304,7 +304,7 @@ transition: .3s;
                 <a href="update-profile.php">Update Profile</a>
                 <a href="change-password.php" >Change Pass</a>
                 <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
-                <a href="admin/logout.php" data-nav-link>Log Out</a>
+                <a href="../admin/logout.php" data-nav-link>Log Out</a>
               </div>
             </li>
             
@@ -392,6 +392,7 @@ transition: .3s;
             
  </body>
  </html>
+ <script src="delete-profile.js" ></script>
 <?php
 } else {
     // Redirect the user to the login page if they are not logged in
