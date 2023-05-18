@@ -721,7 +721,7 @@ if ($user_name !== null && $id !== null) {
                 $api_url = 'news.json';
                 $newslist = json_decode(file_get_contents($api_url));
             } else {
-                $api_url = 'https://newsapi.org/v2/everything?q=videogames&from=2023-05-14&to=2023-05-10&sortBy=popularity&pageSize=15&apiKey=371aaaac69d64e46bef2448595bcfe8f';
+                $api_url = 'https://newsapi.org/v2/everything?q=videogames&language=en&from=2023-05-14&to=2023-05-10&sortBy=popularity&pageSize=15&apiKey=371aaaac69d64e46bef2448595bcfe8f';
 
                 $newslist = @file_get_contents($api_url);
 
