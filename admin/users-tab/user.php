@@ -2,7 +2,14 @@
 
  require('../../storeDB.php');
   session_start();
- $name = $_SESSION['admin'];
+ $name = isset($_SESSION['admin']) ? $_SESSION['admin'] : null;
+ // nese preket back button dhe munohet te kete qasje pa bere login
+ if ($name === null ) {
+    // User is not logged in or session expired, redirect to the login page
+    header('Location: ../../login.php');
+    exit();
+}
+
 // Numerimi i llogarive te krijuara te webfaqes
 $sql_total_users = "SELECT COUNT(*) FROM user WHERE role = 'user' "; // replace "users" with your table name
 $result_total_users = mysqli_query($conn, $sql_total_users);

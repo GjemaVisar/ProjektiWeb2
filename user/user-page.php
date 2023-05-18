@@ -12,7 +12,7 @@ if ($user_name !== null && $id !== null) {
   // echo '<span style="color: white;">Welcome, ' . $user_name . '</span>';
 } else {
   // User is not logged in
-  echo '<a href="login.php" class="navbar-link skewBg" data-nav-link><button style="background-color: white; color: black; border: none; padding: 5px 10px; cursor: pointer;">Log In</button></a>';
+  echo '<a href="../login.php" class="navbar-link skewBg" data-nav-link><button style="background-color: white; color: black; border: none; padding: 5px 10px; cursor: pointer;">Log In</button></a>';
 }  // You can redirect to the login page here if desired
 ?>
 
