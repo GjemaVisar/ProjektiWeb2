@@ -204,14 +204,7 @@ if ($user_name !== null && $id !== null) {
             <ion-icon name="cart"></ion-icon>
           </button>
           </a>
-          <form action="" class="footer-newsletter">
-            <input type="search" name="search products" aria-label="search" placeholder="search products" required
-              class="email-field">
-
-            <button type="submit" class="footer-btn" aria-label="submit">
-              <ion-icon name="search-outline"></ion-icon>            
-            </button>
-          </form>
+          
 
           <!-- 
               Ikona e menus kur te ngushtohet faqja, duhet mu ndreq qe me dal to Home, Blog, Shop...
