@@ -26,7 +26,6 @@ $row_users_today = mysqli_fetch_array($result_users_today);
 $num_users_today = $row_users_today[0];
  
 
-
 ?>
 
 
@@ -37,8 +36,20 @@ $num_users_today = $row_users_today[0];
 	<title></title>
 	<link rel="stylesheet" href="../css/admin.css" type="text/css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="admin.css" type="text/css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+		/* Add scroll bar to the table section */
+		#dataTable {
+			height: 300px; /* Adjust the height as needed */
+			overflow-y: scroll;
+		}
+	</style>
 </head>
 
 <body>
@@ -176,10 +187,6 @@ $num_users_today = $row_users_today[0];
         });
     }
 });
-
-
-
-
 
 </script>
 
