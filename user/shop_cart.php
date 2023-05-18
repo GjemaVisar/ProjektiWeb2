@@ -1,7 +1,9 @@
 <?php
   require("../storeDB.php");
   session_start();
- 
+
+
+  
 
   if(isset($_POST['submit'])){
     $pid = $_POST['product_id'];

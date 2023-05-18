@@ -73,7 +73,7 @@
           
         }else{
             $_SESSION['error_message'] = "Your credentials are not correct!";
-            header("Location: ../shop_cart.php");
+            header("Location: ../user/shop_cart.php");
             exit();
           
         }
