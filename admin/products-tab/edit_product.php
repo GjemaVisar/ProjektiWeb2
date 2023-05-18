@@ -1,7 +1,15 @@
 <?php 
-session_start();
-$name = $_SESSION['admin'];
+
 require('../../storeDB.php');
+session_start();
+$name = isset($_SESSION['admin']) ? $_SESSION['admin'] : null;
+// nese preket back button dhe munohet te kete qasje pa bere login
+if ($name === null ) {
+   // User is not logged in or session expired, redirect to the login page
+   header('Location: ../../login.php');
+   exit();
+}
+
 
 if(isset($_POST['edit_btn']))
 {

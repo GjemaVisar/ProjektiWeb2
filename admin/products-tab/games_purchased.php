@@ -2,7 +2,13 @@
 
  require('../../storeDB.php');
  session_start();
- $name = $_SESSION['admin'];
+ $name = isset($_SESSION['admin']) ? $_SESSION['admin'] : null;
+ // nese preket back button dhe munohet te kete qasje pa bere login
+ if ($name === null ) {
+    // User is not logged in or session expired, redirect to the login page
+    header('Location: ../../login.php');
+    exit();
+}
 
 ?>
 
@@ -23,7 +29,7 @@
   <a href="admins.php"class="icon-a"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;&nbsp;Admins</a>
   <a href="products.php"class="icon-a"><i class="fa fa-gamepad icons"></i> &nbsp;&nbsp;Products</a>
   <a href="../faq.php"class="icon-a"><i class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Faq</a>
-  <a href="logout.php"class="icon-a"><i class="fa fa-level-down icons"></i> &nbsp;&nbsp;Log Out</a>
+  <a href="../logout.php"class="icon-a"><i class="fa fa-level-down icons"></i> &nbsp;&nbsp;Log Out</a>
 
 </div>
   <div id="main">
