@@ -1,6 +1,6 @@
 <?php 
 
-    include 'storeDB.php';
+    include '../storeDB.php';
     session_start();
 
     $length = 10;
@@ -69,7 +69,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
    
-    <link rel="stylesheet" href="admin/admin.css" type="text/css"/>
+    <link rel="stylesheet" href="../admin/admin.css" type="text/css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- 
     - favicon
@@ -79,7 +79,7 @@
 <!-- 
   - custom css link
 -->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 
 <!-- 
   - google font link
@@ -272,11 +272,11 @@ transition: .3s;
             </li>
 
             <li class="navbar-item">
-              <a href="#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
+              <a href="user-page.php#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
             </li>
 
             <li class="navbar-item">
-              <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
+              <a href="user-page.php#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
             <!--
@@ -295,7 +295,7 @@ transition: .3s;
                 <a href="update-profile.php">Update Profile</a>
                 <a href="change-password.php" >Change Pass</a>
                 <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
-                <a href="admin/logout.php" data-nav-link>Log Out</a>
+                <a href="../admin/logout.php" data-nav-link>Log Out</a>
               </div>
             </li>
             
@@ -306,17 +306,9 @@ transition: .3s;
     <a href='shop_cart.php'>
       <button class="cart-btn" aria-label="cart">
         <ion-icon name="cart"></ion-icon>
-        <span class="cart-badge">0</span>
       </button>
       </a>
-      <form action="" class="footer-newsletter">
-        <input type="search" name="search products" aria-label="search" placeholder="search products" required
-          class="email-field">
-
-        <button type="submit" class="footer-btn" aria-label="submit">
-          <ion-icon name="search-outline"></ion-icon>            
-        </button>
-      </form>
+      
 
       <!-- 
           Ikona e menus kur te ngushtohet faqja, duhet mu ndreq qe me dal to Home, Blog, Shop...
@@ -371,7 +363,7 @@ transition: .3s;
           <!-- 
     - custom js link
   -->
-  <script src="./assets/js/script.js" defer></script>
+  <script src="../assets/js/script.js" defer></script>
 
 <!-- 
   - ionicon link

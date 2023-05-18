@@ -1,5 +1,5 @@
 <?php
-include 'storeDB.php';
+include '../storeDB.php';
 session_start();
 
 $length = 10;
@@ -9,9 +9,9 @@ if (isset($_SESSION['user'])) {
     $userId = $_SESSION['user_id'];
 
     // Retrieve the current user's information from the database
-    $sql = "SELECT name, email, salt,  password FROM user WHERE id = $userId";
+    $sql = "SELECT name, email, salt, password FROM user WHERE id = $userId";
     $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
+    $info = mysqli_fetch_assoc($result);
     $length = 10;
 
     function generate_salt($length){
@@ -32,52 +32,45 @@ if (isset($_SESSION['user'])) {
         $u_email = $_POST['email'];
         $u_password = $_POST['password'];
 
+        $salt_in_database = $info['salt'];
+        $password_in_database = $info['password'];
+        $errors = '';
+
         $usernameRegex = "/^[a-zA-Z0-9_]{3,20}$/";
         $emailRegex = "/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/";
         $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
-        
-        $salt_in_database = $row['salt'];
-        $password_in_database = $row['password'];
-        $errors = "";
+      
+        $hashed= hash('sha256',$u_password.$salt_in_database);
+
+        // $errors = "";
         // $u = "SELECT name from user where name = '$u_name'";
         // $u_query = mysqli_query($conn,$u);
                 
         // $e = "SELECT email from user where email ='$u_email'";
         // $e_query = mysqli_query($conn,$e);
 
+        if($hashed = $password_in_database){
+          $sql2= "UPDATE user SET name = '$u_name', email = '$u_email' WHERE id = $userId ";
 
-        // if (!preg_match($usernameRegex, $u_name)) {
-        //     $errors = "Invalid username format";
-        //   }
-        //   elseif (!preg_match($emailRegex, $u_email)) {
-        //     $errors = "Invalid email format";
-        //   }
-        //   elseif (!preg_match($passwordRegex, $u_password)) {
-        //     $errors = "Invalid password format";
-        //   }
-        //   else{
-
-            $hashed = hash('sha256',$u_password.$salt_in_database);
-            if($hashed = $password_in_database){
-              $sql2= "UPDATE user SET name = '$u_name', email = '$u_email' WHERE id = $userId ";
-
-              $result2 = mysqli_query($conn,$sql2);
-  
-              if($result2){
-                  header("Location: user-page.php");
-              }else{
-                $error = "Error!!!";
-                header("Location: update-profile.php");
-              }
-            }else{
-              $error = "Incorrect Password";
-            // }
+        if($result2){
+            echo "Update success";
         }
-    }
+          $result2 = mysqli_query($conn,$sql2);
 
-   
+          if($result2){
+              header("Location: user-page.php");
+          }else{
+            $error = "Error!!!";
+            header("Location: update-profile.php");
+          }
+        }else{
+          $error = "Incorrect Password";
+        // }
+    }
+}
+
     ?>
-<!DOCTYPE html>
+     <!DOCTYPE html>
  <html lang="en">
  <head>
     <meta charset="UTF-8">
@@ -85,8 +78,8 @@ if (isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
    
-    <link rel="stylesheet" href="admin/admin.css" type="text/css"/>
-	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../admin/admin.css" type="text/css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- 
     - favicon
   -->
@@ -95,7 +88,7 @@ if (isset($_SESSION['user'])) {
 <!-- 
   - custom css link
 -->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 
 <!-- 
   - google font link
@@ -106,6 +99,7 @@ if (isset($_SESSION['user'])) {
   href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
   rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         body{
 
@@ -287,11 +281,11 @@ transition: .3s;
             </li>
 
             <li class="navbar-item">
-              <a href="#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
+              <a href="user-page.php#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
             </li>
 
             <li class="navbar-item">
-              <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
+              <a href="user-page.php#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
             <!--
@@ -310,7 +304,7 @@ transition: .3s;
                 <a href="update-profile.php">Update Profile</a>
                 <a href="change-password.php" >Change Pass</a>
                 <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
-                <a href="admin/logout.php" data-nav-link>Log Out</a>
+                <a href="../admin/logout.php" data-nav-link>Log Out</a>
               </div>
             </li>
             
@@ -321,17 +315,9 @@ transition: .3s;
     <a href='shop_cart.php'>
       <button class="cart-btn" aria-label="cart">
         <ion-icon name="cart"></ion-icon>
-        <span class="cart-badge">0</span>
       </button>
       </a>
-      <form action="" class="footer-newsletter">
-        <input type="search" name="search products" aria-label="search" placeholder="search products" required
-          class="email-field">
-
-        <button type="submit" class="footer-btn" aria-label="submit">
-          <ion-icon name="search-outline"></ion-icon>            
-        </button>
-      </form>
+      
 
       <!-- 
           Ikona e menus kur te ngushtohet faqja, duhet mu ndreq qe me dal to Home, Blog, Shop...
@@ -357,27 +343,28 @@ transition: .3s;
                         <div class="card-body py-md-4">
                             <form method="POST">
 
-                              <div class="form-group">
-                                  <input type="text" class="form-control" name="username" value="<?php echo "{$row['name']}"; ?>" id="name" placeholder="Name">
-                              </div>
-                              <div class="form-group">
-                                  <input type="email" class="form-control" name="email" value="<?php echo "{$row['email']}"; ?>" id="email" placeholder="Email">
-                              </div>
-                              <div class="form-group">
-                                  <label style="color:#f1f1f1">Verify your password</label>
-                                  <input type="password" class="form-control" name="password" placeholder="Password">
-                              </div>
-                              <?php if (isset($errors)): ?>
-                                  <span><?php echo $errors; ?></span>
-                              <?php endif ?>
-                              <div>
-                                  <a href="accounts.php" class="btn btn-primary" style="text-align: center;">Cancel</a>
-                                  <br>
-                                  <input type='submit' name='submit' class="btn btn-primary" value='Update Profile'>
-                                  </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="username" value="<?php echo "{$info['name']}" ?>" id="name" placeholder="Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" value="<?php echo "{$info['email']}" ?>" id="email" placeholder="Email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="color:#f1f1f1">Verify your password</label>
+                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                </div>
+                                <?php if(isset($errors)): ?>
+                                    <span><?php echo $errors; ?> </span>
+                                <?php endif ?>
+                                <div>
+                                    <a href="user-page.php" class="btn btn-primary" style="text-align: center;" >Cancel</a>
+                                    <br>
+                                    <input type='submit' name='submit'class="btn btn-primary" value='Update Profile'>
+                                </div>
 
                             </form>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -387,7 +374,7 @@ transition: .3s;
           <!-- 
     - custom js link
   -->
-  <script src="./assets/js/script.js" defer></script>
+  <script src="../assets/js/script.js" defer></script>
 
 <!-- 
   - ionicon link
@@ -397,6 +384,7 @@ transition: .3s;
             
  </body>
  </html>
+ <script src="delete-profile.js" ></script>
 <?php
 } else {
     // Redirect the user to the login page if they are not logged in
@@ -407,4 +395,3 @@ transition: .3s;
 
 
  ?>
- <script src="delete-profile.js" ></script>

@@ -11,6 +11,14 @@ if(! $conn)
    # echo "Connected to the database";
 }
 
+function get_cookie(){
+    if(isset($_SESSION['user_id'])){
+      $user_id =$_SESSION['user_id'];
+      $cookie_name = "shopping_cart".$user_id;
+      return $cookie_name;
+    }
+    
+  }  
 
 // KRIJIMI I DATABAZES
 // $conn = mysqli_connect($dbhost,$dbuser,$dbpass);

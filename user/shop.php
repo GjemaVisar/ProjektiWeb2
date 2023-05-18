@@ -1,23 +1,20 @@
-<?php
-?>
+
 <html>
 <head>
     <title>Buy Games</title>
-    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="css/shop.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script rel="shop.js"></script>
 
 <!-- 
   - custom css link
 -->
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 
 <!-- 
   - google font link
@@ -27,6 +24,7 @@
 <link
   href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
   rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <style>
     /* Style The Dropdown Button */
@@ -145,11 +143,11 @@
             </li>
 
             <li class="navbar-item">
-              <a href="#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
+              <a href="user-page.php#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
             </li>
 
             <li class="navbar-item">
-              <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
+              <a href="user-page.php#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
             <!--
@@ -168,7 +166,7 @@
                 <a href="update-profile.php">Update Profile</a>
                 <a href="change-password.php" >Change Pass</a>
                 <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
-                <a href="admin/logout.php" data-nav-link>Log Out</a>
+                <a href="../admin/logout.php" data-nav-link>Log Out</a>
               </div>
             </li>
             
@@ -180,10 +178,9 @@
         <a href='shop_cart.php'>
           <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
-            <span class="cart-badge">0</span>
           </button>
           </a>
-          <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="footer-newsletter" methos="GET">
+          <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="footer-newsletter" methos="GET" id="searchForm">
             <input type="search" name="search" aria-label="search" placeholder="search products" required
               class="email-field">
 
@@ -214,7 +211,7 @@
   <br> 
   
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET" id="filterForm">
-  <select id="dropdown" class="dark-dropdown" name="category" >
+<select id="categoryDropdown" class="dark-dropdown" name="category">
   <option value="deffault" disabled selected>Category</option>
   <option value="merch">Merch</option>
   <option value="videogame">Videogame</option>
@@ -222,44 +219,68 @@
   <option value="all">All</option>
 </select>
 </form>
-
 <script>
-  const dropdown = document.getElementById('dropdown');
-  const form = document.getElementById('filterForm');
+  $(document).ready(function() {
+    // Function to update the product listing based on search or category filter
+    function updateProductListing(data) {
+      $('.shop-container').html(data);
+    }
 
-  dropdown.addEventListener('change', function() {
-    form.submit();
+    // Search form submission
+    $('#searchForm').submit(function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Get the search query
+      var searchQuery = $(this).find('input[name="search"]').val();
+
+      // Perform AJAX request
+      $.ajax({
+        url: 'search.php',
+        type: 'GET',
+        data: { search: searchQuery },
+        success: function(response) {
+          // Handle the response and update the product listing
+          updateProductListing(response);
+        },
+        error: function(xhr, status, error) {
+          // Handle any errors
+          console.error(error);
+        }
+      });
+    });
+
+    // Category dropdown change event
+    $('#categoryDropdown').change(function() {
+      var category = $(this).val();
+
+      // Perform AJAX request
+      $.ajax({
+        url: 'search.php',
+        type: 'GET',
+        data: { category: category },
+        success: function(response) {
+          // Handle the response and update the product listing
+          updateProductListing(response);
+        },
+        error: function(xhr, status, error) {
+          // Handle any errors
+          console.error(error);
+        }
+      });
+    });
   });
 </script>
+
   <br></br>
   
   <div class="shop-container">
- 
-  <?php 
-  
-        
-            require("storeDB.php");
-            $search = isset($_GET['search']) ? $_GET['search'] : '';
-$category = isset($_GET['category']) ? $_GET['category'] : '';
-
-if (!empty($search) && !empty($category)) {
-  // Construct the SQL query with search and category filters
-  $get_product = "SELECT * FROM product WHERE product_name LIKE '%$search%' AND category = '$category'";
-} elseif (!empty($search)) {
-  // Construct the SQL query with only search filter
-  $get_product = "SELECT * FROM product WHERE product_name LIKE '%$search%'";
-} elseif (!empty($category)) {
-  // Construct the SQL query with only category filter
-  $get_product = "SELECT * FROM product WHERE category = '$category'";
-} else {
-  // No search or category provided, retrieve all products
+  <?php
+            require("../storeDB.php");
+    
   $get_product = "SELECT * FROM product";
-}
-            
+
             // Further processing with the SQL query and displaying the products
             // ...
-            
-           
             $result = mysqli_query($conn,$get_product);
             if(mysqli_num_rows($result)>0){
                 while($row = mysqli_fetch_assoc($result)){
@@ -270,50 +291,52 @@ if (!empty($search) && !empty($category)) {
                     $product_image = $row['product_image'];
                     $product_description = $row['product_description'];
                     $quantity = $row['quantity'];
-
                     //$cart = isset($_COOKIE["cart"]) ? $_COOKIE["cart"] : "[]";
                     //$cart = json_decode($cart);
-
-                   
-
         ?>
-  
-      
         <div class="shop-card2">
                 <figure class="card-banner" style="width:300; height: 260;">
                   <img src=<?php echo $product_image;?> width="300" height="260" loading="lazy"
                     alt=<?php echo $product_name; ?> class="img-cover">
-                
-
                 <div class="card-content">
-
                   <a href="#" class="card-badge skewBg"><?php echo $category;?></a>
-
                   <h3 class="h3">
                     <a href="#" class="card-title"><?php echo $product_name;?></a>
                   </h3>
-
                   <div class="card-wrapper">
                     <p class="card-price">$<?php echo $product_price;?></p>
                   <form method="Post" action="shop_cart.php" >
                     <input type="hidden" name="product_id" value="<?php echo $product_id;?>" >
                     <input type="hidden" name="product_quantity" value="1">
-                    <button type="submit" class="card-btn" name="submit">
+                    <?php 
+                      $check_quantity = "SELECT quantity from  product where pid = '$product_id'";
+                      $res = mysqli_query($conn,$check_quantity);
+                      $row = mysqli_fetch_row($res);
+                      $value = $row[0];
+
+                      if($value == 0){
+                    ?>
+                    <p class="card-btn">No more of this item in stock!</p>
+                    
+                    <?php }else{ ?>
+                      <button type="submit" class="card-btn" name="submit">
                       <ion-icon name="basket"></ion-icon>
                     </button>
+                    <?php }?>
                   </form>
                   </div>
                   <i style="color:white;"><?php echo $product_description; ?></i>
-
                 </div>
                 </figure>
               </div>
-    <?php 
-        
-    
+    <?php
     }
-            }       
+            }
                 ?>
+  
+
+
+
                 </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

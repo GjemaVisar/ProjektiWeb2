@@ -1,5 +1,5 @@
 <?php
-require("storeDB.php");
+require("../storeDB.php");
 session_start();
 $asker = $_SESSION['user'];
 if(isset($_POST['submit'])){
@@ -24,13 +24,13 @@ if(isset($_POST['submit'])){
 <html>
 <head>
     <title>FAQ Page</title>
-    <link rel="stylesheet" type="text/css" href="faq.css">
+    <link rel="stylesheet" type="text/css" href="../faq.css">
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
 
   <!-- 
     - custom css link
   -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 
   <!-- 
     - google font link
@@ -40,7 +40,8 @@ if(isset($_POST['submit'])){
   <link
     href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
     /* Style The Dropdown Button */
     .dropbtn {
@@ -152,11 +153,11 @@ if(isset($_POST['submit'])){
             </li>
 
             <li class="navbar-item">
-              <a href="#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
+              <a href="user-page.php#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
             </li>
 
             <li class="navbar-item">
-              <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
+              <a href="user-page.php#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
             <!--
@@ -175,28 +176,22 @@ if(isset($_POST['submit'])){
                 <a href="update-profile.php">Update Profile</a>
                 <a href="change-password.php" >Change Pass</a>
                 <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
-                <a href="admin/logout.php" data-nav-link>Log Out</a>
+                <a href="../admin/logout.php" data-nav-link>Log Out</a>
               </div>
             </li>
+
             
           </ul>
         </nav>
 
         <div class="header-actions">
 
+        <a href='shop_cart.php'>
           <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
-
-            <span class="cart-badge">0</span>
           </button>
-          <form action="" class="footer-newsletter">
-            <input type="search" name="search products" aria-label="search" placeholder="search products" required
-              class="email-field">
-
-            <button type="submit" class="footer-btn" aria-label="submit">
-              <ion-icon name="search-outline"></ion-icon>            
-            </button>
-          </form>
+          </a>
+          
 
           <!-- 
               Ikona e menus kur te ngushtohet faqja, duhet mu ndreq qe me dal to Home, Blog, Shop...
@@ -263,7 +258,7 @@ if(isset($_POST['submit'])){
         }
        </script>
     </main>
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 
 <script>
@@ -272,7 +267,7 @@ window.addEventListener("load",function(){
 });
 </script>
 </html>
-<script src="./assets/js/script.js" defer></script>
+<script src="../assets/js/script.js" defer></script>
 
   <!-- 
     - ionicon link
@@ -280,5 +275,6 @@ window.addEventListener("load",function(){
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script src="delete-profile.js" ></script>
+
 
 

@@ -37,7 +37,7 @@
 					//echo "Its working";
 					$name = $row['name'];
                     $_SESSION['admin'] = $name;
-                    header("Location:admin/user.php", TRUE, 301);
+                    header("Location:admin/users-tab/user.php", TRUE, 301);
 
             	}
                 else if($row['role'] == 'user'){
@@ -45,7 +45,7 @@
                     $_SESSION['user'] = $name;
 					$id = $row['id'];
 					$_SESSION['user_id'] = $id;
-                    header("Location:user-page.php", TRUE, 301);
+                    header("Location:user/user-page.php", TRUE, 301);
            	 	}	
 
                 // header("Location: http://localhost/ProjektiWeb2/", TRUE, 301);
@@ -75,12 +75,8 @@
 	<div class="form-container sign-in-container">
 		<form action="" method="post">
 			<h1>Sign in</h1>
-			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your account</span>
+			
+		
 			<input type="email" name="email" placeholder="Email" />
 			<input type="password" name="password" placeholder="Password" />
 			<?php if(isset($errors)): ?>

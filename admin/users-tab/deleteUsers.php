@@ -1,5 +1,5 @@
 <?php
-require('../storeDB.php');
+require('../../storeDB.php');
 
 if(isset($_POST['delete'])) {
     // Get the user ID to be deleted
