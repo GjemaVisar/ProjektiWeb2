@@ -258,7 +258,7 @@
                 <a href="update-profile.php">Update Profile</a>
                 <a href="change-password.php" >Change Pass</a>
                 <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
-                <a href="admin/logout.php" data-nav-link>Log Out</a>
+                <a href="../admin/logout.php" data-nav-link>Log Out</a>
               </div>
             </li>
 
