@@ -32,12 +32,14 @@ require("storeDB.php");
     product_id INT not null,quantity tinyint(4) not null ,payment real not null,purchase_date DATE,
     primary key(id,user_id,product_id),
     foreign key(user_id) references user(id), foreign key(product_id) references product(pid))';
+
+
     
     $retvalue = mysqli_query($conn,$sql);
     if(! $retvalue){
-        die("Could not create pruchase table : ".mysqli_connect_error());
+        die("Could not create purchased table : ".mysqli_connect_error());
     }
-    echo "Table has been created successfully";
+    echo "table has been added successfully";
 	mysqli_close($conn);
 
 

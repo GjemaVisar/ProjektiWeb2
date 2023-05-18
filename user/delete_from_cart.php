@@ -12,6 +12,7 @@
       
       if(isset($_COOKIE[$cookie_name])){
         $cart = $_COOKIE[$cookie_name];
+        echo $cart;
       }else{
         $cart = "";
       }
@@ -26,7 +27,7 @@
       }
       var_dump($new_cart);
       setcookie($cookie_name,json_encode($new_cart),time()+1296000);
-    
+     
       header("Location:shop_cart.php",TRUE,301);
     }
   

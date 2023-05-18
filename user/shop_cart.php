@@ -56,6 +56,7 @@
 
 
     setcookie($cookie_name,json_encode($cart),time()+1296000);
+    
     //setcookie($cookie_name,"",time()-1296000);
 
     header("Location: shop.php");
@@ -335,9 +336,10 @@
         <?php if (isset($_SESSION['success_buy'])) { ?>
         <div class="buy_green">
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            <?php echo $_SESSION['success_buy']; ?>
+            <?php echo $_SESSION['success_buy'];}?>
         </div>
-        <?php unset($_SESSION['error_message']);} ?>
+        <?php unset($_SESSION['success_buy']); ?>
+        
 <div class="container mt-5 p-3 rounded cart">
     <div class="row no-gutters">
         <div class="col-md-8">
@@ -406,6 +408,7 @@
                     ?>
             </div>
         </div>
+        
         <div class="col-md-4">
             <div class="payment-info">
                 <div class="d-flex justify-content-between align-items-center"><span>Card details</span><img class="rounded" src="https://i.imgur.com/WU501C8.jpg" width="30"></div><span class="type d-block mt-3 mb-1">Card type</span><label class="radio"> <input type="radio" name="card" value="payment" checked> <span><img width="30" src="https://img.icons8.com/color/48/000000/mastercard.png"/></span> </label>
@@ -440,11 +443,35 @@
                   <span>$<?php if(isset($_COOKIE[$cookie_name])){
                     echo "<input type='hidden' name='total' value=".$totalPrice+$shipping.">".$totalPrice+$shipping;}?></span>
                 </div>
-                
                   <button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="submit" name="buy">
-                    <input type="hidden" name="mycookie" value=<?php echo $cookie_name;?>>
+
+                  <?php 
+                    
+                    $product_ids = array();
+                    $product_quantity = array();
+                    $product_price = array();
+                                      
+                    if(isset($_COOKIE[$cookie_name])){
+                      // echo $_COOKIE[$cookie_name];
+                      $cookie_data = json_decode($_COOKIE[$cookie_name],true);
+                      foreach($cookie_data as $key=>$value){
+                          array_push($product_ids,$value['productId']);
+                          array_push($product_quantity,$value['quantity']);
+                          array_push($product_price,$value['price']*$value['quantity']);
+                        
+                    }
+                  
+                      }
+                    
+                  ?>
+                    
+                    <input type="hidden" name="ids" value=<?php echo serialize($product_ids);?>>
+                    <input type="hidden" name="quantity" value=<?php echo serialize($product_quantity);?>>
+                    <input type="hidden" name="prices" value=<?php echo serialize($product_price);?>>
+                    
                   <span>$<?php if(isset($_COOKIE[$cookie_name])){echo $totalPrice+$shipping;}?></span>
                   <span>Buy<i class="fa fa-long-arrow-right ml-1"></i></span></button></div>
+                 
             </form>
         </div>
     </div>
@@ -472,6 +499,7 @@
 
         
     </script>
+
 </body>
 </html>
 <script src="delete-profile.js" ></script>
