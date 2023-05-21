@@ -97,8 +97,7 @@
                 echo "Error during editing question or answer";
             }
         }
-    
-    
+        mysqli_close($conn);
     ?>
     
 </body>

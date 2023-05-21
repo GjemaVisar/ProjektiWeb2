@@ -30,5 +30,5 @@
      
       header("Location:shop_cart.php",TRUE,301);
     }
-  
+      mysqli_close($conn); 
   ?>

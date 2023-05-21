@@ -13,6 +13,7 @@ if(isset($_POST['delete'])) {
   
     // Redirect to the page with the table of users
     header("Location: user.php");
+     mysqli_close($conn); 
   }
 
 

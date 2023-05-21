@@ -19,5 +19,5 @@ if(isset($_POST['delete_btn'])){
     }
 
 }
-
+ mysqli_close($conn); 
 ?>

@@ -37,6 +37,8 @@
 					//echo "Its working";
 					$name = $row['name'];
                     $_SESSION['admin'] = $name;
+					$adminId = $row['id']; // Get the admin's ID
+					$_SESSION['admin_id'] = $adminId;
                     header("Location:admin/users-tab/user.php", TRUE, 301);
 
             	}
@@ -102,6 +104,6 @@
 	</div>
 </div>
 <script src="login.js"></script>
-
+<?php  mysqli_close($conn); ?>
 </body>
 </html>

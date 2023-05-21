@@ -259,6 +259,7 @@ if(isset($_POST['submit'])){
        </script>
     </main>
     <script src="../script.js"></script>
+    <?php  mysqli_close($conn); ?>
 </body>
 
 <script>

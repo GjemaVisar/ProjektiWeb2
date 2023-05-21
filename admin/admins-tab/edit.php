@@ -3,6 +3,7 @@
 require('../../storeDB.php');
 session_start();
 $name = isset($_SESSION['admin']) ? $_SESSION['admin'] : null;
+$adminId = isset($_SESSION['admin_id']) ? $_SESSION['admin_id'] : null;
  // nese preket back button dhe munohet te kete qasje pa bere login
  if ($name === null ) {
     // User is not logged in or session expired, redirect to the login page
@@ -14,12 +15,14 @@ $name = isset($_SESSION['admin']) ? $_SESSION['admin'] : null;
 if(isset($_POST['edit_btn']))
 {
     $id = $_POST['edit_id'];
+    if ($adminId == 13) {
     
     $query = "SELECT * FROM user where id='$id' ";
     $query_run = mysqli_query($conn, $query);
 
-    foreach($query_run as $row){
 
+    foreach($query_run as $row){
+      
         ?>
 <div id="main">
 
@@ -80,8 +83,12 @@ if(isset($_POST['edit_btn']))
 
     }
 
+} else {
+  // Redirect other admins to accounts.php
+  header('Location: accounts.php');
+  exit();
 }
-
+}
 ?>
 
 <?php 
@@ -229,7 +236,7 @@ a:hover{
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<?php  mysqli_close($conn); ?>
 </body>
 
 

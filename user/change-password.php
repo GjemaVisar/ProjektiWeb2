@@ -370,7 +370,7 @@ transition: .3s;
 -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-            
+<?php  mysqli_close($conn); ?>
  </body>
  </html>
  <script src="delete-profile.js" ></script>

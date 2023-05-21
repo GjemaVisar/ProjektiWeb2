@@ -392,6 +392,6 @@ transition: .3s;
     exit;
 }
 
-
+  mysqli_close($conn); 
 
  ?>

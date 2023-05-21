@@ -189,7 +189,7 @@ $num_users_today = $row_users_today[0];
 });
 
 </script>
-
+<?php  mysqli_close($conn); ?>
 
 </body>
 

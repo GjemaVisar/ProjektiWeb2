@@ -15,5 +15,5 @@
     } else {
         echo "error";
     }
-
+    mysqli_close($conn); 
 ?>
