@@ -160,7 +160,11 @@ if ($user_name !== null && $id !== null) {
               <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
-      
+            <!--
+            <li class="navbar-item">
+              <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
+            </li>
+            -->
             <?php if(isset($_SESSION['user'])){ ?>
             
             <li class="navbar-item">
