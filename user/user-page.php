@@ -187,13 +187,19 @@ if ($user_name !== null && $id !== null) {
         </nav>
 
         <div class="header-actions">
+        <?php if(isset($_SESSION['user'])){?>
         <a href='shop_cart.php'>
           <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
           </button>
           </a>
-          
-
+          <?php }else{?>
+            <a href='shop_cart.php'>
+          <button class="cart-btn" aria-label="cart" disabled>
+            <ion-icon name="cart"></ion-icon>
+          </button>
+          </a>
+          <?php }?>
           <!-- 
               Ikona e menus kur te ngushtohet faqja, duhet mu ndreq qe me dal to Home, Blog, Shop...
            -->
