@@ -107,17 +107,9 @@
 		</form>
 	</div>
 	
-			<?php if(isset($errors)): ?>
-					<span><?php echo $errors; ?> </span>
-				<?php endif ?>
-			<input type="email" name="email" placeholder="Email" />
-			<input type="password" name="password" placeholder="Password" />
-			<a href="#">Forgot your password?</a>
-			<input type="submit" name="submit" value="Submit">
-		</form>
-	</div> 
+   </div>
 	
-</div>
+
 <script src="login.js"></script>
 
 </body>

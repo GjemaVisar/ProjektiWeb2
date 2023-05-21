@@ -7,7 +7,7 @@ if(isset($_POST['submit'])){
     $answer = $_POST['answer'];
     $date_created = date('d/m/Y');
     $date_updated = NULL;
-    $insert_query = "INSERT INTO faq(question,answer,date_created,date_updated,asker,answerer) VALUES('$question','$answer','$date_created',
+    $insert_query = "INSERT INTO faq(question,answer,date_created,date_updated,asker,admin_id) VALUES('$question','$answer','$date_created',
     '$date_updated','$name','$name')";
     
     if(mysqli_query($conn,$insert_query)){
@@ -112,13 +112,13 @@ if(isset($_POST['submit'])){
                         $questions = $row['question'];
                         $answers = $row['answer'];
                         $askers = $row['asker'];
-                        $answerers = $row['answerer'];
+                        $answerers = $row['admin_id'];
                         echo '<h2>General Questions </h2>
                         <div class="question">
                         <h3>'.$questions.'</h3>
                         <h4>Question by:'.$askers.'</h4>
                         <p>'.$answers.'</p>
-                        <h4>Answered by: '.$answerers.'</h4><br>
+                        <h4>Answered by: '.$name.'</h4><br>
                         
                         <form action="?faq='.$id.'" method="Post">
                         <input type="submit" name="delete_faq" value="Delete FAQ">

@@ -1,6 +1,4 @@
-<?php  
-session_start();
-?>
+
 <html>
 <head>
     <title>Buy Games</title>
@@ -157,7 +155,6 @@ session_start();
               <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
             </li>
             -->
-            <?php if(isset($_SESSION['user'])){ ?>
             
             <li class="navbar-item">
               <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
@@ -166,7 +163,6 @@ session_start();
             <li class="navbar-item dropdown" >
               <a href="#" class="navbar-link skewBg dropbtn" data-nav-link>Profile</a>
               <div class="dropdown-content" >
-                
                 <a href="update-profile.php">Update Profile</a>
                 <a href="change-password.php" >Change Pass</a>
                 <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
@@ -174,26 +170,16 @@ session_start();
               </div>
             </li>
             
-              <?php } ?>
-            </ul>
+          </ul>
         </nav>
 
         <div class="header-actions">
-        <?php if(isset($_SESSION['user'])){ ?>
-        <a href='shop_cart.php'> 
-          <button class="cart-btn" aria-label="cart" > 
-            
+
+        <a href='shop_cart.php'>
+          <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
           </button>
           </a>
-          <?php }else{?>
-            <a href='shop_cart.php'> 
-          <button class="cart-btn" aria-label="cart" disabled> 
-            
-            <ion-icon name="cart"></ion-icon>
-          </button>
-          </a>
-          <?php } ?>
           <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="footer-newsletter" methos="GET" id="searchForm">
             <input type="search" name="search" aria-label="search" placeholder="search products" required
               class="email-field">
@@ -346,8 +332,6 @@ session_start();
     <?php
     }
             }
-
-             mysqli_close($conn); 
                 ?>
   
 

@@ -90,9 +90,9 @@
             }
             $new_answer = $_POST['new_answer'];
             $new_update_date =date('d/m/Y');
-            $edit_query = "UPDATE faq SET question='$new_question',answer='$new_answer',date_updated='$new_update_date',answerer='$name' WHERE id='$faq_id' ";
+            $edit_query = "UPDATE faq SET question='$new_question',answer='$new_answer',date_updated='$new_update_date',admin_id='$name' WHERE id='$faq_id' ";
             if(mysqli_query($conn,$edit_query)){
-                header("Location:faq.php", TRUE, 301);
+                header("Location:admin/faq.php", TRUE, 301);
             }else{
                 echo "Error during editing question or answer";
             }

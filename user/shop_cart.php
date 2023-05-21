@@ -1,32 +1,23 @@
 <?php
   require("../storeDB.php");
   session_start();
-
-
   
-
   if(isset($_POST['submit'])){
     $pid = $_POST['product_id'];
     $quantity = $_POST['product_quantity'];
-
     $cookie_name = get_cookie();
     echo $cookie_name;
     
    
     $cart = isset($_COOKIE[$cookie_name]) ? $_COOKIE[$cookie_name] : "[]";
     $cart = json_decode($cart,true);
-
     $result = mysqli_query($conn,"SELECT * FROM product WHERE pid='".$pid."'");
     $product = mysqli_fetch_assoc($result);
     
-
     $get_quantity = "SELECT quantity from product WHERE pid = '".$pid."'";
     $quantity_res = mysqli_query($conn,$get_quantity);
     $quantity_limit = mysqli_fetch_assoc($quantity_res);
     $limit = $quantity_limit['quantity'];
-
-
-
     $found = "";
     foreach($cart as &$item) {
       if($item["productId"] == $pid) {
@@ -41,7 +32,6 @@
           }
       }
   }
-
   // if product not found, add it to cart
   if(!$found) {
       array_push($cart, array(
@@ -56,7 +46,7 @@
 
 
     setcookie($cookie_name,json_encode($cart),time()+1296000);
-    
+
     //setcookie($cookie_name,"",time()-1296000);
 
     header("Location: shop.php");
@@ -72,12 +62,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
     <script rel="shop.js"></script>
-
 <!-- 
   - custom css link
 -->
 <link rel="stylesheet" href="css/style.css">
-
 <!-- 
   - google font link
 -->
@@ -87,12 +75,10 @@
   href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
   rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
   <style>
     /* Style The Dropdown Button */
     .dropbtn {
       color: white;
-
       border: none;
       cursor: pointer;
     }
@@ -119,7 +105,6 @@
         color: black;
     }
     
-
     .buy_green {
         padding: 20px;
         background-color: #03AC13;
@@ -141,13 +126,11 @@
     .buy_green .closebtn:hover {
         color: black;
     }
-
     /* The container <div> - needed to position the dropdown content */
     .dropdown {
       position: relative;
       display: inline-block;
     }
-
     /* Dropdown Content (Hidden by Default) */
     .dropdown-content {
       display: none;
@@ -157,7 +140,6 @@
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
     }
-
     /* Links inside the dropdown */
     .dropdown-content a {
       color: black;
@@ -165,18 +147,15 @@
       text-decoration: none;
       display: block;
     }
-
     /* Change color of dropdown links on hover */
     .dropdown-content a:hover {
       background-color: #f1f1f1;
       display: block;
     }
-
     /* Show the dropdown menu on hover */
     .dropdown:hover .dropdown-content {
       display: block;
     }
-
   .btn_quantity{
       border: 2px solid #333;
       padding: 5px 10px;
@@ -192,78 +171,56 @@
   color: #fff;
   cursor: pointer;
 }
-
     </style>
-
 </head>
-
 <body>
 <header class="header">
-
     <div class="header-top">
       <div class="container">
-
         <!-- <div class="countdown-text">
           Exclusive Black Friday ! Offer <span class="span skewBg">10</span> Days
         </div> -->
-
         <div class="social-wrapper">
-
           <p class="social-title">Follow us on :</p>
-
           <ul class="social-list">
-
             <li>
               <a href="#" class="social-link">
                 <ion-icon name="logo-facebook"></ion-icon>
               </a>
             </li>
-
             <li>
               <a href="#" class="social-link">
                 <ion-icon name="logo-twitter"></ion-icon>
               </a>
             </li>
-
             <li>
               <a href="#" class="social-link">
                 <ion-icon name="logo-pinterest"></ion-icon>
               </a>
             </li>
-
             <li>
               <a href="#" class="social-link">
                 <ion-icon name="logo-linkedin"></ion-icon>
               </a>
             </li>
-
           </ul>
-
         </div>
-
       </div>
     </div>
-
     <div class="header-bottom skewBg" data-header>
       <div class="container">
-
         <a href="#" class="logo">Gamics</a>
-
         <nav class="navbar" data-navbar>
           <ul class="navbar-list">
-
           <li class="navbar-item">
               <a href="user-page.php" class="navbar-link skewBg" data-nav-link>Home</a>
             </li>
-
             <li class="navbar-item">
               <a href="shop.php" class="navbar-link skewBg" data-nav-link>Shop</a>
             </li>
-
             <li class="navbar-item">
               <a href="user-page.php#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
             </li>
-
             <li class="navbar-item">
               <a href="user-page.php#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
@@ -277,7 +234,6 @@
             <li class="navbar-item">
               <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
             </li>
-
             <li class="navbar-item dropdown" >
               <a href="#" class="navbar-link skewBg dropbtn" data-nav-link>Profile</a>
               <div class="dropdown-content" >
@@ -287,13 +243,10 @@
                 <a href="../admin/logout.php" data-nav-link>Log Out</a>
               </div>
             </li>
-
             
           </ul>
         </nav>
-
         <div class="header-actions">
-
         <a href='shop_cart.php'>
           <button class="cart-btn" aria-label="cart">
             <ion-icon name="cart"></ion-icon>
@@ -302,12 +255,10 @@
           <form action="" class="footer-newsletter">
             <input type="search" name="search products" aria-label="search" placeholder="search products" required
               class="email-field">
-
             <button type="submit" class="footer-btn" aria-label="submit">
               <ion-icon name="search-outline"></ion-icon>            
             </button>
           </form>
-
           <!-- 
               Ikona e menus kur te ngushtohet faqja, duhet mu ndreq qe me dal to Home, Blog, Shop...
            -->
@@ -316,12 +267,9 @@
             
             <ion-icon name="close-outline" class="close"></ion-icon>
           </button>
-
         </div>
-
       </div>
     </div>
-
   </header>
   <br></br>
   <br></br>
@@ -332,14 +280,15 @@
             <?php echo $_SESSION['error_message']; ?>
         </div>
         <?php unset($_SESSION['error_message']);} ?>
-
         <?php if (isset($_SESSION['success_buy'])) { ?>
         <div class="buy_green">
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            <?php echo $_SESSION['success_buy'];}?>
+            <?php echo $_SESSION['success_buy']; ?>
+        <?php echo $_SESSION['success_buy'];}else{?>
         </div>
+        <?php unset($_SESSION['error_message']);} ?>
         <?php unset($_SESSION['success_buy']); ?>
-        
+
 <div class="container mt-5 p-3 rounded cart">
     <div class="row no-gutters">
         <div class="col-md-8">
@@ -363,7 +312,6 @@
                   ?>
                   <span>You have <?php echo $totalQuantity;?> items in your cart</span>
                 </div>
-
                 <?php  
                      if(isset($_COOKIE[$cookie_name])){
                         foreach($cookie_data as $key=>$value){
@@ -375,11 +323,9 @@
                           <span class="font-weight-bold d-block"><?php echo $value['name'];?></span>
                           <span class="spec"><?php echo $value['description'];?></span></div>
                     </div>
-
                     <div class="d-flex flex-row align-items-center">
                       <span class="d-block"><?php echo $value['quantity'];?></span>
                       <span class="d-block ml-5 font-weight-bold">$<?php echo $value['price']*$value['quantity'];?></span>
-
                       <form method="Post" action="delete_from_cart.php">
                         <input type="hidden" name="id_to_delete" value="<?php echo $value['productId']?>">
                         <button type="submit" name="delete_item"><i class="fa fa-trash-o ml-3 text-black-50"></i></button>
@@ -408,16 +354,12 @@
                     ?>
             </div>
         </div>
-        
+
         <div class="col-md-4">
             <div class="payment-info">
                 <div class="d-flex justify-content-between align-items-center"><span>Card details</span><img class="rounded" src="https://i.imgur.com/WU501C8.jpg" width="30"></div><span class="type d-block mt-3 mb-1">Card type</span><label class="radio"> <input type="radio" name="card" value="payment" checked> <span><img width="30" src="https://img.icons8.com/color/48/000000/mastercard.png"/></span> </label>
-
 <label class="radio"> <input type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/visa.png"/></span> </label>
-
 <label class="radio"> <input type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/ultraviolet/48/000000/amex.png"/></span> </label>
-
-
 <label class="radio"> <input type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png"/></span> </label>
             <form method="Post" action="../admin/buy_product.php">
                 <div><label class="credit-card-label">Name on card</label><input type="text" class="form-control credit-inputs" placeholder="Name" name="name_card" required></div>
@@ -434,7 +376,6 @@
                     </span>
                 </div>
                 <div class="d-flex justify-content-between information">
-
                   <span>Shipping</span><span>$<?php if(isset($_COOKIE[$cookie_name])){
                     echo "<input type='hidden' name='shipping' value=".$shipping.">".$shipping;}?></span>
                 </div>
@@ -443,14 +384,16 @@
                   <span>$<?php if(isset($_COOKIE[$cookie_name])){
                     echo "<input type='hidden' name='total' value=".$totalPrice+$shipping.">".$totalPrice+$shipping;}?></span>
                 </div>
+
                   <button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="submit" name="buy">
+                    <input type="hidden" name="mycookie" value=<?php echo $cookie_name;?>>
 
                   <?php 
-                    
+
                     $product_ids = array();
                     $product_quantity = array();
                     $product_price = array();
-                                      
+
                     if(isset($_COOKIE[$cookie_name])){
                       // echo $_COOKIE[$cookie_name];
                       $cookie_data = json_decode($_COOKIE[$cookie_name],true);
@@ -458,20 +401,20 @@
                           array_push($product_ids,$value['productId']);
                           array_push($product_quantity,$value['quantity']);
                           array_push($product_price,$value['price']*$value['quantity']);
-                        
+
                     }
-                  
+
                       }
-                    
+
                   ?>
-                    
+
                     <input type="hidden" name="ids" value=<?php echo serialize($product_ids);?>>
                     <input type="hidden" name="quantity" value=<?php echo serialize($product_quantity);?>>
                     <input type="hidden" name="prices" value=<?php echo serialize($product_price);?>>
-                    
+
                   <span>$<?php if(isset($_COOKIE[$cookie_name])){echo $totalPrice+$shipping;}?></span>
                   <span>Buy<i class="fa fa-long-arrow-right ml-1"></i></span></button></div>
-                 
+
             </form>
         </div>
     </div>
@@ -481,7 +424,6 @@
   <?php 
     mysqli_close($conn);
   ?>
-
     <script>
         var close = document.getElementsByClassName("closebtn");
         var i;
@@ -497,7 +439,7 @@
             alertBox.style.display = 'none';
         }, 3000); // Set the duration in milliseconds
 
-        
+
     </script>
 
 </body>
