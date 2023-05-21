@@ -24,7 +24,7 @@ document.getElementById("deleteAccountBtn").addEventListener("click", function()
           var response = xhr.responseText;
           if (response === "success") {
             Swal.fire('Deleted!', 'Your account has been deleted.', 'success').then(() => {
-              location.reload();
+              window.location.href = "../login.php"; 
             });
           } else {
             Swal.fire('Error', 'An error occurred while deleting your account.', 'error');

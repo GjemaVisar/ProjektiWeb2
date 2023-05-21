@@ -34,15 +34,15 @@ if (isset($_POST['delete_btn'])) {
     $query = "DELETE FROM user WHERE id='$id'";
     $query_run = mysqli_query($conn, $query);
 
-    // if ($query_run) {
-    //     $_SESSION['success'] = "Admin with ID $id has been deleted.";
-    //     header('Location: accounts.php');
-    //     exit();
-    // } else {
-    //     $_SESSION['status'] = "Failed to delete admin with ID $id.";
-    //     header('Location: accounts.php');
-    //     exit();
-    // }
+    if ($query_run) {
+        $_SESSION['success'] = "Admin with ID $id has been deleted.";
+        header('Location: accounts.php');
+        exit();
+    } else {
+        $_SESSION['status'] = "Failed to delete admin with ID $id.";
+        header('Location: accounts.php');
+        exit();
+    }
 }
 
 mysqli_close($conn);

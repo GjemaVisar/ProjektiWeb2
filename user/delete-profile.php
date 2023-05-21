@@ -1,6 +1,6 @@
 <?php 
 
-    require('storeDB.php');
+    require('../storeDB.php');
     session_start();
     if (isset($_SESSION['user'])) {
         $userId = $_SESSION['user_id'];
@@ -9,11 +9,14 @@
 
         if ($query_run) {
             echo "success";
+           
         } else {
             echo "error";
         }
     } else {
         echo "error";
     }
+
+
     mysqli_close($conn); 
 ?>

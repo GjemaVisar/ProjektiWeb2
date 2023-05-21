@@ -4,6 +4,7 @@
 
 session_start();
 
+
 $user_name = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
@@ -180,6 +181,7 @@ if ($user_name !== null && $id !== null) {
               <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
             </li>
             -->
+            <?php if(isset($_SESSION['user'])){ ?>
             
             <li class="navbar-item">
               <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
@@ -188,14 +190,16 @@ if ($user_name !== null && $id !== null) {
             <li class="navbar-item dropdown" >
               <a href="#" class="navbar-link skewBg dropbtn" data-nav-link>Profile</a>
               <div class="dropdown-content" >
+                
                 <a href="update-profile.php">Update Profile</a>
                 <a href="change-password.php" >Change Pass</a>
                 <a><button type="button" id="deleteAccountBtn">Delete Account</button></a>
                 <a href="../admin/logout.php" data-nav-link>Log Out</a>
               </div>
             </li>
-
+              <?php } ?>
           </ul>
+
         </nav>
 
         <div class="header-actions">

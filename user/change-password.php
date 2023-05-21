@@ -42,8 +42,8 @@
                 if($new_password != $cfnew_password){
                     $errors = "Passwords doesnt match";
                 }else{
-                    $salt = generate_salt($length);
-                    $hashed_new_password = hash('sha256',$new_password.$salt);
+                  
+                    $hashed_new_password = hash('sha256',$new_password.$salt_in_database);
                     $sql2 = "UPDATE user SET password = '$hashed_new_password' WHERE id = $userId";
                     $result2 = mysqli_query($conn,$sql2);
                     if($result2){

@@ -388,8 +388,8 @@ transition: .3s;
 <?php
 } else {
     // Redirect the user to the login page if they are not logged in
-    header("Location: login.php");
-    exit;
+    header("Location: ../login.php");
+    exit();
 }
 
   mysqli_close($conn); 

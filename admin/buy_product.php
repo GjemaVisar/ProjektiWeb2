@@ -62,8 +62,8 @@
             $_SESSION['success_buy'] = "Your purchase was complete! If you dont want to purchase the same items again, 
             please click the garbage cans!";
             
-            // header("Location: ../user/shop_cart.php");
-            // exit();
+            header("Location: ../user/shop_cart.php");
+            exit();
           
         }else{
             $_SESSION['error_message'] = "Your credentials are not correct!";
