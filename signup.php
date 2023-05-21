@@ -24,7 +24,7 @@
 		$data = date('d/m/Y');
 	
 		// RegEx
-		$usernameRegex = "/^[a-zA-Z0-9_]{3,20}$/";
+		$usernameRegex = "/^[a-zA-Z0-9_]{4,20}$/";
 		$emailRegex = "/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/";
 		$passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
 	
@@ -36,19 +36,19 @@
         $e_query = mysqli_query($conn,$e);
 	
 		if (!preg_match($usernameRegex, $name)) {
-			$errors = "Invalid username format";
+			$errors = "Username should have 4 to 20 characters";
 		}
 		elseif (!preg_match($emailRegex, $email)) {
 			$errors = "Invalid email format";
 		}
 		elseif (!preg_match($passwordRegex, $password)) {
-			$errors = "Invalid password format";
+			$errors = "Password should include at least 8 charachters (1 upper , lower and a symbol character)";
 		}
 		elseif(mysqli_num_rows($u_query) > 0){
-			$errors = "Username exists";
+			$errors = "Username taken";
 		}
 		elseif(mysqli_num_rows($e_query) > 0){
-			$errors = "Email exists";
+			$errors = "This email already has an account";
 		}
 		elseif($password != $cfpassword){
 			$errors = "Password and confirm password should be the same";
@@ -86,20 +86,15 @@
 	<div class="">
 		<form action="" method="post">
 			<h1>Create Account</h1>
-			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your email for registration</span>
+			
 			<div>
-				<input type="text" name="name" placeholder="Name" required/><!-- -->
+				<input type="text" name="name" placeholder="Username" required/><!-- -->
 				<input type="email"name="email"  placeholder="Email" required/><!-- -->
 				<input type="password" name="password" placeholder="Password" required/><!-- -->
 				<input type="password" name="cfpassword" placeholder="Confirm Password" required/><!-- -->
 				<?php if(isset($errors)): ?>
-					<span><?php echo $errors; ?> </span>
-				<?php endif ?>
+        <span style="color: red;"><?php echo $errors; ?></span>
+    <?php endif ?>
 				<select hidden name="role" >
 					<option value="user" selected >user</option>
 					<option value="admin" >admin</option>

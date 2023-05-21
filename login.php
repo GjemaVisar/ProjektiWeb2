@@ -3,18 +3,17 @@
     require('storeDB.php');
 
     session_start();
-   
+	$error = '';
+	$salt = '';
         if(isset($_POST['submit'])){
             $email = $_POST['email'];
             $password = $_POST['password'];
             $salt_query = "SELECT `salt` FROM user WHERE email = '$email' ";
 			
-			$result = mysqli_query($conn,$salt_query);
+			$result = @mysqli_query($conn,$salt_query);
 			if(mysqli_num_rows($result)==1){
 				$row = mysqli_fetch_assoc($result);
 				$salt = $row['salt'];
-			}else{
-				echo "Invalid query";
 			}
 			//echo $salt;
 
@@ -54,7 +53,7 @@
                 // exit();
 			}	
 			else{
-                $error['e'] = 'Incorrect';
+                $error = "Account or password incorrect";
             }  
         }
 
@@ -81,10 +80,9 @@
 		
 			<input type="email" name="email" placeholder="Email" />
 			<input type="password" name="password" placeholder="Password" />
-			<?php if(isset($errors)): ?>
-					<span><?php echo $errors; ?> </span>
-				<?php endif ?>
-			<!--<a href="#">Forgot your password?</a>-->
+			<?php if(!empty($error)): ?>
+                <span style="color: red;"><?php echo $error; ?></span>
+            <?php endif; ?>
 			<input type="submit" name="submit" value="Submit">
 		</form>
 	</div>
@@ -95,11 +93,11 @@
 				<p>To keep connected with us please login with your personal info</p>
 				<button class="ghost" id="signIn">Sign In</button>
 			</div>
-			<div class="overlay-panel overlay-right">
-				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost" id="signUp" ><a href="signup.php">Sign Up</a></button>
-			</div>
+			<<div class="overlay-panel overlay-right">
+    <h1>Hello, Friend!</h1>
+    <p>Enter your personal details and start the journey with us</p>
+    <button class="ghost" id="signUp" onclick="window.location.href='signup.php'">Sign Up</button>
+</div>
 		</div>
 	</div>
 </div>
