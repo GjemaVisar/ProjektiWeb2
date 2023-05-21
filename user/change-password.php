@@ -2,7 +2,7 @@
 
     include '../storeDB.php';
     session_start();
-
+    $user_name = $_SESSION['user'];
     $length = 10;
     $errors= '';
 

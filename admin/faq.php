@@ -112,7 +112,7 @@ if(isset($_POST['submit'])){
                         $questions = $row['question'];
                         $answers = $row['answer'];
                         $askers = $row['asker'];
-                        $answerers = $row['admin_id'];
+                        $answerers = $row['answerer'];
                         echo '<h2>General Questions </h2>
                         <div class="question">
                         <h3>'.$questions.'</h3>
