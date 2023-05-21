@@ -15,11 +15,11 @@
 				$row = mysqli_fetch_assoc($result);
 				$salt = $row['salt'];
 			}
-			//echo $salt;
+			 
 
             $hashed = hash('sha256',$password.$salt);
             $hashed = substr($hashed,0,20);
-			//echo $hashed;
+			 
             
             $select = "SELECT * FROM user WHERE email= '$email' &&
                         password = '$hashed' ";
@@ -29,14 +29,14 @@
 
 
             if(mysqli_num_rows($check)==1){
-                #echo "Login success";
+                 
                 $row = mysqli_fetch_array($check);
                 
                 if($row['role'] == 'admin'){
-					//echo "Its working";
+					 
 					$name = $row['name'];
                     $_SESSION['admin'] = $name;
-					$adminId = $row['id']; // Get the admin's ID
+					$adminId = $row['id'];  
 					$_SESSION['admin_id'] = $adminId;
                     header("Location:admin/users-tab/user.php", TRUE, 301);
 
@@ -49,8 +49,6 @@
                     header("Location:user/user-page.php", TRUE, 301);
            	 	}	
 
-                // header("Location: http://localhost/ProjektiWeb2/", TRUE, 301);
-                // exit();
 			}	
 			else{
                 $error = "Account or password incorrect";

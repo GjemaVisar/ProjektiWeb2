@@ -114,12 +114,6 @@ body{
   width: 50%;
   padding: 10px;
 }
-/* .col-md-5 {
-  border: 5px solid;
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-} */
 .card {
     border: 5px solid;
   margin: auto;
@@ -228,9 +222,6 @@ a:hover{
             <?php if(isset($errors)): ?>
               <span><?php echo $errors; ?> </span>
             <?php endif ?>
-            <!-- <div class="form-group">
-                <select name="role"><option value="admin" >admin</option></select>
-            </div><br> -->
             <div class="d-flex flex-row align-items-center justify-content-between">
               
               <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>

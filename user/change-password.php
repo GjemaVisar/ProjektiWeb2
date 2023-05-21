@@ -71,19 +71,13 @@
    
     <link rel="stylesheet" href="../admin/admin.css" type="text/css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- 
-    - favicon
-  -->
+
   <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
 
-<!-- 
-  - custom css link
--->
+
 <link rel="stylesheet" href="css/style.css">
 
-<!-- 
-  - google font link
--->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -103,12 +97,7 @@ margin-top: 150px;
 width: 50%;
 padding: 10px;
 }
-/* .col-md-5 {
-border: 5px solid;
-margin: auto;
-width: 50%;
-padding: 10px;
-} */
+
 .card {
   border: 5px solid;
 margin: auto;
@@ -167,13 +156,11 @@ transition: .3s;
       cursor: pointer;
     }
 
-    /* The container <div> - needed to position the dropdown content */
     .dropdown {
       position: relative;
       display: inline-block;
     }
 
-    /* Dropdown Content (Hidden by Default) */
     .dropdown-content {
       display: none;
       position: absolute;
@@ -183,7 +170,6 @@ transition: .3s;
       z-index: 1;
     }
 
-    /* Links inside the dropdown */
     .dropdown-content a {
       color: black;
       padding: 12px 16px;
@@ -191,13 +177,11 @@ transition: .3s;
       display: block;
     }
 
-    /* Change color of dropdown links on hover */
     .dropdown-content a:hover {
       background-color: #f1f1f1;
       display: block;
     }
 
-    /* Show the dropdown menu on hover */
     .dropdown:hover .dropdown-content {
       display: block;
     }
@@ -210,9 +194,7 @@ transition: .3s;
 <div class="header-top">
   <div class="container">
 
-    <!-- <div class="countdown-text">
-      Exclusive Black Friday ! Offer <span class="span skewBg">10</span> Days
-    </div> -->
+
 
     <div class="social-wrapper">
 
@@ -252,9 +234,9 @@ transition: .3s;
 </div>
 
 <div class="header-bottom skewBg" data-header>
-  <!-- <div>
-    <h3><?php echo "Welcome ".$user_name." !";?></h3>
-  </div> -->
+  
+    <?php echo "Welcome ".$user_name." !";?>
+  
   <div class="container">
     
 
@@ -279,11 +261,7 @@ transition: .3s;
               <a href="user-page.php#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
-            <!--
-            <li class="navbar-item">
-              <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
-            </li>
-            -->
+
             
             <li class="navbar-item">
               <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>

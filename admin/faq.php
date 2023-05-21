@@ -14,7 +14,7 @@ if(isset($_POST['submit'])){
        #echo "Right";
     }
     else{
-        #echo "problem adding";}
+        
 }
 }
 ?>
@@ -23,7 +23,6 @@ if(isset($_POST['submit'])){
 <head>
     <title>FAQ Page</title>
     <link rel="stylesheet" type="text/css" href="../faq.css">
-    <!-- <link rel="stylesheet" href="admin/admin.css" type="text/css"/> -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .logo{
@@ -66,27 +65,11 @@ if(isset($_POST['submit'])){
         font-size: 36px;
       }   
       main, header {
-        margin-left: 300px; /* Adjust the margin value to match the width of the navigation bar */
+        margin-left: 300px;  
     }
     </style>
 
-    <!-- <style>
-    nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200px;
-        height: 100vh;
-        background-color: #f1f1f1;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
 
-    main, header {
-        margin-left: 200px; /* Adjust the margin value to match the width of the navigation bar */
-    } -->
 </style>
 </head>
 <body>

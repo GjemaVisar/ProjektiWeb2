@@ -23,7 +23,7 @@
         $c = 0;
         $filter_result = mysqli_query($conn,$filter_admin);
         while($row_admin = mysqli_fetch_assoc($filter_result)){
-            // add each row returned into an array
+             
             $array[] = $row_admin;
             $c++;
           }
@@ -33,9 +33,9 @@
             $result = mysqli_query($conn,$query);
             $row = mysqli_fetch_assoc($result);
             $questions = $row['question'];
-            //echo $questions;
+             
             $answers = $row['answer'];
-            //echo $answers;
+            
             $askers = $row['asker'];
             $answerers = $row['answerer'];
 
@@ -43,7 +43,7 @@
             $editable_question=false;
             
             for($i=0;$i<$c;$i++){
-                //echo $askers;
+                 
                 if(implode($array[$i])==$askers)
                 {
                     $editable_question = true;
@@ -53,7 +53,7 @@
                     $editable_question = false;
                 }
             }
-            //echo $editable_question;
+            
 
             echo '<h2>Edit the Question </h2>
             <form method="Post" action="">

@@ -162,12 +162,6 @@ body{
   width: 50%;
   padding: 10px;
 }
-/* .col-md-5 {
-  border: 5px solid;
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-} */
 .card {
     border: 5px solid;
   margin: auto;

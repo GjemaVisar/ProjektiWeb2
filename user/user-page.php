@@ -27,19 +27,9 @@ if ($user_name !== null && $id !== null) {
   <title>Gamics - Create Manage Matches(User Page)</title>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- 
-    - favicon
-  -->
+
   <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
 
-  <!-- 
-    - custom css link
-  -->
-
-
-  <!-- 
-    - google font link
-  -->
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +37,7 @@ if ($user_name !== null && $id !== null) {
     rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
-    /* Style The Dropdown Button */
+
     .dropbtn {
       color: white;
 
@@ -55,13 +45,13 @@ if ($user_name !== null && $id !== null) {
       cursor: pointer;
     }
 
-    /* The container <div> - needed to position the dropdown content */
+   
     .dropdown {
       position: relative;
       display: inline-block;
     }
 
-    /* Dropdown Content (Hidden by Default) */
+    
     .dropdown-content {
       display: none;
       position: absolute;
@@ -71,7 +61,7 @@ if ($user_name !== null && $id !== null) {
       z-index: 1;
     }
 
-    /* Links inside the dropdown */
+    
     .dropdown-content a {
       color: black;
       padding: 12px 16px;
@@ -79,37 +69,31 @@ if ($user_name !== null && $id !== null) {
       display: block;
     }
 
-    /* Change color of dropdown links on hover */
+     
     .dropdown-content a:hover {
       background-color: #f1f1f1;
       display: block;
     }
 
-    /* Show the dropdown menu on hover */
+    
     .dropdown:hover .dropdown-content {
       display: block;
     }
 
     </style>
-  <!-- 
-    - preload images
-  -->
+ 
 </head>
 
 <body id="top">
 
-  <!-- 
-    - #HEADER
-  -->
+ 
 
   <header class="header"style="color:black;">
 
     <div class="header-top" >
       <div class="container">
 
-        <!-- <div class="countdown-text">
-          Exclusive Black Friday ! Offer <span class="span skewBg">10</span> Days
-        </div> -->
+    
 
         <div class="social-wrapper">
 
@@ -176,11 +160,7 @@ if ($user_name !== null && $id !== null) {
               <a href="#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
-            <!--
-            <li class="navbar-item">
-              <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
-            </li>
-            -->
+      
             <?php if(isset($_SESSION['user'])){ ?>
             
             <li class="navbar-item">
@@ -230,11 +210,7 @@ if ($user_name !== null && $id !== null) {
 
   <main>
     <article>
-
-      <!-- 
-        - #HERO
-      -->
-      
+ 
 
       <section class="section hero" id="home" aria-label="home"
         style="background-image: url('https://cdn.mos.cms.futurecdn.net/84CvByk739yh2zzP6bZZm8.jpg')">
@@ -258,13 +234,7 @@ if ($user_name !== null && $id !== null) {
       </section>
 
 
-
-
-
-      <!-- 
-        - #BRAND
-      -->
-
+ 
       <section class="section brand" aria-label="brand">
         <div class="container">
 
@@ -305,10 +275,7 @@ if ($user_name !== null && $id !== null) {
 
       <div class="section-wrapper">
 
-        <!-- 
-          - #LATEST GAME
-        -->
-
+ 
         <section class="section latest-game" aria-label="latest game">
           <div class="container">
 
@@ -403,10 +370,7 @@ if ($user_name !== null && $id !== null) {
 
 
 
-
-      <!-- 
-        - #FEATURED GAME
-      -->
+ 
 
       <section class="section featured-game" id="features" aria-label="featured game">
         <div class="container">
@@ -742,10 +706,10 @@ if ($user_name !== null && $id !== null) {
             }
 
             if (!empty($newslist->articles)) {
-                $count = 0; // Counter variable
+                $count = 0;  
                 foreach ($newslist->articles as $news) {
                     if ($count >= 10) {
-                        break; // Break the loop once 30 articles have been displayed
+                        break;  
                     }
                     ?>
                     <div class="row single-news">
@@ -763,7 +727,7 @@ if ($user_name !== null && $id !== null) {
                         </div>
                     </div>
                     <?php
-                    $count++; // Increment the counter variable
+                    $count++;  
                 }
             }
             

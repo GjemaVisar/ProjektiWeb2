@@ -27,14 +27,10 @@ if(isset($_POST['submit'])){
     <link rel="stylesheet" type="text/css" href="../faq.css">
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
 
-  <!-- 
-    - custom css link
-  -->
+
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- 
-    - google font link
-  -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -43,7 +39,7 @@ if(isset($_POST['submit'])){
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
-    /* Style The Dropdown Button */
+
     .dropbtn {
       color: white;
 
@@ -51,13 +47,13 @@ if(isset($_POST['submit'])){
       cursor: pointer;
     }
 
-    /* The container <div> - needed to position the dropdown content */
+
     .dropdown {
       position: relative;
       display: inline-block;
     }
 
-    /* Dropdown Content (Hidden by Default) */
+
     .dropdown-content {
       display: none;
       position: absolute;
@@ -67,7 +63,7 @@ if(isset($_POST['submit'])){
       z-index: 1;
     }
 
-    /* Links inside the dropdown */
+
     .dropdown-content a {
       color: black;
       padding: 12px 16px;
@@ -75,13 +71,13 @@ if(isset($_POST['submit'])){
       display: block;
     }
 
-    /* Change color of dropdown links on hover */
+
     .dropdown-content a:hover {
       background-color: #f1f1f1;
       display: block;
     }
 
-    /* Show the dropdown menu on hover */
+
     .dropdown:hover .dropdown-content {
       display: block;
     }
@@ -95,9 +91,7 @@ if(isset($_POST['submit'])){
     <div class="header-top">
       <div class="container">
 
-        <!-- <div class="countdown-text">
-          Exclusive Black Friday ! Offer <span class="span skewBg">10</span> Days
-        </div> -->
+
 
         <div class="social-wrapper">
 
@@ -160,11 +154,7 @@ if(isset($_POST['submit'])){
               <a href="user-page.php#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
             </li>
             
-            <!--
-            <li class="navbar-item">
-              <a href="login.php" class="navbar-link skewBg" data-nav-link>LogIn</a>
-            </li>
-            -->
+
             
             <li class="navbar-item">
               <a href="faq-user.php" class="navbar-link skewBg" data-nav-link>FAQ</a>
